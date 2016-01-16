@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:decorate template="/template/default.xhtml">
+	<ui:define name="centro">
+		<h:form>
+
+	
+			
+			<h:messages />
+			<h:panelGrid columns="1">
+				<h:commandButton value="User page!"
+					action="#{redirectorBean.userPage}" />
+				<h:commandButton value="Admin page!"
+					action="#{redirectorBean.adminPage}" />
+				<h:commandButton value="Index!" action="#{redirectorBean.index}" />
+
+				<br />
+				<br />
+
+				<h:commandButton value="Logout!" action="#{authenticator.logout}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:decorate>
+</html>
