@@ -2,6 +2,12 @@ package com.springsecurity.enums;
 
 public enum StatusObjectEnum {
 
-	ATIVO, INATIVO
+	ATIVO(1), INATIVO(2);
+
+	public int valorEnumStatus;
+
+	StatusObjectEnum(int valor) {
+		valorEnumStatus = valor;
+	}
 
 }
