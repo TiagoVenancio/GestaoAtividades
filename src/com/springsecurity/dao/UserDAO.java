@@ -16,5 +16,5 @@ public interface UserDAO {
 
 	User getById(Long id);
 	
-	User login(String username, String password);
+	User login(String username);
 }

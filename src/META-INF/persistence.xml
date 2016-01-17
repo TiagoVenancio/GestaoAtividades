@@ -11,7 +11,7 @@
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://sv2kprel5:3306/gestao_atividades" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gestao_atividades" />
 			<property name="javax.persistence.jdbc.user" value="insert" />
 			<property name="javax.persistence.jdbc.password" value="insert" />
 			
@@ -21,8 +21,10 @@
 			<property name="hibernate.jdbc.wrap_result_sets" value="false" />
 			<property name="hibernate.hibernate.cache.use_query_cache" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
+
+			
 		</properties>
-		
+			
 		
 	</persistence-unit>
 </persistence>

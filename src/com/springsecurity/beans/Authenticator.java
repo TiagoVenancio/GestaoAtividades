@@ -25,11 +25,10 @@ public class Authenticator implements AuthenticationProvider {
 	private UserSession session;
 
 	private String username;
-	private String password;
 
 	public String login() {
 		try {
-			User user = service.login(username, password);
+			User user = service.login(username);
 			loginSpringSecurity(user);
 			session.setUser(user);
 			return "successfulPage";
@@ -40,6 +39,7 @@ public class Authenticator implements AuthenticationProvider {
 	}
 
 	private void loginSpringSecurity(User user) {
+
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				user.getUsername(), null, user.getRoles());
 		token.setDetails(user);
@@ -67,24 +67,14 @@ public class Authenticator implements AuthenticationProvider {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	@Override
 	public Authentication authenticate(Authentication arg0)
 			throws AuthenticationException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean supports(Class<?> arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

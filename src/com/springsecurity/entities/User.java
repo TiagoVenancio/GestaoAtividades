@@ -1,5 +1,6 @@
 package com.springsecurity.entities;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.LazyCollection;
@@ -18,17 +21,23 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.springsecurity.enums.StatusObjectEnum;
+
 @Entity
-@Table(name = "sg_act_access_user")
+@Table(name = "sg_act_access_user", schema = "gestao_atividades")
 public class User implements UserDetails {
 	private static final long serialVersionUID = -7590317347612436291L;
 
 	private Long id;
+	private Calendar dateCreate;
+	private Calendar lastUpdate;
 	private String registration;
 	private String email;
 	private String username;
 	private String password;
 	private List<Role> roles;
+	private Long lastUserChange;
+	private StatusObjectEnum statusObjectEnum;
 
 	@Id
 	@GeneratedValue
@@ -77,6 +86,44 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE")
+	public Calendar getDateCreate() {
+		return dateCreate;
+	}
+
+	public void setDateCreate(Calendar dateCreate) {
+		this.dateCreate = dateCreate;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATE")
+	public Calendar getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(Calendar lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	@Column(name = "LAST_USER_CHANGE")
+	public Long getLastUserChange() {
+		return lastUserChange;
+	}
+
+	public void setLastUserChange(Long lastUserChange) {
+		this.lastUserChange = lastUserChange;
+	}
+
+	@Column(name = "STATUS_OBJECT_USER")
+	public StatusObjectEnum getStatusObjectEnum() {
+		return statusObjectEnum;
+	}
+
+	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
+		this.statusObjectEnum = statusObjectEnum;
+	}
+
 	@ManyToMany
 	@JoinTable(name = "sg_act_access_user_role", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -97,28 +144,28 @@ public class User implements UserDetails {
 	@Override
 	@Transient
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	@Transient
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	@Transient
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
 	@Transient
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
+
 		return false;
 	}
 
