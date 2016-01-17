@@ -15,7 +15,7 @@ public class Role implements GrantedAuthority {
 	private static final long serialVersionUID = -3968396919486158590L;
 
 	private Long id;
-	private String descriptionRole;
+	private String description;
 
 	@Id
 	@GeneratedValue
@@ -28,18 +28,18 @@ public class Role implements GrantedAuthority {
 		this.id = id;
 	}
 
-	@Column(name = "DESCRIPTION_ROLE", unique = true)
+	@Column(name = "DESCRIPTION", unique = true)
 	public String getDescription() {
-		return descriptionRole;
+		return description;
 	}
 
 	public void setDescription(String description) {
-		this.descriptionRole = description;
+		this.description = description;
 	}
 
 	@Override
 	@Transient
 	public String getAuthority() {
-		return descriptionRole;
+		return description;
 	}
 }
