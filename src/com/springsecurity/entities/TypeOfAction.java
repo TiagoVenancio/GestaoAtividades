@@ -24,7 +24,7 @@ public class TypeOfAction implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "TYPE_ACYION_ID")
+	@Column(name = "TYPE_ACTION_ID")
 	public Long getId() {
 		return id;
 	}
