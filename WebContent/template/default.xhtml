@@ -60,41 +60,41 @@ body {
 								action="#{redirectorBean.successfulPage}" icon="ui-icon-home" />
 
 
+							<p:submenu label="Cadastro" icon="ui-icon-gear">
 
+								<p:menuitem value="Atividades" actionListener="#"
+									icon="ui-icon-flag" update="messages" />
 
-							<p:submenu label="Atividades" icon="ui-icon-clipboard">
-								<p:menuitem value="Undo" url="#"
-									icon="ui-icon-arrowreturnthick-1-w" />
-								<p:menuitem value="Redo" url="#"
-									icon="ui-icon-arrowreturnthick-1-e" />
+								<p:menuitem value="Ações" actionListener="#"
+									icon="ui-icon-wrench" update="messages" />
+
+								<p:menuitem value="Tarefas" actionListener="#"
+									icon="ui-icon-clipboard" update="messages" />
+
+								<p:menuitem value="Solicitantes" actionListener="#"
+									icon="ui-icon-person" update="messages" />
+
 							</p:submenu>
 
-							<p:submenu label="Administração" icon="ui-icon-locked">
-								<p:menuitem value="Contents" url="#" />
-								<p:submenu label="Search" icon="ui-icon-search">
-									<p:submenu label="Text">
-										<p:menuitem value="Workspace" url="#" />
-									</p:submenu>
-									<p:menuitem value="File" url="#" />
-								</p:submenu>
+
+							<p:submenu label="Configuração" icon="ui-icon-locked">
+
+								<p:menuitem value="Usuários" actionListener="#"
+									icon="ui-icon-person" update="messages" />
+
+								<p:menuitem value="Prioridades" actionListener="#"
+									icon="ui-icon-alert" update="messages" />
+
+								<p:menuitem value="Status" actionListener="#"
+									icon="ui-icon-transferthick-e-w" update="messages" />
+
 							</p:submenu>
 
-							<p:submenu label="Configurações" icon="ui-icon-gear">
-								<p:submenu label="Item 1" icon="ui-icon-refresh">
-									<p:menuitem value="Item 1.1" actionListener="#"
-										icon="ui-icon-disk" update="messages" />
-									<p:menuitem value="Item 1.2" actionListener="#"
-										icon="ui-icon-arrowrefresh-1-w" update="messages" />
-								</p:submenu>
-								<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-									<p:menuitem value="Delete" actionListener="#"
-										icon="ui-icon-close" update="messages" ajax="false" />
-								</p:submenu>
-							</p:submenu>
-
+							<p:menuitem value="Tarefa" action="#" icon="ui-icon-clipboard" />
 
 
 							<f:facet name="options">
+								<p:outputLabel value="Bem vindo, Teste " />
 								<p:inputText style="margin-right:10px" placeholder="Pesquisar" />
 
 								<p:commandButton value="Logout" icon="ui-icon-power"
