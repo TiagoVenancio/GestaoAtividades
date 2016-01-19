@@ -4,10 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.springsecurity.dao.RequestCustomerDAO;
 import com.springsecurity.entities.RequestCustomer;
 
@@ -39,8 +37,7 @@ public class RequestCustomerDAOImpl implements RequestCustomerDAO {
 
 	@Override
 	public RequestCustomer getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(RequestCustomer.class, id);
 	}
 
 }
