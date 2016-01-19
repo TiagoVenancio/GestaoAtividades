@@ -24,7 +24,7 @@ public class TypeOfGroup implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "TYPE_ACTION_ID", length = 20)
+	@Column(name = "TYPE_GROUP_ID", length = 20)
 	public Long getId() {
 		return id;
 
