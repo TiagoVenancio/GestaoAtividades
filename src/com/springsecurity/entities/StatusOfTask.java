@@ -81,4 +81,5 @@ public class StatusOfTask implements Serializable {
 		this.statusFinalAction = statusFinalAction;
 	}
 
+	
 }
