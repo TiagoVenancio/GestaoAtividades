@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,35 +19,68 @@ import com.springsecurity.enums.StatusObjectEnum;
 public class RequestTask implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
 
-	private Long id;
-	private Calendar createDate;
-	private Calendar closeDate;
-	private Calendar startDate;
-	private Calendar conclusionDate;
-	private Double amountHours;
-	private StatusObjectEnum statusObjectEnum;
-	private String description;
-	private String resume;
-	@ManyToOne
-	private TypeOfActivity typeOfActivity;
-	@ManyToOne
-	private TypeOfTask typeOfTask;
-	@ManyToOne
-	private TypeOfAction typeOfAction;
-	@ManyToOne
-	private TypeOfGroup typeOfGroup;
-	@ManyToOne
-	private StatusOfTask statusOfTask;
-	@ManyToOne
-	private RequestCustomer requestCustomer;
-	@ManyToOne
-	private User user;
-	@ManyToOne
-	private TypeOfPriority typeOfPriority;
-
 	@Id
 	@GeneratedValue
 	@Column(name = "TASK_ID", length = 20)
+	private Long id;
+
+	@Column(name = "CREATE_DATE", nullable = false)
+	private Calendar createDate;
+
+	@Column(name = "CLOSE_DATE")
+	private Calendar closeDate;
+
+	@Column(name = "START_DATE", nullable = false)
+	private Calendar startDate;
+
+	@Column(name = "CONCLUSION_DATE")
+	private Calendar conclusionDate;
+
+	@Column(name = "AMOUNT_HOURS", nullable = false)
+	private Double amountHours;
+
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
+	private StatusObjectEnum statusObjectEnum;
+
+	@Column(name = "DESCRIPTION", length = 1000, nullable = false)
+	private String description;
+
+	@Column(name = "RESUME", length = 45, nullable = false)
+	private String resume;
+
+	@ManyToOne
+	@JoinColumn(name = "TYPE_ACTIVITY_ID")
+	private TypeOfActivity typeOfActivity;
+
+	@ManyToOne
+	@JoinColumn(name = "TYPE_TASK_ID")
+	private TypeOfTask typeOfTask;
+
+	@ManyToOne
+	@JoinColumn(name = "TYPE_ACTION_ID")
+	private TypeOfAction typeOfAction;
+
+	@ManyToOne
+	@JoinColumn(name = "TYPE_GROUP_ID")
+	private TypeOfGroup typeOfGroup;
+
+	@ManyToOne
+	@JoinColumn(name = "STATUS_TASK_ID")
+	private StatusOfTask statusOfTask;
+
+	@ManyToOne
+	@JoinColumn(name = "CLIENT_ID")
+	private RequestCustomer requestCustomer;
+
+	@ManyToOne
+	@JoinColumn(name = "USER_ID")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "PRIORITY_ID")
+	private TypeOfPriority typeOfPriority;
+
 	public Long getId() {
 		return id;
 	}
@@ -55,7 +89,6 @@ public class RequestTask implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "CREATE_DATE", nullable = false)
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -64,7 +97,6 @@ public class RequestTask implements Serializable {
 		this.createDate = createDate;
 	}
 
-	@Column(name = "CLOSE_DATE")
 	public Calendar getCloseDate() {
 		return closeDate;
 	}
@@ -73,7 +105,6 @@ public class RequestTask implements Serializable {
 		this.closeDate = closeDate;
 	}
 
-	@Column(name = "START_DATE", nullable = false)
 	public Calendar getStartDate() {
 		return startDate;
 	}
@@ -82,7 +113,6 @@ public class RequestTask implements Serializable {
 		this.startDate = startDate;
 	}
 
-	@Column(name = "CONCLUSION_DATE")
 	public Calendar getConclusionDate() {
 		return conclusionDate;
 	}
@@ -91,7 +121,6 @@ public class RequestTask implements Serializable {
 		this.conclusionDate = conclusionDate;
 	}
 
-	@Column(name = "AMOUNT_HOURS", nullable = false)
 	public Double getAmountHours() {
 		return amountHours;
 	}
@@ -100,8 +129,6 @@ public class RequestTask implements Serializable {
 		this.amountHours = amountHours;
 	}
 
-	@Enumerated
-	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -110,7 +137,6 @@ public class RequestTask implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-	@Column(name = "DESCRIPTION", length = 1000, nullable = false)
 	public String getDescription() {
 		return description;
 	}
@@ -119,7 +145,6 @@ public class RequestTask implements Serializable {
 		this.description = description;
 	}
 
-	@Column(name = "RESUME", length = 45, nullable = false)
 	public String getResume() {
 		return resume;
 	}
@@ -128,7 +153,6 @@ public class RequestTask implements Serializable {
 		this.resume = resume;
 	}
 
-	@Column(name = "TYPE_ACTVITY_ID", length = 20, nullable = false)
 	public TypeOfActivity getTypeOfActivity() {
 		return typeOfActivity;
 	}
@@ -137,7 +161,6 @@ public class RequestTask implements Serializable {
 		this.typeOfActivity = typeOfActivity;
 	}
 
-	@Column(name = "TYPE_TASK_ID", length = 20, nullable = false)
 	public TypeOfTask getTypeOfTask() {
 		return typeOfTask;
 	}
@@ -146,7 +169,6 @@ public class RequestTask implements Serializable {
 		this.typeOfTask = typeOfTask;
 	}
 
-	@Column(name = "TYPE_ACTION_ID", length = 20, nullable = false)
 	public TypeOfAction getTypeOfAction() {
 		return typeOfAction;
 	}
@@ -155,7 +177,6 @@ public class RequestTask implements Serializable {
 		this.typeOfAction = typeOfAction;
 	}
 
-	@Column(name = "TYPE_GROUP_ID", length = 20, nullable = false)
 	public TypeOfGroup getTypeOfGroup() {
 		return typeOfGroup;
 	}
@@ -164,7 +185,6 @@ public class RequestTask implements Serializable {
 		this.typeOfGroup = typeOfGroup;
 	}
 
-	@Column(name = "STATUS_TASK_ID", length = 20, nullable = false)
 	public StatusOfTask getStatusOfTask() {
 		return statusOfTask;
 	}
@@ -173,7 +193,6 @@ public class RequestTask implements Serializable {
 		this.statusOfTask = statusOfTask;
 	}
 
-	@Column(name = "CLIENT_ID", length = 20, nullable = false)
 	public RequestCustomer getRequestCustomer() {
 		return requestCustomer;
 	}
@@ -182,7 +201,6 @@ public class RequestTask implements Serializable {
 		this.requestCustomer = requestCustomer;
 	}
 
-	@Column(name = "USER_ID", length = 20, nullable = false)
 	public User getUser() {
 		return user;
 	}
@@ -191,7 +209,6 @@ public class RequestTask implements Serializable {
 		this.user = user;
 	}
 
-	@Column(name = "PRIORITY_ID", length = 20, nullable = false)
 	public TypeOfPriority getTypeOfPriority() {
 		return typeOfPriority;
 	}

@@ -19,7 +19,7 @@ public class Role implements GrantedAuthority {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "ROLE_ID")
+	@Column(name = "ROLE_ID", length = 20)
 	public Long getId() {
 		return id;
 	}
@@ -28,7 +28,7 @@ public class Role implements GrantedAuthority {
 		this.id = id;
 	}
 
-	@Column(name = "DESCRIPTION", unique = true)
+	@Column(name = "DESCRIPTION", unique = true, length = 45)
 	public String getDescription() {
 		return description;
 	}

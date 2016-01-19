@@ -2,13 +2,19 @@ package com.springsecurity.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.springsecurity.enums.StatusFinalAction;
 import com.springsecurity.enums.StatusObjectEnum;
@@ -18,17 +24,32 @@ import com.springsecurity.enums.StatusObjectEnum;
 public class StatusOfTask implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
 
-	private Long id;
-	private Calendar createDate;
-	private Calendar lastUpdate;
-	private StatusObjectEnum statusObjectEnum;
-	private String description;
-	private StatusFinalAction statusFinalAction;
+	@OneToMany(mappedBy = "statusOfTask", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<RequestTask> requestTasks;
 
-	
 	@Id
 	@GeneratedValue
 	@Column(name = "STATUS_TASK_ID", length = 20)
+	private Long id;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE", nullable = false)
+	private Calendar createDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATE", nullable = false)
+	private Calendar lastUpdate;
+
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
+	private StatusObjectEnum statusObjectEnum;
+
+	@Column(name = "DESCRIPTION", length = 45, nullable = false)
+	private String description;
+
+	@Column(name = "FINAL_ACTION", length = 10, nullable = false)
+	private StatusFinalAction statusFinalAction;
+
 	public Long getId() {
 		return id;
 	}
@@ -37,7 +58,6 @@ public class StatusOfTask implements Serializable {
 		this.id = id;
 	}
 
-	@Column (name = "CREATE_DATE", nullable = false )
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -46,7 +66,6 @@ public class StatusOfTask implements Serializable {
 		this.createDate = createDate;
 	}
 
-	@Column (name = "LAST_UPDATE", nullable = false)
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
@@ -55,8 +74,6 @@ public class StatusOfTask implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Enumerated
-	@Column (name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -65,7 +82,6 @@ public class StatusOfTask implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-	@Column(name = "DESCRIPTION", length = 45, nullable = false)
 	public String getDescription() {
 		return description;
 	}
@@ -74,7 +90,6 @@ public class StatusOfTask implements Serializable {
 		this.description = description;
 	}
 
-	@Column (name = "FINAL_ACTION", length = 10, nullable = false)
 	public StatusFinalAction getStatusFinalAction() {
 		return statusFinalAction;
 	}
@@ -83,5 +98,4 @@ public class StatusOfTask implements Serializable {
 		this.statusFinalAction = statusFinalAction;
 	}
 
-	
 }

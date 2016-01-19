@@ -2,13 +2,19 @@ package com.springsecurity.entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.springsecurity.enums.StatusObjectEnum;
 
@@ -17,18 +23,38 @@ import com.springsecurity.enums.StatusObjectEnum;
 public class RequestCustomer implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
 
-	private Long id;
-	private Calendar createDate;
-	private Calendar lastUpdate;
-	private String userName;
-	private String Name;
-	private String email;
-	private String lastUserChange;
-	private StatusObjectEnum statusObjectEnum;
+	@OneToMany(mappedBy = "requestCustomer", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<RequestTask> requestTasks;
 
 	@Id
 	@GeneratedValue
 	@Column(name = "CLIENT_ID", length = 20)
+	private Long id;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE", nullable = false)
+	private Calendar createDate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATE", nullable = false)
+	private Calendar lastUpdate;
+
+	@Column(name = "USERNAME", length = 20, nullable = false)
+	private String userName;
+
+	@Column(name = "NAME", length = 255, nullable = false)
+	private String Name;
+
+	@Column(name = "EMAIL", length = 100, nullable = false)
+	private String email;
+
+	@Column(name = "LAST_USER_CHANGE", length = 20, nullable = false)
+	private String lastUserChange;
+
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
+	private StatusObjectEnum statusObjectEnum;
+
 	public Long getId() {
 		return id;
 	}
@@ -37,7 +63,6 @@ public class RequestCustomer implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "CREATE_DATE", nullable = false)
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -46,7 +71,6 @@ public class RequestCustomer implements Serializable {
 		this.createDate = createDate;
 	}
 
-	@Column(name = "LAST_UPDATE", nullable = false)
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
@@ -55,7 +79,6 @@ public class RequestCustomer implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Column(name = "USERNAME", length = 20, nullable = false)
 	public String getUserName() {
 		return userName;
 	}
@@ -64,7 +87,6 @@ public class RequestCustomer implements Serializable {
 		this.userName = userName;
 	}
 
-	@Column(name = "NAME", length = 255, nullable = false)
 	public String getName() {
 		return Name;
 	}
@@ -73,7 +95,6 @@ public class RequestCustomer implements Serializable {
 		Name = name;
 	}
 
-	@Column(name = "EMAIL", length = 100, nullable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -82,7 +103,6 @@ public class RequestCustomer implements Serializable {
 		this.email = email;
 	}
 
-	@Column(name = "LAST_USER_CHANGE", length = 20, nullable = false)
 	public String getLastUserChange() {
 		return lastUserChange;
 	}
@@ -91,8 +111,6 @@ public class RequestCustomer implements Serializable {
 		this.lastUserChange = lastUserChange;
 	}
 
-	@Enumerated
-	@Column(name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}

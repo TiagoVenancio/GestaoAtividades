@@ -4,14 +4,17 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,20 +32,46 @@ import com.springsecurity.enums.StatusObjectEnum;
 public class User implements UserDetails {
 	private static final long serialVersionUID = -7590317347612436291L;
 
-	private Long id;
-	private Calendar dateCreate;
-	private Calendar lastUpdate;
-	private String registration;
-	private String email;
-	private String username;
-	private String password;
-	private List<Role> roles;
-	private Long lastUserChange;
-	private StatusObjectEnum statusObjectEnum;
+	@OneToMany(mappedBy = "user", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<RequestTask> requestTasks;
 
 	@Id
 	@GeneratedValue
-	@Column(name = "USER_ID")
+	@Column(name = "USER_ID", length = 20)
+	private Long id;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATE_DATE")
+	private Calendar dateCreate;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "LAST_UPDATE")
+	private Calendar lastUpdate;
+
+	@Column(name = "NAME", unique = true, length = 255)
+	private String name;
+
+	@Column(name = "EMAIL", unique = true, length = 255)
+	private String email;
+
+	@Column(name = "USERNAME", unique = true, length = 20)
+	private String username;
+
+	@Column(name = "PASSWORD")
+	private String password;
+
+	@ManyToMany
+	@JoinTable(name = "sg_act_access_user_role", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Role> roles;
+
+	@Column(name = "LAST_USER_CHANGE")
+	private Long lastUserChange;
+
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_USER")
+	private StatusObjectEnum statusObjectEnum;
+
 	public Long getId() {
 		return id;
 	}
@@ -51,7 +80,6 @@ public class User implements UserDetails {
 		this.id = id;
 	}
 
-	@Column(name = "USERNAME", unique = true)
 	public String getUsername() {
 		return username;
 	}
@@ -60,7 +88,6 @@ public class User implements UserDetails {
 		this.username = username;
 	}
 
-	@Column(name = "PASSWORD")
 	public String getPassword() {
 		return password;
 	}
@@ -69,16 +96,14 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	@Column(name = "REGISTRATION", unique = true)
-	public String getRegistration() {
-		return registration;
+	public String getName() {
+		return name;
 	}
 
-	public void setRegistration(String registration) {
-		this.registration = registration;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "EMAIL", unique = true)
 	public String getEmail() {
 		return email;
 	}
@@ -87,8 +112,6 @@ public class User implements UserDetails {
 		this.email = email;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE")
 	public Calendar getDateCreate() {
 		return dateCreate;
 	}
@@ -97,8 +120,6 @@ public class User implements UserDetails {
 		this.dateCreate = dateCreate;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "LAST_UPDATE")
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
@@ -107,7 +128,6 @@ public class User implements UserDetails {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Column(name = "LAST_USER_CHANGE")
 	public Long getLastUserChange() {
 		return lastUserChange;
 	}
@@ -116,8 +136,6 @@ public class User implements UserDetails {
 		this.lastUserChange = lastUserChange;
 	}
 
-	@Enumerated
-	@Column(name = "STATUS_OBJECT_USER")
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -126,9 +144,6 @@ public class User implements UserDetails {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "sg_act_access_user_role", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-	@LazyCollection(LazyCollectionOption.FALSE)
 	public List<Role> getRoles() {
 		return roles;
 	}
