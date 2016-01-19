@@ -99,4 +99,5 @@ public class RequestCustomer implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
+	
 }
