@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13585721779620" configfile="/GestaoAtividades/WebContent/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13585721779620" configfile="/GestaoAtividades/WebContent/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="754" id="pf14531627396630" outlinks="pf14531627396631 pf14531627396632 pf14531627396633 pf14531627396634" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.jsf" x="120" y="552" id="pf14531627396635" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14531627396631" path="/index.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/successfulPage.jsf" x="408" y="591" id="pf14531627396636" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14531627396632" path="/pages/successfulPage.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/user/userPage.jsf" x="432" y="754" id="pf14531627396637" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf14531627396633" path="/pages/user/userPage.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/admin/adminPage.jsf" x="420" y="912" id="pf14531627396638" referenceLink="//@navigationRule.3/@navigationCase.0/@toViewId|" inlinks="pf14531627396634" path="/pages/admin/adminPage.jsf"/>
+  <links id="pf14531627396631" target="pf14531627396635" source="pf14531627396630" outcome="index" redirect="true"/>
+  <links id="pf14531627396632" target="pf14531627396636" source="pf14531627396630" outcome="successfulPage" redirect="true"/>
+  <links id="pf14531627396633" target="pf14531627396637" source="pf14531627396630" outcome="userPage" redirect="true"/>
+  <links id="pf14531627396634" target="pf14531627396638" source="pf14531627396630" outcome="adminPage" redirect="true"/>
+</pageflow:Pageflow>
