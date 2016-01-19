@@ -12,8 +12,6 @@ public interface TypeOfTaskDAO {
 
 	void update(TypeOfTask typeOfTask);
 
-	void remove(TypeOfTask typeOfTask);
-
 	TypeOfTask getById(Long id);
 
 

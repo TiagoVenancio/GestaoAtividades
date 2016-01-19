@@ -12,8 +12,6 @@ public interface RequestTaskDAO {
 
 	void update(RequestTask requestTask);
 
-	void remove(RequestTask requestTask);
-
 	RequestTask getById(Long id);
 
 

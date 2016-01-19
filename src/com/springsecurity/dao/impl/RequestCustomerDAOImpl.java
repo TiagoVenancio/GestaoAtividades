@@ -38,14 +38,6 @@ public class RequestCustomerDAOImpl implements RequestCustomerDAO {
 	}
 
 	@Override
-	public void remove(RequestCustomer requestCustomer) {
-		//requestCustomer = getById(requestCustomer.getId());
-		//entityManager.remove(requestCustomer);
-		// TODO Metodo remover DAO RequestCustomer
-
-	}
-
-	@Override
 	public RequestCustomer getById(Long id) {
 		// TODO Auto-generated method stub
 		return null;

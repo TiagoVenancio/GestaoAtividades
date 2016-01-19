@@ -12,8 +12,6 @@ public interface TypeOfGroupDAO {
 
 	void update(TypeOfGroup typeOfGroup);
 
-	void remove(TypeOfGroup typeOfGroup);
-
 	TypeOfGroup getById(Long id);
 
 }

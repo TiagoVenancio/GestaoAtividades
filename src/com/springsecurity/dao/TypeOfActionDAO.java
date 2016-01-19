@@ -12,7 +12,5 @@ public interface TypeOfActionDAO {
 
 	void update(TypeOfAction typeOfAction);
 
-	void remove(TypeOfAction typeOfAction);
-
 	TypeOfAction getById(Long id);
 }

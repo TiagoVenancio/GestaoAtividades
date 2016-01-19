@@ -14,6 +14,4 @@ public interface TypeOfActivityDAO {
 
 	void remove(TypeOfActivity typeOfActivity);
 
-	TypeOfActivity getById(Long id);
-
 }

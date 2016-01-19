@@ -12,8 +12,6 @@ public interface RequestCustomerDAO {
 
 	void update(RequestCustomer requestCustomer);
 
-	void remove(RequestCustomer requestCustomer);
-
 	RequestCustomer getById(Long id);
 
 

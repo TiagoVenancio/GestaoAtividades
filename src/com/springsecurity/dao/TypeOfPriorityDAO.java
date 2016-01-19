@@ -12,8 +12,6 @@ public interface TypeOfPriorityDAO {
 
 	void update(TypeOfPriority typeOfPriority);
 
-	void remove(TypeOfPriority typeOfPriority);
-
 	TypeOfPriority getById(Long id);
 
 }
