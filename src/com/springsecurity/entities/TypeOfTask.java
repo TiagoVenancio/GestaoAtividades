@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.springsecurity.enums.StatusTaskEnum;
+import com.springsecurity.enums.StatusObjectEnum;
 
 @Entity
 @Table(name = "sg_act_type_task", schema = "gestao_atividades")
@@ -19,7 +19,7 @@ public class TypeOfTask implements Serializable {
 	private Long id;
 	private Calendar createDate;
 	private Calendar lastUpdate;
-	private StatusTaskEnum statusTaskEnum;
+	private StatusObjectEnum statusObjectEnum;
 	private String description;
 
 	@Id
@@ -52,12 +52,12 @@ public class TypeOfTask implements Serializable {
 	}
 
 	@Column (name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
-	public StatusTaskEnum getStatusTaskEnum() {
-		return statusTaskEnum;
+	public StatusObjectEnum getStatusObjectEnum() {
+		return statusObjectEnum;
 	}
 
-	public void setStatusTaskEnum(StatusTaskEnum statusTaskEnum) {
-		this.statusTaskEnum = statusTaskEnum;
+	public void setStatusTaskEnum(StatusObjectEnum statusObjectEnum) {
+		this.statusObjectEnum = statusObjectEnum;
 	}
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
