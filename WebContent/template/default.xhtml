@@ -62,16 +62,20 @@ body {
 
 							<p:submenu label="Cadastro" icon="ui-icon-gear">
 
-								<p:menuitem value="Atividades" actionListener="#"
+								<p:menuitem value="Atividades"
+									actionListener="#{redirectorBean.tipoAtividades}"
 									icon="ui-icon-flag" update="messages" />
 
-								<p:menuitem value="Ações" actionListener="#"
+								<p:menuitem value="Ações"
+									actionListener="#{redirectorBean.tipoAcoes}"
 									icon="ui-icon-wrench" update="messages" />
 
-								<p:menuitem value="Tarefas" actionListener="#"
+								<p:menuitem value="Tarefas"
+									actionListener="#{redirectorBean.tipoTarefasPage}"
 									icon="ui-icon-clipboard" update="messages" />
 
-								<p:menuitem value="Solicitantes" actionListener="#"
+								<p:menuitem value="Solicitantes"
+									actionListener="#{redirectorBean.solicitante}"
 									icon="ui-icon-person" update="messages" />
 
 							</p:submenu>
@@ -79,13 +83,16 @@ body {
 
 							<p:submenu label="Configuração" icon="ui-icon-locked">
 
-								<p:menuitem value="Usuários" actionListener="#"
+								<p:menuitem value="Usuários"
+									actionListener="#{redirectorBean.usuarios}"
 									icon="ui-icon-person" update="messages" />
 
-								<p:menuitem value="Prioridades" actionListener="#"
+								<p:menuitem value="Prioridades"
+									actionListener="#{redirectorBean.prioridades}"
 									icon="ui-icon-alert" update="messages" />
 
-								<p:menuitem value="Status" actionListener="#"
+								<p:menuitem value="Status"
+									actionListener="#{redirectorBean.statusTask}"
 									icon="ui-icon-transferthick-e-w" update="messages" />
 
 							</p:submenu>
