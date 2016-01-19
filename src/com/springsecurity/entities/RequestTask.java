@@ -5,9 +5,9 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -27,13 +27,21 @@ public class RequestTask implements Serializable {
 	private StatusObjectEnum statusObjectEnum;
 	private String description;
 	private String resume;
+	@ManyToOne
 	private TypeOfActivity typeOfActivity;
+	@ManyToOne
 	private TypeOfTask typeOfTask;
+	@ManyToOne
 	private TypeOfAction typeOfAction;
+	@ManyToOne
 	private TypeOfGroup typeOfGroup;
+	@ManyToOne
 	private StatusOfTask statusOfTask;
+	@ManyToOne
 	private RequestCustomer requestCustomer;
+	@ManyToOne
 	private User user;
+	@ManyToOne
 	private TypeOfPriority typeOfPriority;
 
 	@Id
@@ -92,6 +100,7 @@ public class RequestTask implements Serializable {
 		this.amountHours = amountHours;
 	}
 
+	@Enumerated
 	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
@@ -120,8 +129,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "TYPE_ACTVITY_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "TYPE_ACTIVITY_ID")
 	public TypeOfActivity getTypeOfActivity() {
 		return typeOfActivity;
 	}
@@ -131,8 +138,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "TYPE_TASK_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "TYPE_TASK_ID")
 	public TypeOfTask getTypeOfTask() {
 		return typeOfTask;
 	}
@@ -142,8 +147,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "TYPE_ACTION_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "TYPE_ACTION_ID")
 	public TypeOfAction getTypeOfAction() {
 		return typeOfAction;
 	}
@@ -153,8 +156,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "TYPE_GROUP_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "TYPE_GROUP_ID")
 	public TypeOfGroup getTypeOfGroup() {
 		return typeOfGroup;
 	}
@@ -164,8 +165,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "STATUS_TASK_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "STATUS_TASK_ID")
 	public StatusOfTask getStatusOfTask() {
 		return statusOfTask;
 	}
@@ -175,8 +174,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "CLIENT_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "CLIENT_ID")
 	public RequestCustomer getRequestCustomer() {
 		return requestCustomer;
 	}
@@ -186,8 +183,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "USER_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "USER_ID")
 	public User getUser() {
 		return user;
 	}
@@ -197,8 +192,6 @@ public class RequestTask implements Serializable {
 	}
 
 	@Column(name = "PRIORITY_ID", length = 20, nullable = false)
-	@ManyToOne
-	@JoinColumn(name = "PRIORITY_ID")
 	public TypeOfPriority getTypeOfPriority() {
 		return typeOfPriority;
 	}

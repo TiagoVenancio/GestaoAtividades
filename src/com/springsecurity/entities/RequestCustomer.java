@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -36,7 +37,7 @@ public class RequestCustomer implements Serializable {
 		this.id = id;
 	}
 
-	@Column (name = "CREATE_DATE", nullable = false )
+	@Column(name = "CREATE_DATE", nullable = false)
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -45,7 +46,7 @@ public class RequestCustomer implements Serializable {
 		this.createDate = createDate;
 	}
 
-	@Column (name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE", nullable = false)
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
@@ -54,7 +55,7 @@ public class RequestCustomer implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-	@Column (name = "USERNAME", length = 20, nullable = false)
+	@Column(name = "USERNAME", length = 20, nullable = false)
 	public String getUserName() {
 		return userName;
 	}
@@ -63,7 +64,7 @@ public class RequestCustomer implements Serializable {
 		this.userName = userName;
 	}
 
-	@Column (name = "NAME", length = 255, nullable = false)
+	@Column(name = "NAME", length = 255, nullable = false)
 	public String getName() {
 		return Name;
 	}
@@ -72,7 +73,7 @@ public class RequestCustomer implements Serializable {
 		Name = name;
 	}
 
-	@Column (name = "EMAIL", length = 100, nullable = false)
+	@Column(name = "EMAIL", length = 100, nullable = false)
 	public String getEmail() {
 		return email;
 	}
@@ -81,7 +82,7 @@ public class RequestCustomer implements Serializable {
 		this.email = email;
 	}
 
-	@Column (name = "LAST_USER_CHANGE", length = 20, nullable = false)
+	@Column(name = "LAST_USER_CHANGE", length = 20, nullable = false)
 	public String getLastUserChange() {
 		return lastUserChange;
 	}
@@ -90,7 +91,8 @@ public class RequestCustomer implements Serializable {
 		this.lastUserChange = lastUserChange;
 	}
 
-	@Column (name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -99,5 +101,4 @@ public class RequestCustomer implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-	
 }

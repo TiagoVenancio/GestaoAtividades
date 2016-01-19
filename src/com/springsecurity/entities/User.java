@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -115,6 +116,7 @@ public class User implements UserDetails {
 		this.lastUserChange = lastUserChange;
 	}
 
+	@Enumerated
 	@Column(name = "STATUS_OBJECT_USER")
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;

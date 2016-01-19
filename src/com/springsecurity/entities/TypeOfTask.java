@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ public class TypeOfTask implements Serializable {
 		this.id = id;
 	}
 
-	@Column (name = "CREATE_DATE", nullable = false )
+	@Column(name = "CREATE_DATE", nullable = false)
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -42,22 +43,13 @@ public class TypeOfTask implements Serializable {
 		this.createDate = createDate;
 	}
 
-	@Column (name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE", nullable = false)
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
 
 	public void setLastUpdate(Calendar lastUpdate) {
 		this.lastUpdate = lastUpdate;
-	}
-
-	@Column (name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
-	public StatusObjectEnum getStatusObjectEnum() {
-		return statusObjectEnum;
-	}
-
-	public void setStatusTaskEnum(StatusObjectEnum statusObjectEnum) {
-		this.statusObjectEnum = statusObjectEnum;
 	}
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
@@ -67,6 +59,16 @@ public class TypeOfTask implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Enumerated
+	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
+	public StatusObjectEnum getStatusObjectEnum() {
+		return statusObjectEnum;
+	}
+
+	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
+		this.statusObjectEnum = statusObjectEnum;
 	}
 
 }
