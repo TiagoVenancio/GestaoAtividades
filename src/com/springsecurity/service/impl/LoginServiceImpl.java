@@ -14,14 +14,12 @@ public class LoginServiceImpl implements LoginService {
 
 	public User login(String username) throws IllegalArgumentException {
 		if (isEmptyOrNull(username)) {
-			throw new IllegalArgumentException(
-					"AtenÃ§Ã£o, username ou password vazios!");
+			throw new IllegalArgumentException("Atenção, Username vazios!");
 		}
 		User u = dao.login(username);
 
 		if (u == null) {
-			throw new IllegalArgumentException(
-					"Erro: username ou password incorretos!");
+			throw new IllegalArgumentException("Erro: Username incorretos!");
 		}
 		return u;
 	}
