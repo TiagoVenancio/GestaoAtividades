@@ -24,7 +24,7 @@ public class TypeOfAction implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "TYPE_ACTION_ID")
+	@Column(name = "TYPE_ACTION_ID", length = 20)
 	public Long getId() {
 		return id;
 	}
@@ -51,7 +51,7 @@ public class TypeOfAction implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 	
-	@Column (name = "STATUS_OBJECT_TYPE_ACTIVITY", length = 10, nullable = false)
+	@Column (name = "STATUS_OBJECT_ACTION", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -60,7 +60,7 @@ public class TypeOfAction implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-	@Column (name = "DESCRIPTION", length = 45, nullable = false)
+	@Column(name = "DESCRIPTION", length = 45, nullable = false)
 	public String getDescription() {
 		return description;
 	}
