@@ -32,7 +32,8 @@ public class TypeOfAction implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	@Column (name = "CREATE_DATE", nullable = false )
 	public Calendar getCreateDate() {
 		return createDate;
 	}
@@ -40,7 +41,8 @@ public class TypeOfAction implements Serializable {
 	public void setCreateDate(Calendar createDate) {
 		this.createDate = createDate;
 	}
-
+	
+	@Column (name = "LAST_UPDATE", nullable = false)
 	public Calendar getLastUpdate() {
 		return lastUpdate;
 	}
@@ -48,7 +50,8 @@ public class TypeOfAction implements Serializable {
 	public void setLastUpdate(Calendar lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-
+	
+	@Column (name = "STATUS_OBJECT_TYPE_ACTIVITY", length = 10, nullable = false)
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -57,6 +60,7 @@ public class TypeOfAction implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
+	@Column (name = "DESCRIPTION", length = 45, nullable = false)
 	public String getDescription() {
 		return description;
 	}
