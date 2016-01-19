@@ -12,6 +12,6 @@ public interface TypeOfActivityDAO {
 
 	void update(TypeOfActivity typeOfActivity);
 
-	void remove(TypeOfActivity typeOfActivity);
+	TypeOfActivity getById(Long id);
 
 }
