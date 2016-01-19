@@ -23,39 +23,4 @@ public class RedirectorBean {
 
 	}
 
-	public String usuarios() {
-		return "usuariosPage";
-
-	}
-
-	public String prioridades() {
-		return "prioridadesPage";
-
-	}
-
-	public String statusTask() {
-		return "statusTarefaPage";
-
-	}
-
-	public String tipoAtividades() {
-		return "tipoAtividadesPage";
-
-	}
-
-	public String tipoAcoes() {
-		return "tipoAcoesPage";
-
-	}
-
-	public String solicitante() {
-		return "solicitantePage";
-
-	}
-
-	public String tipoTarefasPage() {
-		return "tipoTarefasPage";
-
-	}
-
 }

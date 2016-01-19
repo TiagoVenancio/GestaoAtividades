@@ -62,38 +62,40 @@ body {
 
 							<p:submenu label="Cadastro" icon="ui-icon-gear">
 
-								<p:menuitem value="Atividades"
-									actionListener="#{redirectorBean.tipoAtividades}"
-									icon="ui-icon-flag" update="messages" />
 
-								<p:menuitem value="Ações"
-									actionListener="#{redirectorBean.tipoAcoes}"
+								<p:menuitem value="Atividades"
+									url="/pages/user/tipoAtividadesPage.jsf" icon="ui-icon-flag"
+									update="messages" />
+
+								<p:menuitem value="Ações" url="/pages/user/tipoAcoesPage.jsf"
 									icon="ui-icon-wrench" update="messages" />
 
 								<p:menuitem value="Tarefas"
-									actionListener="#{redirectorBean.tipoTarefasPage}"
-									icon="ui-icon-clipboard" update="messages" />
+									url="/pages/user/tipoTarefasPage.jsf" icon="ui-icon-clipboard"
+									update="messages" />
 
 								<p:menuitem value="Solicitantes"
-									actionListener="#{redirectorBean.solicitante}"
-									icon="ui-icon-person" update="messages" />
+									url="/pages/user/solicitantePage.jsf" icon="ui-icon-person"
+									update="messages" />
 
 							</p:submenu>
 
 
 							<p:submenu label="Configuração" icon="ui-icon-locked">
 
-								<p:menuitem value="Usuários"
-									actionListener="#{redirectorBean.usuarios}"
+								<p:menuitem value="Usuários" url="/pages/admin/usuariosPage.jsf"
 									icon="ui-icon-person" update="messages" />
 
 								<p:menuitem value="Prioridades"
-									actionListener="#{redirectorBean.prioridades}"
-									icon="ui-icon-alert" update="messages" />
+									action="#{redirectorBean.prioridades}" icon="ui-icon-alert"
+									update="messages" />
 
 								<p:menuitem value="Status"
-									actionListener="#{redirectorBean.statusTask}"
+									url="/pages/admin/statusTarefaPage.jsf"
 									icon="ui-icon-transferthick-e-w" update="messages" />
+
+								<p:menuitem value="Grupos" url="/pages/admin/gruposPage.jsf"
+									icon="ui-icon-folder-collapsed" update="messages" />
 
 							</p:submenu>
 
