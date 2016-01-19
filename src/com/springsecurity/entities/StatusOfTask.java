@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.springsecurity.enums.StatusTaskEnum;
+import com.springsecurity.enums.StatusFinalAction;
+import com.springsecurity.enums.StatusObjectEnum;
 
 @Entity
 @Table(name = "sg_act_status_task", schema = "gestao_atividades")
@@ -19,10 +20,11 @@ public class StatusOfTask implements Serializable {
 	private Long id;
 	private Calendar createDate;
 	private Calendar lastUpdate;
-	private StatusTaskEnum statusTaskEnum;
+	private StatusObjectEnum statusObjectEnum;
 	private String description;
-	private String finalAction;
+	private StatusFinalAction statusFinalAction;
 
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "STATUS_TASK_ID", length = 20)
@@ -31,7 +33,7 @@ public class StatusOfTask implements Serializable {
 	}
 
 	public void setId(Long id) {
-		this.id = id;	
+		this.id = id;
 	}
 
 	@Column (name = "CREATE_DATE", nullable = false )
@@ -53,12 +55,12 @@ public class StatusOfTask implements Serializable {
 	}
 
 	@Column (name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
-	public StatusTaskEnum getStatusTaskEnum() {
-		return statusTaskEnum;
+	public StatusObjectEnum getStatusObjectEnum() {
+		return statusObjectEnum;
 	}
 
-	public void setStatusTaskEnum(StatusTaskEnum statusTaskEnum) {
-		this.statusTaskEnum = statusTaskEnum;
+	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
+		this.statusObjectEnum = statusObjectEnum;
 	}
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
@@ -70,14 +72,13 @@ public class StatusOfTask implements Serializable {
 		this.description = description;
 	}
 
-	@Column (name = "FINAL_ACTION", length = 5, nullable = false)
-	public String getFinalAction() {
-		return finalAction;
+	@Column (name = "FINAL_ACTION", length = 10, nullable = false)
+	public StatusFinalAction getStatusFinalAction() {
+		return statusFinalAction;
 	}
 
-	public void setFinalAction(String finalAction) {
-		this.finalAction = finalAction;
+	public void setStatusFinalAction(StatusFinalAction statusFinalAction) {
+		this.statusFinalAction = statusFinalAction;
 	}
 
-	
 }
