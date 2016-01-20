@@ -186,4 +186,9 @@ public class User implements UserDetails {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
 }

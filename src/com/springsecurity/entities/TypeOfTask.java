@@ -32,15 +32,15 @@ public class TypeOfTask implements Serializable {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE", nullable = false)
+	@Column(name = "CREATE_DATE", nullable = true)
 	private Calendar createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE", nullable = true)
 	private Calendar lastUpdate;
 
 	@Enumerated
-	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
+	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = true)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
@@ -84,6 +84,11 @@ public class TypeOfTask implements Serializable {
 
 	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
 		this.statusObjectEnum = statusObjectEnum;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 }

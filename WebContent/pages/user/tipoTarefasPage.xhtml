@@ -1,13 +1,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
+
 		<h:form>
-			<h:messages />
-			<h:outputText value="TIPO DE TAREFAS" />
+
+			<p:panel id="painelTipoTarefas" header="Cadastro de tipos de tarefas"
+				style="margin-bottom:20px">
+
+				<h:messages />
+
+				<h:panelGrid columns="2">
+					<h:outputText value="Descrição: " />
+					<h:inputText value="#{typeOfTaskBean.typeOfTask.description}" />
+					<h:outputText value="Data criação: " />
+					<h:inputText value="#{typeOfTaskBean.typeOfTask.createDate}" />
+					<h:outputText value="Última atualização: " />
+					<h:inputText value="#{typeOfTaskBean.typeOfTask.lastUpdate}" />
+					<h:outputText value="Status da tarefa: " />
+					<h:inputText value="#{typeOfTaskBean.typeOfTask.statusObjectEnum}" />
+				</h:panelGrid>
+
+				<h:commandButton value="Adicionar"
+					action="#{typeOfTaskBean.adicionar}" />
+
+			</p:panel>
+
 		</h:form>
+
+
 	</ui:define>
 </ui:decorate>
 </html>
