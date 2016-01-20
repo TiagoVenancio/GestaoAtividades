@@ -1,12 +1,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
 		<h:form>
-			<h:messages />
-			<h:outputText value="STATUS TAREFAS" />
+
+			<p:panel id="panelStatusTask" header="Manutenção de Status"
+				style="margin-bottom:10px;">
+
+				<h:panelGrid id="grid" cellpadding="5" columns="2"
+					style="margin-bottom:10px">
+					<f:facet name="header">
+						<p:messages id="msgs" />
+					</f:facet>
+
+					<p:outputLabel for="description" value="Descrição: " />
+					<p:inputText id="description"
+						value="#{statusOfTaskBean.description}" />
+
+					<h:outputLabel for="statusFinalAction" value="Status finalizador: " />
+					<h:selectOneMenu id="statusFinalAction"
+						value="#{statusOfTaskBean.statusFinalAction}" required="true"
+						label="Status finalizador: ">
+						<f:selectItem itemLabel="Selecionar o Status" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Sim" itemValue="SIM" />
+						<f:selectItem itemLabel="Não" itemValue="NAO" />
+					</h:selectOneMenu>
+
+				</h:panelGrid>
+			</p:panel>
+			<h:panelGrid columns="6" cellpadding="5">
+				<p:commandButton value="Salvar" id="btnSalvar" process="@all"
+					update="grid" actionListener="#{statusOfTaskBean.salvar}" />
+			</h:panelGrid>
+
 		</h:form>
 	</ui:define>
 </ui:decorate>
