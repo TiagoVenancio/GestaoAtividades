@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class TypeOfAction implements Serializable {
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Calendar lastUpdate;
 
-	@Enumerated
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATUS_OBJECT_ACTION", length = 10, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 

@@ -17,7 +17,7 @@ public class TypeOfTaskServiceImpl implements TypeOfTaskService {
 	@Override
 	public void adicionar(TypeOfTask typeOfTask)
 			throws IllegalArgumentException {
-		dao.adiciona(typeOfTask);
+		dao.save(typeOfTask);
 
 	}
 

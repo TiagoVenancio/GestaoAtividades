@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class RequestTask implements Serializable {
 	@Column(name = "AMOUNT_HOURS", nullable = false)
 	private Double amountHours;
 
-	@Enumerated
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 

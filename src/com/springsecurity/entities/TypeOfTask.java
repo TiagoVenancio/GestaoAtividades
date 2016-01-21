@@ -1,12 +1,12 @@
 package com.springsecurity.entities;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,8 +20,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 
 @Entity
 @Table(name = "sg_act_type_task", schema = "gestao_atividades")
-public class TypeOfTask implements Serializable {
-	private static final long serialVersionUID = -7590317347612436291L;
+public class TypeOfTask {
 
 	@OneToMany(mappedBy = "typeOfTask", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<RequestTask> requestTasks;
@@ -32,15 +31,15 @@ public class TypeOfTask implements Serializable {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE", nullable = true)
+	@Column(name = "CREATE_DATE", nullable = false)
 	private Calendar createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "LAST_UPDATE", nullable = true)
+	@Column(name = "LAST_UPDATE", nullable = false)
 	private Calendar lastUpdate;
 
-	@Enumerated
-	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = true)
+	@Enumerated(value = EnumType.STRING)
+	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)

@@ -14,29 +14,29 @@ import com.springsecurity.entities.TypeOfTask;
 public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 
 	@PersistenceContext
-	private EntityManager manager;
+	private EntityManager entityManager;
 
 	@Override
-	public TypeOfTask buscaPorId(Long id) {
-		return manager.find(TypeOfTask.class, id);
+	public TypeOfTask getById(final Long id) {
+		return entityManager.find(TypeOfTask.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TypeOfTask> lista() {
-		return manager.createQuery("select t from TypeOfTask t")
+	public List<TypeOfTask> findAll() {
+		return entityManager.createQuery("FROM " + TypeOfTask.class.getName())
 				.getResultList();
 	}
 
 	@Override
-	public void adiciona(TypeOfTask t) {
-		manager.persist(t);
+	public void save(TypeOfTask typeOfTask) {
+		entityManager.persist(typeOfTask);
 
 	}
 
 	@Override
-	public void altera(TypeOfTask t) {
-		manager.merge(t);
+	public void update(TypeOfTask typeOfTask) {
+		entityManager.merge(typeOfTask);
 
 	}
 

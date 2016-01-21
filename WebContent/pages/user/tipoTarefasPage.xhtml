@@ -15,13 +15,24 @@
 
 				<h:panelGrid columns="2">
 					<h:outputText value="Descrição: " />
-					<h:inputText value="#{typeOfTaskBean.typeOfTask.description}" />
+					<h:inputText value="#{typeOfTaskBean.tipoTarefa}" />
 					<h:outputText value="Data criação: " />
-					<h:inputText value="#{typeOfTaskBean.typeOfTask.createDate}" />
+					<h:inputText value="#" />
 					<h:outputText value="Última atualização: " />
-					<h:inputText value="#{typeOfTaskBean.typeOfTask.lastUpdate}" />
-					<h:outputText value="Status da tarefa: " />
-					<h:inputText value="#{typeOfTaskBean.typeOfTask.statusObjectEnum}" />
+					<h:inputText value="#" />
+
+
+					<h:outputLabel for="txt3" value="Text 3: *" />
+					<h:selectOneMenu id="txt3" value="#{typeOfTaskBean.statusObjeto}"
+						required="true" label="Text 3">
+						<f:selectItem itemLabel="Select One" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Ativo 1" itemValue="ATIVO" />
+						<f:selectItem itemLabel="Inativo 2" itemValue="INATIVO" />
+						<f:selectItem itemLabel="Inativo 3" itemValue="INATIVO" />
+					</h:selectOneMenu>
+
+
 				</h:panelGrid>
 
 				<h:commandButton value="Adicionar"

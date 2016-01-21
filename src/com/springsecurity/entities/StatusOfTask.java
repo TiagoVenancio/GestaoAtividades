@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -40,13 +41,14 @@ public class StatusOfTask implements Serializable {
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Calendar lastUpdate;
 
-	@Enumerated
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
 	private String description;
 
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "FINAL_ACTION", length = 10, nullable = false)
 	private StatusFinalAction statusFinalAction;
 

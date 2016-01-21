@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -51,7 +52,7 @@ public class RequestCustomer implements Serializable {
 	@Column(name = "LAST_USER_CHANGE", length = 20, nullable = false)
 	private String lastUserChange;
 
-	@Enumerated
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
