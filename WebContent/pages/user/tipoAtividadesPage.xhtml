@@ -4,7 +4,65 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
+
 		<h:form>
+
+			<p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();"
+				type="button" icon="ui-icon-extlink" />
+
+			<p:dialog header="Dynamic Focus" widgetVar="dlg" focus="age"
+				showEffect="explode" hideEffect="bounce" height="350">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="name" value="Name:" />
+					<p:inputText id="name" label="name" />
+
+					<h:outputLabel for="surname" value="Surname:" />
+					<p:inputText id="surname" label="surname" />
+
+					<h:outputLabel for="age" value="Age:" />
+					<p:inputText id="age" label="age" />
+				</h:panelGrid>
+				<p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();"
+					type="button" icon="ui-icon-extlink" />
+			</p:dialog>
+
+		</h:form>
+
+		<h:form>
+			<p:dataTable var="car" value="#{dtPaginatorView.cars}" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15">
+
+				<p:column filterBy="#{car.id}" headerText="Id"
+					filterMatchMode="contains">
+					<h:outputText value="#{car.id}" />
+				</p:column>
+
+				<p:column filterBy="#{car.year}" headerText="Year"
+					filterMatchMode="contains">
+					<h:outputText value="#{car.year}" />
+				</p:column>
+
+				<p:column filterBy="#{car.brand}" headerText="Brand"
+					filterMatchMode="contains">
+					<h:outputText value="#{car.brand}" />
+				</p:column>
+
+				<p:column filterBy="#{car.color}" headerText="Color"
+					filterMatchMode="contains">
+					<h:outputText value="#{car.color}" />
+				</p:column>
+				<p:column filterBy="#{car.color}" headerText="Color"
+					filterMatchMode="contains">
+					<h:outputText value="#{car.color}" />
+				</p:column>
+
+			</p:dataTable>
+
+			<br />
+			<br />
+			<br />
 			<h:messages />
 			<h:outputText value="TIPO DE ATIVIDADES" />
 		</h:form>
