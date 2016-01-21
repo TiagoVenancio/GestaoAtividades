@@ -1,6 +1,8 @@
 package com.springsecurity.beans;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -25,6 +27,8 @@ public class TypeOfTaskBean {
 	@Autowired
 	private TypeOfTaskService service;
 
+	List<TypeOfTask> typeOfTaskList;
+
 	@PostConstruct
 	private void init() {
 		typeOfTask = new TypeOfTask();
@@ -42,6 +46,26 @@ public class TypeOfTaskBean {
 			message(e.getMessage());
 		}
 		return "";
+	}
+
+	public String alterar() {
+		try {
+			typeOfTask.setLastUpdate(Calendar.getInstance());
+			typeOfTask.setDescription(tipoTarefa);
+			typeOfTask.setStatusObjectEnum(statusObjeto);
+			service.adicionar(typeOfTask);
+			message("Alterado com sucesso!");
+		} catch (Exception e) {
+			message(e.getMessage());
+		}
+		return "";
+	}
+
+	public List<TypeOfTask> listar() {
+		List<TypeOfTask> tarefas = new ArrayList<TypeOfTask>();
+		tarefas = service.findAll();
+		return tarefas;
+
 	}
 
 	private void message(String msg) {
