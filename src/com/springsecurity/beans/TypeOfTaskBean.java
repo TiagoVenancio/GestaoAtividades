@@ -1,13 +1,16 @@
 package com.springsecurity.beans;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
 import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfTaskService;
@@ -22,11 +25,16 @@ public class TypeOfTaskBean {
 	private StatusObjectEnum statusObjeto;
 
 	@Autowired
-	private TypeOfTaskService service;
+	private TypeOfTaskService typeOfTaskService;
 
 	@PostConstruct
 	private void init() {
 		typeOfTask = new TypeOfTask();
+	}
+
+	public List<TypeOfTask> getList() {
+		return typeOfTaskService.getAll();
+
 	}
 
 	public String adicionar() {
@@ -35,7 +43,7 @@ public class TypeOfTaskBean {
 			typeOfTask.setLastUpdate(Calendar.getInstance());
 			typeOfTask.setDescription(tipoTarefa);
 			typeOfTask.setStatusObjectEnum(statusObjeto);
-			service.adicionar(typeOfTask);
+			typeOfTaskService.adicionar(typeOfTask);
 			message("Adicionado com sucesso!");
 		} catch (Exception e) {
 			message(e.getMessage());
@@ -48,7 +56,7 @@ public class TypeOfTaskBean {
 			typeOfTask.setLastUpdate(Calendar.getInstance());
 			typeOfTask.setDescription(tipoTarefa);
 			typeOfTask.setStatusObjectEnum(statusObjeto);
-			service.alterar(typeOfTask);
+			typeOfTaskService.alterar(typeOfTask);
 			message("Alterado com sucesso!");
 		} catch (Exception e) {
 			message(e.getMessage());

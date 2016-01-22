@@ -17,7 +17,7 @@ public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 	private EntityManager entityManager;
 
 	@Override
-	public TypeOfTask getById(final Long id) {
+	public TypeOfTask getById(Long id) {
 		return entityManager.find(TypeOfTask.class, id);
 	}
 
@@ -38,6 +38,11 @@ public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 	public void update(TypeOfTask typeOfTask) {
 		entityManager.merge(typeOfTask);
 
+	}
+
+	@Override
+	public List<TypeOfTask> getAll() {
+		return findAll();
 	}
 
 }

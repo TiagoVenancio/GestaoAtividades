@@ -43,27 +43,28 @@
 			<p:panel id="painelListaTarefas" header="Tarefas"
 				style="margin-bottom:20px">
 
-				<p:dataTable id="tiposTarefas" var="tarefas"
-					value="#{service.all}">
+				<p:dataTable id="tiposTarefas" var="tipoTask"
+					value="#{typeOfTaskBean.list}"
+					converter="converterListaTipoTarefas">
 
 					<p:column headerText="Id">
-						<h:outputText value="#{service.typeOfTask.id}" />
+						<h:outputText value="#{tipoTask.id}" />
 					</p:column>
 
 					<p:column headerText="Data de criação">
-						<h:outputText value="#{typeOfTask.createDate}" />
+						<h:outputText value="#{tipoTask.createDate}" />
 					</p:column>
 
 					<p:column headerText="Última atualização">
-						<h:outputText value="#{typeOfTask.lastUpdate}" />
+						<h:outputText value="#{tipoTask.lastUpdate}" />
 					</p:column>
 
 					<p:column headerText="Descrição">
-						<h:outputText value="#{typeOfTask.description}" />
+						<h:outputText value="#{tipoTask.description}" />
 					</p:column>
 
 					<p:column headerText="Status">
-						<h:outputText value="#{typeOfTask.statusObjectEnum}" />
+						<h:outputText value="#{tipoTask.statusObjectEnum}" />
 					</p:column>
 
 				</p:dataTable>
