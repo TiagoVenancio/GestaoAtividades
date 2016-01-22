@@ -40,8 +40,37 @@
 
 			</p:panel>
 
-		</h:form>
+			<p:panel id="painelListaTarefas" header="Tarefas"
+				style="margin-bottom:20px">
 
+				<p:dataTable id="tiposTarefas" var="tarefas"
+					value="#{service.all}">
+
+					<p:column headerText="Id">
+						<h:outputText value="#{service.typeOfTask.id}" />
+					</p:column>
+
+					<p:column headerText="Data de criação">
+						<h:outputText value="#{typeOfTask.createDate}" />
+					</p:column>
+
+					<p:column headerText="Última atualização">
+						<h:outputText value="#{typeOfTask.lastUpdate}" />
+					</p:column>
+
+					<p:column headerText="Descrição">
+						<h:outputText value="#{typeOfTask.description}" />
+					</p:column>
+
+					<p:column headerText="Status">
+						<h:outputText value="#{typeOfTask.statusObjectEnum}" />
+					</p:column>
+
+				</p:dataTable>
+
+			</p:panel>
+
+		</h:form>
 
 	</ui:define>
 </ui:decorate>

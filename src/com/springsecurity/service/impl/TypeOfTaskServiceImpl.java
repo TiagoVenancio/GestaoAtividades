@@ -35,4 +35,9 @@ public class TypeOfTaskServiceImpl implements TypeOfTaskService {
 
 	}
 
+	@Override
+	public List<TypeOfTask> getAll() {
+		return this.findAll();
+	}
+
 }

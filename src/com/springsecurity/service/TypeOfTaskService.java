@@ -11,5 +11,7 @@ public interface TypeOfTaskService {
 	void alterar(TypeOfTask typeOfTask) throws IllegalArgumentException;
 
 	List<TypeOfTask> findAll();
+	
+	public List<TypeOfTask> getAll();  
 
 }

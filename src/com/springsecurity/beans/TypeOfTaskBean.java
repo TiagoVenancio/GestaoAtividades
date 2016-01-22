@@ -1,17 +1,13 @@
 package com.springsecurity.beans;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
 import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfTaskService;
@@ -21,13 +17,12 @@ import com.springsecurity.service.TypeOfTaskService;
 public class TypeOfTaskBean {
 
 	private TypeOfTask typeOfTask;
+
 	private String tipoTarefa;
 	private StatusObjectEnum statusObjeto;
 
 	@Autowired
 	private TypeOfTaskService service;
-
-	List<TypeOfTask> typeOfTaskList;
 
 	@PostConstruct
 	private void init() {
@@ -59,13 +54,6 @@ public class TypeOfTaskBean {
 			message(e.getMessage());
 		}
 		return "";
-	}
-
-	public List<TypeOfTask> listar() {
-		List<TypeOfTask> tarefas = new ArrayList<TypeOfTask>();
-		tarefas = service.findAll();
-		return tarefas;
-
 	}
 
 	private void message(String msg) {
