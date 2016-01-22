@@ -53,7 +53,7 @@ public class TypeOfTaskBean {
 			typeOfTask.setLastUpdate(Calendar.getInstance());
 			typeOfTask.setDescription(tipoTarefa);
 			typeOfTask.setStatusObjectEnum(statusObjeto);
-			service.adicionar(typeOfTask);
+			service.alterar(typeOfTask);
 			message("Alterado com sucesso!");
 		} catch (Exception e) {
 			message(e.getMessage());
