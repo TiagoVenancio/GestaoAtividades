@@ -8,63 +8,46 @@
 
 		<h:form>
 
-			<p:panel id="painelTipoTarefas" header="Cadastro de tipos de tarefas"
-				style="margin-bottom:20px">
-
-				<h:messages />
-
-				<h:panelGrid columns="2">
-					<h:outputText value="Descrição: " />
-					<h:inputText value="#{typeOfTaskBean.tipoTarefa}" />
-					<h:outputText value="Data criação: " />
-					<h:inputText value="#" />
-					<h:outputText value="Última atualização: " />
-					<h:inputText value="#" />
-
-
-					<h:outputLabel for="txt3" value="Text 3: *" />
-					<h:selectOneMenu id="txt3" value="#{typeOfTaskBean.statusObjeto}"
-						required="true" label="Text 3">
-						<f:selectItem itemLabel="Select One" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItem itemLabel="Ativo 1" itemValue="ATIVO" />
-						<f:selectItem itemLabel="Inativo 2" itemValue="INATIVO" />
-						<f:selectItem itemLabel="Inativo 3" itemValue="INATIVO" />
-					</h:selectOneMenu>
-
-
-				</h:panelGrid>
-
-				<h:commandButton value="Adicionar"
-					action="#{typeOfTaskBean.adicionar}" />
-
-			</p:panel>
-
 			<p:panel id="painelListaTarefas" header="Tarefas"
 				style="margin-bottom:20px">
 
 				<p:dataTable id="tiposTarefas" var="tipoTask"
-					value="#{typeOfTaskBean.list}"
-					converter="converterListaTipoTarefas">
+					value="#{typeOfTaskService.typeOfTasks}">
 
 					<p:column headerText="Id">
+
 						<h:outputText value="#{tipoTask.id}" />
+
 					</p:column>
 
 					<p:column headerText="Data de criação">
+
 						<h:outputText value="#{tipoTask.createDate}" />
+
 					</p:column>
 
 					<p:column headerText="Última atualização">
+
 						<h:outputText value="#{tipoTask.lastUpdate}" />
+
 					</p:column>
 
 					<p:column headerText="Descrição">
+
 						<h:outputText value="#{tipoTask.description}" />
+
 					</p:column>
 
 					<p:column headerText="Status">
+
 						<h:outputText value="#{tipoTask.statusObjectEnum}" />
+
+					</p:column>
+
+					<p:column headerText="Ação">
+
+						<h:outputText value="#" />
+
 					</p:column>
 
 				</p:dataTable>
