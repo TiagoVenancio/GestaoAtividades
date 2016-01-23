@@ -38,8 +38,8 @@ public class TypeOfTask {
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Calendar lastUpdate;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 10, nullable = false)
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)

@@ -10,7 +10,7 @@ import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.service.TypeOfTaskService;
 
 @Controller
-@Scope("request")
+@Scope(value = "session")
 public class TypeOfTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
