@@ -2,13 +2,10 @@ package com.springsecurity.beans;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedProperty;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
 import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.service.TypeOfTaskService;
 
@@ -18,23 +15,26 @@ public class TypeOfTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty("#{typeOfTaskService}")
+	@Autowired
 	private TypeOfTaskService typeOfTaskService;
+	private List<TypeOfTask> listaTiposTarefas;
 
-	private List<TypeOfTask> typeOfTasks;
+	public TypeOfTaskBean() {
+
+	}
 
 	@PostConstruct
-	public void loadTypeOfTasks() {
-		typeOfTasks = typeOfTaskService.findAll();
+	public void init() {
+		listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
 
 	}
 
-	public List<TypeOfTask> getTypeOfTasks() {
-		return typeOfTasks;
+	public List<TypeOfTask> getListaTiposTarefas() {
+		return listaTiposTarefas;
 	}
 
-	public void setTypeOfTaskService(TypeOfTaskService typeOfTaskService) {
-		this.typeOfTaskService = typeOfTaskService;
+	public void setListaTiposTarefas(List<TypeOfTask> listaTiposTarefas) {
+		this.listaTiposTarefas = listaTiposTarefas;
 	}
 
 }

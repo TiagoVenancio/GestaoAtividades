@@ -21,13 +21,6 @@ public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 		return entityManager.find(TypeOfTask.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<TypeOfTask> findAll() {
-		return entityManager.createQuery("FROM " + TypeOfTask.class.getName())
-				.getResultList();
-	}
-
 	@Override
 	public void save(TypeOfTask typeOfTask) {
 		entityManager.persist(typeOfTask);
@@ -40,9 +33,11 @@ public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<TypeOfTask> getAll() {
-		return findAll();
+	public List<TypeOfTask> getAllTipoDeTarefas() {
+		return entityManager.createQuery("FROM " + TypeOfTask.class.getName())
+				.getResultList();
 	}
 
 }

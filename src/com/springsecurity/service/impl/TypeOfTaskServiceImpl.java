@@ -25,20 +25,14 @@ public class TypeOfTaskServiceImpl implements TypeOfTaskService {
 	}
 
 	@Override
-	public List<TypeOfTask> findAll() {
-		return dao.findAll();
+	public List<TypeOfTask> getAllTipoDeTarefas() {
+		return dao.getAllTipoDeTarefas();
 	}
-
 
 	@Override
 	public void alterar(TypeOfTask typeOfTask) throws IllegalArgumentException {
 		dao.update(typeOfTask);
 
-	}
-
-	@Override
-	public List<TypeOfTask> getAll() {
-		return this.findAll();
 	}
 
 }

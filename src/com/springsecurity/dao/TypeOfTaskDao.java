@@ -6,11 +6,9 @@ import com.springsecurity.entities.TypeOfTask;
 
 public interface TypeOfTaskDao {
 
-	TypeOfTask getById(Long id);
+	public TypeOfTask getById(Long id);
 
-	List<TypeOfTask> findAll();
-
-	List<TypeOfTask> getAll();
+	public List<TypeOfTask> getAllTipoDeTarefas();
 
 	void save(TypeOfTask typeOfTask);
 
