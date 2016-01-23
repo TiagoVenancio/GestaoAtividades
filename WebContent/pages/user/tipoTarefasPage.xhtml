@@ -8,46 +8,43 @@
 
 		<h:form>
 
-			<p:panel id="painelListaTarefas" header="Tarefas"
+			<p:panel id="painelListaTarefas" header="Manutenção de tipos de tarefas"
 				style="margin-bottom:20px">
 
 				<p:dataTable id="tiposTarefas" var="tipoTask"
-					value="#{typeOfTaskBean.listaTiposTarefas}">
+					value="#{typeOfTaskBean.listaTiposTarefas}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,30">
 
 					<p:column headerText="Id">
-
 						<h:outputText value="#{tipoTask.id}" />
-
 					</p:column>
 
 					<p:column headerText="Data de criação">
-
-						<h:outputText value="#{tipoTask.createDate}" />
-
+						<h:outputText value="#{tipoTask.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última atualização">
-
-						<h:outputText value="#{tipoTask.lastUpdate}" />
-
+						<h:outputText value="#{tipoTask.lastUpdate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Descrição">
-
+					<p:column headerText="Descrição" filterBy="#{tipoTask.description}"
+						filterMatchMode="contains">
 						<h:outputText value="#{tipoTask.description}" />
-
 					</p:column>
 
 					<p:column headerText="Status">
-
 						<h:outputText value="#{tipoTask.statusObjectEnum}" />
-
 					</p:column>
 
 					<p:column headerText="Ação">
-
-						<h:outputText value="#" />
-
+						<p:commandButton value="Editar" onclick="#" type="button"
+							icon="ui-icon-extlink" />
 					</p:column>
 
 				</p:dataTable>

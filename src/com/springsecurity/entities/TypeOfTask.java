@@ -1,8 +1,7 @@
 package com.springsecurity.entities;
 
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +31,11 @@ public class TypeOfTask {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE", nullable = false)
-	private Calendar createDate;
+	private Date createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "LAST_UPDATE", nullable = false)
-	private Calendar lastUpdate;
+	private Date lastUpdate;
 
 	@Enumerated(value = EnumType.ORDINAL)
 	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 1, nullable = false)
@@ -53,19 +52,19 @@ public class TypeOfTask {
 		this.id = id;
 	}
 
-	public Calendar getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Calendar createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Calendar getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Calendar lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
