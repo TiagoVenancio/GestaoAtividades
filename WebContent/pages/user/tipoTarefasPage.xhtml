@@ -8,8 +8,33 @@
 
 		<h:form>
 
-			<p:panel id="painelListaTarefas" header="Manutenção de tipos de tarefas"
-				style="margin-bottom:20px">
+			<p:commandButton value="Nova Tarefa" onclick="PF('dlg').show();"
+				type="button" icon="ui-icon-extlink" />
+
+			<p:dialog header="Dynamic Focus" widgetVar="dlg" focus="descricao"
+				showEffect="explode" hideEffect="bounce" height="350">
+				<h:panelGrid columns="2" cellpadding="5">
+
+					<h:outputLabel for="descricao" value="Descrição:" />
+					<p:inputText id="descricao" label="descricao" />
+
+					<p:outputLabel for="console" value="Status:" />
+					<p:selectOneRadio id="console" value="#{radioView.console}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
+				</h:panelGrid>
+				<p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();"
+					type="button" icon="ui-icon-extlink" />
+			</p:dialog>
+
+		</h:form>
+
+		<h:form>
+
+			<p:panel id="painelListaTarefas"
+				header="Manutenção de tipos de tarefas" style="margin-bottom:20px">
 
 				<p:dataTable id="tiposTarefas" var="tipoTask"
 					value="#{typeOfTaskBean.listaTiposTarefas}" rows="10"
