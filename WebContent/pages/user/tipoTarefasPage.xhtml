@@ -6,75 +6,83 @@
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
 
-		<h:form>
+		<h:form prependId="false" id="frmTiposTarefas">
 
-			<p:commandButton value="Nova Tarefa" onclick="PF('dlg').show();"
-				type="button" icon="ui-icon-extlink" />
-
-			<p:dialog header="Cadastro De Tarefa" widgetVar="dlg" focus="descricao"
-				showEffect="explode" hideEffect="bounce" height="350">
-				<h:panelGrid columns="2" cellpadding="5">
-
-					<h:outputLabel for="descricao" value="Descrição:" />
-					<p:inputText id="descricao" label="descricao" />
-
-					<p:outputLabel for="console" value="Status:" />
-					<p:selectOneRadio id="console" value="#{radioView.console}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
-
-				</h:panelGrid>
-				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
-					type="button" icon="ui-icon-extlink" />
-			</p:dialog>
-
-		</h:form>
-
-		<h:form>
-
-			<p:panel id="painelListaTarefas"
-				header="Manutenção de tipos de tarefas" style="margin-bottom:20px">
+			<h:panelGrid id="gridTiposTarefas">
 
 				<p:dataTable id="tiposTarefas" var="tipoTask"
-					value="#{typeOfTaskBean.listaTiposTarefas}" rows="10"
+					value="#{typeOfTaskBean.listaTiposTarefas}" rows="15"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10,20,30">
+					rowsPerPageTemplate="15,30"
+					emptyMessage="Nenhum registro encontrado.">
 
-					<p:column headerText="Id">
+					<f:facet name="header">
+           				Manutenção Tipos de Tarefas
+        		</f:facet>
+
+					<p:column headerText="Id" sortBy="#{tipoTask.id}">
 						<h:outputText value="#{tipoTask.id}" />
 					</p:column>
 
-					<p:column headerText="Data de criação">
+					<p:column headerText="Data de criação"
+						sortBy="#{tipoTask.createDate}">
 						<h:outputText value="#{tipoTask.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Última atualização">
+					<p:column headerText="Última atualização"
+						sortBy="#{tipoTask.lastUpdate}">
 						<h:outputText value="#{tipoTask.lastUpdate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Descrição" filterBy="#{tipoTask.description}"
-						filterMatchMode="contains">
+						filterMatchMode="contains" sortBy="#{tipoTask.description}">
 						<h:outputText value="#{tipoTask.description}" />
 					</p:column>
 
-					<p:column headerText="Status">
+					<p:column headerText="Status"
+						filterBy="#{tipoTask.statusObjectEnum}" filterMatchMode="contains"
+						sortBy="#{tipoTask.statusObjectEnum}">
 						<h:outputText value="#{tipoTask.statusObjectEnum}" />
 					</p:column>
 
-					<p:column headerText="Ação">
-						<p:commandButton value="Editar" onclick="#" type="button"
-							icon="ui-icon-extlink" />
-					</p:column>
+					<f:facet name="footer">
+						<p:commandButton value="Novo Tipo de Tarefa"
+							onclick="PF('dlg').show();" type="button"
+							icon="ui-icon-circle-plus" />
+					</f:facet>
 
 				</p:dataTable>
 
-			</p:panel>
+			</h:panelGrid>
+
+			<p:dialog header="Novo Tipo de Tarefa" widgetVar="dlg"
+				focus="descricao" showEffect="explode" hideEffect="bounce"
+				height="350">
+				<h:panelGrid columns="2" cellpadding="5">
+
+					<h:outputLabel for="descricao" value="Descrição:" />
+					<p:inputText id="descricao" label="descricao"
+						value="#{typeOfTaskBean.description}" />
+
+					<p:outputLabel for="console" value="Status:" />
+					<p:selectOneRadio id="console"
+						value="#{typeOfTaskBean.statusObjectEnum}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
+				</h:panelGrid>
+
+				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
+					action="#{typeOfTaskBean.adicionar}" icon="ui-icon-circle-plus"
+					update="gridTiposTarefas" />
+
+			</p:dialog>
 
 		</h:form>
 

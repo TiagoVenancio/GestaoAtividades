@@ -23,4 +23,9 @@ public class RedirectorBean {
 
 	}
 
+	public String tipoTarefasPage() {
+		return "tipoTarefasPage";
+
+	}
+
 }

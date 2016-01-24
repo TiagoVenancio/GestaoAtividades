@@ -35,6 +35,14 @@
 
 	<navigation-rule>
 		<navigation-case>
+			<from-outcome>tipoTarefasPage</from-outcome>
+			<to-view-id>/pages/user/tipoTarefasPage.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
 			<from-outcome>adminPage</from-outcome>
 			<to-view-id>/pages/admin/adminPage.jsf</to-view-id>
 			<redirect />
