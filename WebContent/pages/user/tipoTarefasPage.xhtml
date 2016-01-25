@@ -24,8 +24,10 @@
         			</f:facet>
 
 
-       <p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}" update="@form" />
-       <p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}" update="@form" />
+					<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+						update="@form" />
+					<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"
+						update="@form" />
 
 					<p:column headerText="Id" sortBy="#{tipoTask.id}">
 						<h:outputText value="#{tipoTask.id}" />
@@ -48,11 +50,11 @@
 					<p:column headerText="Descrição" filterBy="#{tipoTask.description}"
 						filterMatchMode="contains" sortBy="#{tipoTask.description}">
 						<p:cellEditor>
-						<f:facet name="output">
-						<h:outputText value="#{tipoTask.description}" />
-						</f:facet>
-						<f:facet name="input">
-						<p:inputText value="#{tipoTask.description}" style="width:100%"
+							<f:facet name="output">
+								<h:outputText value="#{tipoTask.description}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{tipoTask.description}" style="width:100%"
 									label="Year" />
 							</f:facet>
 						</p:cellEditor>
@@ -61,7 +63,19 @@
 					<p:column headerText="Status"
 						filterBy="#{tipoTask.statusObjectEnum}" filterMatchMode="contains"
 						sortBy="#{tipoTask.statusObjectEnum}">
-						<h:outputText value="#{tipoTask.statusObjectEnum}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{tipoTask.statusObjectEnum}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{tipoTask.statusObjectEnum}"
+									style="width:100%">
+									<f:selectItems value="#{dtEditView.statusObjectEnum}" var="statusObjectEnum"
+										itemLabel="#{statusObjectEnum}"
+										itemValue="#{statusObjectEnum}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column style="width:32px">
