@@ -5,10 +5,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+
 import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfTaskService;
@@ -18,12 +22,11 @@ import com.springsecurity.service.TypeOfTaskService;
 public class TypeOfTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String SUCCESS = "success";
-	private static final String ERROR = "error";
 
 	@Autowired
 	private TypeOfTaskService typeOfTaskService;
 	private List<TypeOfTask> listaTiposTarefas;
+	private TypeOfTask typeOfTaskSelecionada;
 
 	private String description;
 	private StatusObjectEnum statusObjectEnum;
@@ -47,10 +50,18 @@ public class TypeOfTaskBean implements Serializable {
 			typeOfTask.setStatusObjectEnum(statusObjectEnum);
 			typeOfTaskService.adicionar(typeOfTask);
 			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item adicionado com sucesso!"));
 			return null;
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não adicionado!"));
 		}
 		return null;
 
@@ -63,12 +74,22 @@ public class TypeOfTaskBean implements Serializable {
 			typeOfTask.setDescription(description);
 			typeOfTask.setStatusObjectEnum(statusObjectEnum);
 			typeOfTaskService.alterar(typeOfTask);
-			return SUCCESS;
+			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item alterado com sucesso!"));
+
+			return null;
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não alterado!"));
 		}
-		return ERROR;
+		return null;
 
 	}
 
@@ -78,14 +99,6 @@ public class TypeOfTaskBean implements Serializable {
 
 	public void setListaTiposTarefas(List<TypeOfTask> listaTiposTarefas) {
 		this.listaTiposTarefas = listaTiposTarefas;
-	}
-
-	public static String getSuccess() {
-		return SUCCESS;
-	}
-
-	public static String getError() {
-		return ERROR;
 	}
 
 	public String getDescription() {
@@ -102,6 +115,14 @@ public class TypeOfTaskBean implements Serializable {
 
 	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
 		this.statusObjectEnum = statusObjectEnum;
+	}
+
+	public TypeOfTask getTypeOfTaskSelecionada() {
+		return typeOfTaskSelecionada;
+	}
+
+	public void setTypeOfTaskSelecionada(TypeOfTask typeOfTaskSelecionada) {
+		this.typeOfTaskSelecionada = typeOfTaskSelecionada;
 	}
 
 }

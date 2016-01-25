@@ -6,7 +6,7 @@
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
 
-		<h:form prependId="false" id="frmTiposTarefas">
+		<h:form id="formTiposTarefas">
 
 			<p:growl id="msgs" showDetail="true" />
 
@@ -16,14 +16,13 @@
 					value="#{typeOfTaskBean.listaTiposTarefas}" rows="15"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="15,30"
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
            				Manutenção Tipos de Tarefas
         			</f:facet>
 
-					<p:column headerText="Id" sortBy="#{tipoTask.id}">
+					<p:column headerText="Id" sortBy="#{tipoTask.id}" style="width:5%">
 						<h:outputText value="#{tipoTask.id}" />
 					</p:column>
 
@@ -52,33 +51,37 @@
 						<h:outputText value="#{tipoTask.statusObjectEnum}" />
 					</p:column>
 
+					<p:column style="width:32px">
+						<p:commandButton update=":formTiposTarefas:displayTipoTarefa"
+							oncomplete="PF('tipoTarefaEditarDialog').show()"
+							icon="ui-icon-search">
+							<f:setPropertyActionListener value="#{tipoTask}"
+								target="#{typeOfTaskBean.typeOfTaskSelecionada}" />
+						</p:commandButton>
+
+					</p:column>
 					<f:facet name="footer">
-						<p:commandButton value="Novo" onclick="PF('dlg').show();"
-							type="button" icon="ui-icon-circle-plus" />
+						<p:commandButton value="Novo"
+							onclick="PF('dlgNovoTipoTarefa').show();" type="button"
+							icon="ui-icon-circle-plus" />
 					</f:facet>
 
 				</p:dataTable>
 
-				<p:contextMenu for="tiposTarefas">
-					<p:menuitem value="Excluir Processo" update="@form"
-						actionListener="#{processoRetBeans.excluir()}" />
-					<p:menuitem value="Alterar Processo"
-						actionListener="#{processoRetBeans.alterar()}" update="@form" />
-				</p:contextMenu>
-
 			</h:panelGrid>
 
-			<p:dialog header="Novo Tipo de Tarefa" widgetVar="dlg"
+			<p:dialog header="Novo Tipo de Tarefa" widgetVar="dlgNovoTipoTarefa"
 				focus="descricao" showEffect="explode" hideEffect="bounce"
 				height="350">
+
 				<h:panelGrid columns="2" cellpadding="5">
 
 					<h:outputLabel for="descricao" value="Descrição:" />
 					<p:inputText id="descricao" label="descricao"
 						value="#{typeOfTaskBean.description}" />
 
-					<p:outputLabel for="console" value="Status:" />
-					<p:selectOneRadio id="console"
+					<p:outputLabel for="statusObj" value="Status:" />
+					<p:selectOneRadio id="statusObj"
 						value="#{typeOfTaskBean.statusObjectEnum}">
 						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
@@ -92,8 +95,39 @@
 
 			</p:dialog>
 
-		</h:form>
+			<p:dialog header="Editar Tipo de Tarefa"
+				widgetVar="tipoTarefaEditarDialog" resizable="false"
+				draggable="false" showEffect="fade" hideEffect="fade" modal="true">
 
+
+				<p:outputPanel id="displayTipoTarefa">
+					<h:panelGrid columns="2" cellpadding="4"
+						rendered="#{not empty dndCarsView.selectedCar}">
+						<f:facet name="header">
+							<p:graphicImage
+								name="demo/images/car/#{dndCarsView.selectedCar.brand}.gif" />
+						</f:facet>
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{dndCarsView.selectedCar.id}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Year:" />
+						<h:outputText value="#{dndCarsView.selectedCar.year}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Brand:" />
+						<h:outputText value="#{dndCarsView.selectedCar.brand}"
+							style="font-weight:bold" />
+
+						<h:outputText value="Color:" />
+						<h:outputText value="#{dndCarsView.selectedCar.color}"
+							style="font-weight:bold" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+
+		</h:form>
 	</ui:define>
 </ui:decorate>
 </html>
