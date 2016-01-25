@@ -55,6 +55,22 @@ public class TypeOfTaskBean implements Serializable {
 
 	}
 
+	public String alterar() {
+		try {
+			TypeOfTask typeOfTask = new TypeOfTask();
+			typeOfTask.setLastUpdate(new Date(System.currentTimeMillis()));
+			typeOfTask.setDescription(description);
+			typeOfTask.setStatusObjectEnum(statusObjectEnum);
+			typeOfTaskService.alterar(typeOfTask);
+			return SUCCESS;
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+		}
+		return ERROR;
+
+	}
+
 	public List<TypeOfTask> getListaTiposTarefas() {
 		return listaTiposTarefas;
 	}
