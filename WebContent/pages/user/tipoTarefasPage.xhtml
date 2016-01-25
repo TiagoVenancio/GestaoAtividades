@@ -17,7 +17,7 @@
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="15,30"
-					emptyMessage="Nenhum registro encontrado." >
+					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
            				Manutenção Tipos de Tarefas
@@ -53,9 +53,8 @@
 					</p:column>
 
 					<f:facet name="footer">
-						<p:commandButton value="Novo Tipo de Tarefa"
-							onclick="PF('dlg').show();" type="button"
-							icon="ui-icon-circle-plus" />
+						<p:commandButton value="Novo" onclick="PF('dlg').show();"
+							type="button" icon="ui-icon-circle-plus" />
 					</f:facet>
 
 				</p:dataTable>
@@ -89,7 +88,7 @@
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
 					action="#{typeOfTaskBean.adicionar}" icon="ui-icon-circle-plus"
-					update="@form" />
+					update="@form" ajax="false" />
 
 			</p:dialog>
 

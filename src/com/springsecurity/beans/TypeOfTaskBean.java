@@ -46,12 +46,13 @@ public class TypeOfTaskBean implements Serializable {
 			typeOfTask.setDescription(description);
 			typeOfTask.setStatusObjectEnum(statusObjectEnum);
 			typeOfTaskService.adicionar(typeOfTask);
-			return SUCCESS;
+			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+			return null;
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return ERROR;
+		return null;
 
 	}
 
