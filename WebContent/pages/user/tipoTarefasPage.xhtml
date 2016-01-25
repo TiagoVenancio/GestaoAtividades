@@ -70,9 +70,26 @@
 							<f:facet name="input">
 								<h:selectOneMenu value="#{tipoTask.statusObjectEnum}"
 									style="width:100%">
-									<f:selectItems value="#{dtEditView.statusObjectEnum}" var="statusObjectEnum"
-										itemLabel="#{statusObjectEnum}"
+									<f:selectItems value="#{dtEditView.statusObjectEnum}"
+										var="statusObjectEnum" itemLabel="#{statusObjectEnum}"
 										itemValue="#{statusObjectEnum}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Status"
+						filterBy="#{tipoTask.statusObjectEnum}" filterMatchMode="contains"
+						sortBy="#{tipoTask.statusObjectEnum}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{tipoTask.statusObjectEnum}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{tipoTask.statusObjectEnum}"
+									style="width:100%">
+									<f:selectItem itemLabel="Inativo" itemValue="0" />
+									<f:selectItem itemLabel="Ativo" itemValue="1" />					
 								</h:selectOneMenu>
 							</f:facet>
 						</p:cellEditor>
