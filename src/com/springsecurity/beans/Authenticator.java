@@ -24,13 +24,14 @@ public class Authenticator implements AuthenticationProvider {
 	@Autowired
 	private UserSession session;
 
-	private String username;
+	@SuppressWarnings("unused")
+	private String userLogadoWindows;
 
-	private String userLogadoWindows = System.getProperty("user.name");
+	private static String userName = System.getProperty("user.name");
 
 	public String login() {
 		try {
-			User user = service.login(username);
+			User user = service.login(userName);
 			loginSpringSecurity(user);
 			session.setUser(user);
 			return "successfulPage";
@@ -38,6 +39,14 @@ public class Authenticator implements AuthenticationProvider {
 			message(ex.getMessage());
 		}
 		return "";
+	}
+
+	public String getUserLogadoWindows() {
+		return System.getProperty("user.name");
+	}
+
+	public void setUserLogadoWindows(String userLogadoWindows) {
+		this.userLogadoWindows = System.getProperty("user.name");
 	}
 
 	private void loginSpringSecurity(User user) {
@@ -61,14 +70,6 @@ public class Authenticator implements AuthenticationProvider {
 				new FacesMessage(message));
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	@Override
 	public Authentication authenticate(Authentication arg0)
 			throws AuthenticationException {
@@ -78,14 +79,6 @@ public class Authenticator implements AuthenticationProvider {
 	@Override
 	public boolean supports(Class<?> arg0) {
 		return false;
-	}
-
-	public String getUserLogadoWindows() {
-		return userLogadoWindows;
-	}
-
-	public void setUserLogadoWindows(String userLogadoWindows) {
-		this.userLogadoWindows = userLogadoWindows;
 	}
 
 }

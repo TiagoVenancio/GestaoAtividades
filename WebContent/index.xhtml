@@ -2,22 +2,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
-	<title>Login - Spring Security</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Bem vindo ao Gestão de Atividades!</title>
+	<link type="text/css" rel="stylesheet" href="dot-luv/skin.css" />
 </h:head>
-<h:body>
-	<h:form>
-		<h:messages />
-		<h:panelGrid columns="2">
-			<h:outputText value="Username: " />
-			<h:inputText value="#{authenticator.username}" />
-			<h:outputText value="Password: " />
-			<h:inputText value="#{authenticator.userLogadoWindows}" />
-		</h:panelGrid>
+<h:body style="background-image: url('template/images/fundo-principal.jpg');">
 
-		<h:commandButton value="Acessar" action="#{authenticator.login}" />
-	</h:form>
+
+	<p:dialog header="Seja bem vindo!" visible="true" closable="false"
+		draggable="false" resizable="false" width="420"
+		style="font-weight:bold">
+
+		<h:form>
+
+			<p:growl id="growl" showDetail="true" />
+
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel value="Usuário:" style="font-weight:bold" />
+				<p:inputText value="#{authenticator.userLogadoWindows}"
+					readonly="true" />
+
+				<p:commandButton value="Acessar" id="acessar"
+					action="#{authenticator.login}" icon="ui-icon-key" update="growl" />
+
+			</h:panelGrid>
+		</h:form>
+	</p:dialog>
 </h:body>
 </html>
