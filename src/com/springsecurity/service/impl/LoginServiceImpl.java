@@ -2,7 +2,6 @@ package com.springsecurity.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.springsecurity.dao.UserDAO;
 import com.springsecurity.entities.User;
 import com.springsecurity.service.LoginService;

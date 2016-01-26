@@ -5,8 +5,8 @@
 	<ui:define name="centro">
 		<h:form>
 
-	
-			
+
+
 			<h:messages />
 			<h:panelGrid columns="1">
 				<h:commandButton value="User page!"
@@ -14,6 +14,8 @@
 				<h:commandButton value="Admin page!"
 					action="#{redirectorBean.adminPage}" />
 				<h:commandButton value="Index!" action="#{redirectorBean.index}" />
+
+				<h:commandButton value="#{authenticator.userLogadoWindows}" />
 
 				<br />
 				<br />

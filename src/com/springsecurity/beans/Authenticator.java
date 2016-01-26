@@ -26,6 +26,8 @@ public class Authenticator implements AuthenticationProvider {
 
 	private String username;
 
+	private String userLogadoWindows = System.getProperty("user.name");
+
 	public String login() {
 		try {
 			User user = service.login(username);
@@ -76,6 +78,14 @@ public class Authenticator implements AuthenticationProvider {
 	@Override
 	public boolean supports(Class<?> arg0) {
 		return false;
+	}
+
+	public String getUserLogadoWindows() {
+		return userLogadoWindows;
+	}
+
+	public void setUserLogadoWindows(String userLogadoWindows) {
+		this.userLogadoWindows = userLogadoWindows;
 	}
 
 }
