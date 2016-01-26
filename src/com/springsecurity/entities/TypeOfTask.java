@@ -38,7 +38,7 @@ public class TypeOfTask {
 	private Date lastUpdate;
 
 	@Enumerated(value = EnumType.ORDINAL)
-	@Column(name = "STATUS_OBJECT_TYPE_TASK", length = 1, nullable = false)
+	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)

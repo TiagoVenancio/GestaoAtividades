@@ -52,8 +52,8 @@ public class RequestCustomer implements Serializable {
 	@Column(name = "LAST_USER_CHANGE", length = 20, nullable = false)
 	private String lastUserChange;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATUS_OBJECT_CLIENT", length = 10, nullable = false)
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	public Long getId() {

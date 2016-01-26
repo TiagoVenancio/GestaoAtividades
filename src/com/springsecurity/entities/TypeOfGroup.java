@@ -40,8 +40,8 @@ public class TypeOfGroup implements Serializable {
 	@Column(name = "LAST_UPDATE", nullable = false)
 	private Calendar lastUpdate;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATUS_OBJECT_GROUP", length = 10, nullable = false)
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)

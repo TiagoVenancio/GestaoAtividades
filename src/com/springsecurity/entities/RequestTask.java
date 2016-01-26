@@ -40,8 +40,8 @@ public class RequestTask implements Serializable {
 	@Column(name = "AMOUNT_HOURS", nullable = false)
 	private Double amountHours;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "STATUS_OBJECT_TASK", length = 10, nullable = false)
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	@Column(name = "DESCRIPTION", length = 1000, nullable = false)

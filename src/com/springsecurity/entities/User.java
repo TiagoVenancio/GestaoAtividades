@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -68,8 +69,8 @@ public class User implements UserDetails {
 	@Column(name = "LAST_USER_CHANGE")
 	private Long lastUserChange;
 
-	@Enumerated
-	@Column(name = "STATUS_OBJECT_USER")
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
 	private StatusObjectEnum statusObjectEnum;
 
 	public Long getId() {
