@@ -69,16 +69,14 @@ public class TypeOfTaskBean implements Serializable {
 
 	public String alterar() {
 		try {
-			TypeOfTask typeOfTask = new TypeOfTask();
-			typeOfTask.setLastUpdate(new Date(System.currentTimeMillis()));
-			typeOfTask.setDescription(description);
-			typeOfTask.setStatusObjectEnum(statusObjectEnum);
-			typeOfTaskService.alterar(typeOfTask);
+			typeOfTaskSelecionada.setLastUpdate(new Date(System
+					.currentTimeMillis()));
+			typeOfTaskService.alterar(typeOfTaskSelecionada);
 			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
-							"Item alterado com sucesso!"));
+							"Item atualizado com sucesso!"));
 
 			return null;
 
