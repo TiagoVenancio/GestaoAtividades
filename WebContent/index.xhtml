@@ -10,7 +10,8 @@
 	<title>Bem vindo ao Gestão de Atividades!</title>
 	<link type="text/css" rel="stylesheet" href="dot-luv/skin.css" />
 </h:head>
-<h:body style="background-image: url('template/images/fundo-principal.jpg');">
+<h:body
+	style="background-image: url('template/images/fundo-principal.jpg');">
 
 
 	<p:dialog header="Seja bem vindo!" visible="true" closable="false"
@@ -23,14 +24,15 @@
 
 			<h:panelGrid columns="2" cellpadding="5">
 
-				<h:outputLabel value="Usuário:" style="font-weight:bold" />
-				<p:inputText value="#{authenticator.userLogadoWindows}"
-					readonly="true" />
+				<h:outputLabel value="USUÁRIO: " style="font-weight:bold" />
+				<h:outputLabel value="#{authenticator.userLogadoWindows} "
+					style="font-weight:bold" />
 
 				<p:commandButton value="Acessar" id="acessar"
 					action="#{authenticator.login}" icon="ui-icon-key" update="growl" />
 
 			</h:panelGrid>
+
 		</h:form>
 	</p:dialog>
 </h:body>
