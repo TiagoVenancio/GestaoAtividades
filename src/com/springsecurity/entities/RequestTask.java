@@ -1,7 +1,7 @@
 package com.springsecurity.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.springsecurity.enums.StatusObjectEnum;
 
@@ -25,18 +27,23 @@ public class RequestTask implements Serializable {
 	@Column(name = "TASK_ID", length = 20)
 	private Long id;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE", nullable = false)
-	private Calendar createDate;
+	private Date createDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CLOSE_DATE")
-	private Calendar closeDate;
+	private Date closeDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "START_DATE", nullable = false)
-	private Calendar startDate;
+	private Date startDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CONCLUSION_DATE")
-	private Calendar conclusionDate;
+	private Date conclusionDate;
 
+	@Temporal(TemporalType.TIME)
 	@Column(name = "AMOUNT_HOURS", nullable = false)
 	private Double amountHours;
 
@@ -90,35 +97,35 @@ public class RequestTask implements Serializable {
 		this.id = id;
 	}
 
-	public Calendar getCreateDate() {
+	public Date getCreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Calendar createDate) {
+	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
-	public Calendar getCloseDate() {
+	public Date getCloseDate() {
 		return closeDate;
 	}
 
-	public void setCloseDate(Calendar closeDate) {
+	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;
 	}
 
-	public Calendar getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Calendar startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Calendar getConclusionDate() {
+	public Date getConclusionDate() {
 		return conclusionDate;
 	}
 
-	public void setConclusionDate(Calendar conclusionDate) {
+	public void setConclusionDate(Date conclusionDate) {
 		this.conclusionDate = conclusionDate;
 	}
 

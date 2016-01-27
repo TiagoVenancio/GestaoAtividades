@@ -25,8 +25,15 @@ public class TypeOfActivityServiceImpl implements TypeOfActivityService {
 	}
 
 	@Override
-	public List<TypeOfActivity> findAll() {
-		return findAll();
+	public void alterar(TypeOfActivity typeOfActivity)
+			throws IllegalArgumentException {
+		dao.update(typeOfActivity);
+
+	}
+
+	@Override
+	public List<TypeOfActivity> getAllTipoDeAtividades() {
+		return dao.findAll();
 	}
 
 }
