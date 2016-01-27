@@ -45,7 +45,7 @@ public class RequestTask implements Serializable {
 
 	@Temporal(TemporalType.TIME)
 	@Column(name = "AMOUNT_HOURS", nullable = false)
-	private Double amountHours;
+	private Date amountHours;
 
 	@Enumerated(value = EnumType.ORDINAL)
 	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
@@ -129,11 +129,11 @@ public class RequestTask implements Serializable {
 		this.conclusionDate = conclusionDate;
 	}
 
-	public Double getAmountHours() {
+	public Date getAmountHours() {
 		return amountHours;
 	}
 
-	public void setAmountHours(Double amountHours) {
+	public void setAmountHours(Date amountHours) {
 		this.amountHours = amountHours;
 	}
 
