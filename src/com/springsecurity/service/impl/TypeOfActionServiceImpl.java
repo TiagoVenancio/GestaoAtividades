@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.TypeOfActionDao;
 import com.springsecurity.entities.TypeOfAction;
 import com.springsecurity.service.TypeOfActionService;
@@ -14,7 +15,7 @@ import com.springsecurity.service.TypeOfActionService;
 public class TypeOfActionServiceImpl implements TypeOfActionService {
 
 	@Autowired
-	TypeOfActionDao dao;
+	private TypeOfActionDao dao;
 
 	@Override
 	public void adicionar(TypeOfAction typeOfAction)
@@ -24,8 +25,14 @@ public class TypeOfActionServiceImpl implements TypeOfActionService {
 	}
 
 	@Override
-	public List<TypeOfAction> findAll() {
-		return findAll();
+	public List<TypeOfAction> getAllTipoDeAcoes() {
+		return dao.findAll();
+	}
+	
+	@Override
+	public void alterar(TypeOfAction typeOfAction) throws IllegalArgumentException {
+		dao.update(typeOfAction);
+		
 	}
 
 }
