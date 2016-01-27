@@ -1,71 +1,149 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
 
-		<h:form>
+		<h:form id="formPrincipal">
 
-			<p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();"
-				type="button" icon="ui-icon-extlink" />
+			<!-- MENSAGENS- INICIO -->
 
-			<p:dialog header="Dynamic Focus" widgetVar="dlg" focus="age"
-				showEffect="explode" hideEffect="bounce" height="350">
-				<h:panelGrid columns="2" cellpadding="5">
-					<h:outputLabel for="name" value="Name:" />
-					<p:inputText id="name" label="name" />
+			<p:growl id="msgs" showDetail="true" />
 
-					<h:outputLabel for="surname" value="Surname:" />
-					<p:inputText id="surname" label="surname" />
+			<!-- FORM PRINCIPAL -->
 
-					<h:outputLabel for="age" value="Age:" />
-					<p:inputText id="age" label="age" />
+			<h:panelGrid id="gridPrincipal">
+				<p:dataTable id="dataTable" var="var"
+					value="#{typeOfActivityBean.listaTiposAtividades}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				Manutenção Tipos de Atividades
+    				</f:facet>
+
+					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+						<h:outputText value="#{var.id}" />
+					</p:column>
+
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+						<h:outputText value="#{var.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Última Atualização"
+						sortBy="#{var.lastUpdate}">
+						<h:outputText value="#{var.lastUpdate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Descrição" filterBy="#{var.description}"
+						filterMatchMode="contains" sortBy="#{var.description}">
+						<h:outputText value="#{var.description}" />
+					</p:column>
+
+					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						<h:outputText value="#{var.statusObjectEnum}" />
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:commandButton update=":formEditar:panelEditar"
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							<f:setPropertyActionListener value="#{var}"
+								target="#{typeOfActivityBean.typeOfActivitySelecionada}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+						<p:commandButton value="Novo" onclick="PF('dlgNovo').show();"
+							type="button" icon="ui-icon-circle-plus" />
+					</f:facet>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</h:form>
+
+
+		<!-- FORM NOVO -->
+
+		<h:form id="formNovo">
+			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
+				hideEffect="bounce" height="350">
+
+
+				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
+
+					<h:outputLabel for="descricao" value="Descrição:" />
+					<p:inputText id="descricao" label="descricao"
+						value="#{typeOfActivityBean.description}" />
+
+					<p:outputLabel for="statusObj" value="Status:" />
+					<p:selectOneRadio id="statusObj"
+						value="#{typeOfActivityBean.statusObjectEnum}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
 				</h:panelGrid>
-				<p:commandButton value="Dynamic Focus" onclick="PF('dlg').show();"
-					type="button" icon="ui-icon-extlink" />
+
+				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
+					action="#{typeOfActivityBean.adicionar}" icon="ui-icon-circle-plus"
+					update="@formPrincipal" ajax="false" />
+
 			</p:dialog>
-
 		</h:form>
 
-		<h:form>
-			<p:dataTable var="car" value="#{dtPaginatorView.cars}" rows="10"
-				paginator="true"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="5,10,15">
-	
-				<p:column filterBy="#{car.id}" headerText="Id"
-					filterMatchMode="contains">
-					<h:outputText value="#{car.id}" />
-				</p:column>
 
-				<p:column filterBy="#{car.year}" headerText="Year"
-					filterMatchMode="contains">
-					<h:outputText value="#{car.year}" />
-				</p:column>
+		<!-- FORM EDITAR -->
 
-				<p:column filterBy="#{car.brand}" headerText="Brand"
-					filterMatchMode="contains">
-					<h:outputText value="#{car.brand}" />
-				</p:column>
+		<h:form id="formEditar">
+			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
+				id="Editar">
 
-				<p:column filterBy="#{car.color}" headerText="Color"
-					filterMatchMode="contains">
-					<h:outputText value="#{car.color}" />
-				</p:column>
-				<p:column filterBy="#{car.color}" headerText="Color"
-					filterMatchMode="contains">
-					<h:outputText value="#{car.color}" />
-				</p:column>
+				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
 
-			</p:dataTable>
+					<h:outputText value="Id:" />
+					<h:outputText value="#{typeOfActivityBean.typeOfActivitySelecionada.id}"
+						style="font-weight:bold" />
 
-			<br />
-			<br />
-			<br />
-			<h:messages />
-			<h:outputText value="Teste" />
+					<h:outputText value="Data Criação:" />
+					<h:outputText
+						value="#{typeOfActivityBean.typeOfActivitySelecionada.createDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+
+					<h:outputText value="Data Atualização:" />
+					<h:outputText
+						value="#{typeOfActivityBean.typeOfActivitySelecionada.lastUpdate}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+
+					<p:outputLabel for="statusObjSelecionado" value="Status:" />
+					<p:selectOneRadio id="statusObjSelecionado"
+						value="#{typeOfActivityBean.typeOfActivitySelecionada.statusObjectEnum}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
+					<h:outputText value="Descrição:" />
+					<p:inputText
+						value="#{typeOfActivityBean.typeOfActivitySelecionada.description}"
+						style="font-weight:bold" />
+
+					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
+						action="#{typeOfActivityBean.alterar}" icon="ui-icon-circle-plus"
+						update="@formPrincipal" ajax="false" />
+
+				</h:panelGrid>
+			</p:dialog>
 		</h:form>
+
 	</ui:define>
 </ui:decorate>
 </html>
