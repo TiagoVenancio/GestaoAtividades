@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.TypeOfGroupDao;
 import com.springsecurity.entities.TypeOfGroup;
 import com.springsecurity.service.TypeOfGroupService;
@@ -26,6 +27,18 @@ public class TypeOfGroupServiceImpl implements TypeOfGroupService {
 	@Override
 	public List<TypeOfGroup> findAll() {
 		return findAll();
+	}
+
+	@Override
+	public void alterar(TypeOfGroup typeOfGroup)
+			throws IllegalArgumentException {
+		dao.update(typeOfGroup);
+
+	}
+
+	@Override
+	public List<TypeOfGroup> getAllTipoDeGrupos() {
+		return dao.findAll();
 	}
 
 }
