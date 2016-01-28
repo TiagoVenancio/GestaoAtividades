@@ -17,8 +17,48 @@
 
 	<style type="text/css">
 body {
-	background-color: #A9D0F5;
-	background-repeat: round;
+
+background: rgba(73,155,234,1);
+background: -moz-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(73,155,234,1) 15%, rgba(48,97,150,1) 100%);
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(73,155,234,1)), color-stop(15%, rgba(73,155,234,1)), color-stop(100%, rgba(48,97,150,1)));
+background: -webkit-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(73,155,234,1) 15%, rgba(48,97,150,1) 100%);
+background: -o-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(73,155,234,1) 15%, rgba(48,97,150,1) 100%);
+background: -ms-radial-gradient(center, ellipse cover, rgba(73,155,234,1) 0%, rgba(73,155,234,1) 15%, rgba(48,97,150,1) 100%);
+background: radial-gradient(ellipse at center, rgba(73,155,234,1) 0%, rgba(73,155,234,1) 15%, rgba(48,97,150,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499bea', endColorstr='#306196', GradientType=1 );
+
+#principal {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -260px;
+	margin-top: -135px;
+	width: 520px;
+	height: 270px;
+	border: 0px solid #6495ED;
+	padding: 10px;
+	text-align: left;
+	font-family: calibri;
+	font-size: 13px;
+	border-radius: 50px;
+}
+
+#msg1 {
+	float: left;
+	padding: 10px;
+	font-family: Cambria;
+	font-size: 21px;
+	color: #6495ED;
+	text-align: left;
+}
+
+#msg2 {
+	float: left;
+	padding: 10px;
+	font-family: calibri;
+	color: #6495ED;
+	font-size: 15px;
+	text-align: left;
 }
 </style>
 </h:head>
@@ -26,13 +66,14 @@ body {
 
 <h:body>
 
+
 	<div class="container-fluid">
 		<div id="loginbox" style="margin-top: 15%;"
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-primary">
 
 				<div class="panel-heading">
-					<div class="panel-title">Gestão de Atividades | Login</div>
+					<div class="panel-title">Autenticação | Login</div>
 				</div>
 
 				<div style="padding-top: 30px" class="panel-body">
@@ -45,12 +86,17 @@ body {
 						<p:growl id="growl" showDetail="true" />
 
 						<div style="margin-bottom: 25px" class="input-group">
-							<h:outputLabel value="Username:  " style="font-weight:bold" />
-							<h:outputLabel value="#{authenticator.userLogadoWindows} "
-								style="font-weight:bold" />
+							<h3>
+								<h:outputLabel id="msg1"
+									value="Olá, #{authenticator.userLogadoWindows}" />
+								<br /> <br />
+								<h:outputLabel
+									value="Bem vindo ao Sistema de Gestão de Atividades! " />
+
+							</h3>
 						</div>
 
-						<div style="margin-top: 10px" class="form-group">
+						<div style="margin-top: 10px" class="form-group" align="right">
 
 							<!-- Button -->
 							<div class="col-sm-12 controls">

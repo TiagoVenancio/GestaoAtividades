@@ -38,7 +38,6 @@
 }
 
 body {
-	background-color: #FFFFFF;
 	font-size: 11px;
 }
 </style>
@@ -64,7 +63,7 @@ body {
 
 
 								<p:menuitem value="Tipos Atividades"
-									url="/pages/user/tipoAtividades.jsf" icon="ui-icon-flag"
+									url="/pages/user/tipoAtividades.jsf" icon="ui-icon-tag"
 									update="messages" />
 
 								<p:menuitem value="Tipos Ações" url="/pages/user/tipoAcoes.jsf"
@@ -90,16 +89,22 @@ body {
 									url="/pages/admin/prioridades.jsf" icon="ui-icon-alert"
 									update="messages" />
 
-								<p:menuitem value="Status" url="/pages/admin/statusTarefa.jsf"
-									icon="ui-icon-transferthick-e-w" update="messages" />
-
 								<p:menuitem value="Grupos" url="/pages/admin/grupos.jsf"
 									icon="ui-icon-folder-collapsed" update="messages" />
 
 							</p:submenu>
 
-							<p:menuitem value="Tarefa" action="#" icon="ui-icon-clipboard" />
+							<p:submenu label="Tarefas" icon="ui-icon-clipboard">
 
+								<p:menuitem value="Pendentes"
+									url="/pages/user/tarefasPendentes.jsf" icon="ui-icon-flag"
+									update="messages" />
+
+								<p:menuitem value="Concluídas"
+									url="/pages/user/tarefasConcluidas.jsf"
+									icon="ui-icon-check" update="messages" />
+
+							</p:submenu>
 
 							<f:facet name="options">
 
