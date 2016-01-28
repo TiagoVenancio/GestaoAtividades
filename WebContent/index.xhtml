@@ -7,33 +7,65 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Bem vindo ao Gestão de Atividades!</title>
-	<link type="text/css" rel="stylesheet" href="dot-luv/skin.css" />
+	<link rel="stylesheet"
+		href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" />
+	<script
+		src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" />
+	<title>Gestão de Atividades | Login</title>
+
+	<style type="text/css">
+body {
+	background-color: #A9D0F5;
+	background-repeat: round;
+}
+</style>
 </h:head>
-<h:body
-	style="background-image: url('template/images/fundo-principal.jpg');">
 
 
-	<p:dialog header="Seja bem vindo!" visible="true" closable="false"
-		draggable="false" resizable="false" width="420"
-		style="font-weight:bold">
+<h:body>
 
-		<h:form>
+	<div class="container-fluid">
+		<div id="loginbox" style="margin-top: 15%;"
+			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel panel-primary">
 
-			<p:growl id="growl" showDetail="true" />
+				<div class="panel-heading">
+					<div class="panel-title">Gestão de Atividades | Login</div>
+				</div>
 
-			<h:panelGrid columns="2" cellpadding="5">
+				<div style="padding-top: 30px" class="panel-body">
 
-				<h:outputLabel value="USUÁRIO: " style="font-weight:bold" />
-				<h:outputLabel value="#{authenticator.userLogadoWindows} "
-					style="font-weight:bold" />
+					<div style="display: none" id="login-alert"
+						class="alert alert-danger col-sm-12"></div>
 
-				<p:commandButton value="Acessar" id="acessar"
-					action="#{authenticator.login}" icon="ui-icon-key" update="growl" />
+					<h:form id="loginform" class="form-horizontal" role="form">
 
-			</h:panelGrid>
+						<p:growl id="growl" showDetail="true" />
 
-		</h:form>
-	</p:dialog>
+						<div style="margin-bottom: 25px" class="input-group">
+							<h:outputLabel value="Username:  " style="font-weight:bold" />
+							<h:outputLabel value="#{authenticator.userLogadoWindows} "
+								style="font-weight:bold" />
+						</div>
+
+						<div style="margin-top: 10px" class="form-group">
+
+							<!-- Button -->
+							<div class="col-sm-12 controls">
+								<p:commandButton value="Acessar" id="acessar"
+									action="#{authenticator.login}" icon="ui-icon-key"
+									update="growl" />
+							</div>
+
+						</div>
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
 </h:body>
 </html>

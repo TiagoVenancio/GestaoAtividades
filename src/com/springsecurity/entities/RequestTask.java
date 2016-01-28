@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.springsecurity.enums.StatusObjectEnum;
+import com.springsecurity.enums.StatusTaskEnum;
 
 @Entity
 @Table(name = "sg_act_request_task", schema = "gestao_atividades")
@@ -73,9 +74,9 @@ public class RequestTask implements Serializable {
 	@JoinColumn(name = "TYPE_GROUP_ID")
 	private TypeOfGroup typeOfGroup;
 
-	@ManyToOne
-	@JoinColumn(name = "STATUS_TASK_ID")
-	private StatusOfTask statusOfTask;
+	@Enumerated(value = EnumType.ORDINAL)
+	@Column(name = "STATUS_TASK_ID", length = 1, nullable = false)
+	private StatusTaskEnum statusTaskEnum;
 
 	@ManyToOne
 	@JoinColumn(name = "CLIENT_ID")
@@ -91,6 +92,14 @@ public class RequestTask implements Serializable {
 
 	public Long getId() {
 		return id;
+	}
+
+	public StatusTaskEnum getStatusTaskEnum() {
+		return statusTaskEnum;
+	}
+
+	public void setStatusTaskEnum(StatusTaskEnum statusTaskEnum) {
+		this.statusTaskEnum = statusTaskEnum;
 	}
 
 	public void setId(Long id) {
@@ -191,14 +200,6 @@ public class RequestTask implements Serializable {
 
 	public void setTypeOfGroup(TypeOfGroup typeOfGroup) {
 		this.typeOfGroup = typeOfGroup;
-	}
-
-	public StatusOfTask getStatusOfTask() {
-		return statusOfTask;
-	}
-
-	public void setStatusOfTask(StatusOfTask statusOfTask) {
-		this.statusOfTask = statusOfTask;
 	}
 
 	public RequestCustomer getRequestCustomer() {
