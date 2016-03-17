@@ -14,7 +14,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
 import com.springsecurity.entities.RequestCustomer;
-import com.springsecurity.entities.TypeOfAction;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.RequestCustomerService;
 
@@ -27,7 +26,7 @@ public class RequestCustomerBean implements Serializable{
 	@Autowired
 	private RequestCustomerService requestCustomerService;
 	private List<RequestCustomer> listaRequestCustomerService;
-	private RequestCustomer requestCustomer;
+	private RequestCustomer requestCustomerSelecionada;
 	
 	private String username;
 	private String name;
@@ -78,10 +77,10 @@ public class RequestCustomerBean implements Serializable{
 
 	public String alterar() {
 		try {
-			typeOfActionkSelecionada.setLastUpdate(new Date(System
+			requestCustomerSelecionada.setLastUpdate(new Date(System
 					.currentTimeMillis()));
-			typeOfActionService.alterar(typeOfActionkSelecionada);
-			listaTiposAcoes = typeOfActionService.getAllTipoDeAcoes();
+			requestCustomerService.alterar(requestCustomerSelecionada);
+			listaRequestCustomerService = requestCustomerService.getAllRequestCustomers();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -119,11 +118,11 @@ public class RequestCustomerBean implements Serializable{
 	}
 
 	public RequestCustomer getRequestCustomer() {
-		return requestCustomer;
+		return requestCustomerSelecionada;
 	}
 
 	public void setRequestCustomer(RequestCustomer requestCustomer) {
-		this.requestCustomer = requestCustomer;
+		this.requestCustomerSelecionada = requestCustomer;
 	}
 
 	public String getUsername() {

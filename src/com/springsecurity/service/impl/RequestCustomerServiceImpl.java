@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.RequestCustomerDao;
 import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.service.RequestCustomerService;
@@ -14,7 +15,7 @@ import com.springsecurity.service.RequestCustomerService;
 public class RequestCustomerServiceImpl implements RequestCustomerService {
 
 	@Autowired
-	RequestCustomerDao dao;
+	private RequestCustomerDao dao;
 
 	@Override
 	public void adicionar(RequestCustomer requestCustomer)
@@ -24,8 +25,14 @@ public class RequestCustomerServiceImpl implements RequestCustomerService {
 	}
 
 	@Override
-	public List<RequestCustomer> findAll() {
-		return findAll();
+	public List<RequestCustomer> getAllRequestCustomers() {
+		return dao.findAll();
 	}
+	
+	@Override
+	public void alterar(RequestCustomer requestCustomer) throws IllegalArgumentException {
+		dao.update(requestCustomer);
 
-}
+	}
+	
+	}
