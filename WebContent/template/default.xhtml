@@ -55,8 +55,8 @@ body {
 
 						<p:menubar>
 
-							<p:menuitem value="Home"
-								action="#{redirectorBean.successfulPage}" icon="ui-icon-home" />
+							<p:menuitem value="Backlog Geral"
+								action="#{redirectorBean.successfulPage}" icon="ui-icon-flag" />
 
 
 							<p:submenu label="Cadastro" icon="ui-icon-gear">
@@ -101,8 +101,8 @@ body {
 									update="messages" />
 
 								<p:menuitem value="Concluídas"
-									url="/pages/user/tarefasConcluidas.jsf"
-									icon="ui-icon-check" update="messages" />
+									url="/pages/user/tarefasConcluidas.jsf" icon="ui-icon-check"
+									update="messages" />
 
 							</p:submenu>
 
@@ -110,7 +110,7 @@ body {
 
 								<p:inputText style="margin-right:10px" placeholder="Pesquisar" />
 
-								<p:commandButton value="Logout" icon="ui-icon-power"
+								<p:commandButton value="Sair" icon="ui-icon-power"
 									action="#{authenticator.logout}" />
 
 							</f:facet>
