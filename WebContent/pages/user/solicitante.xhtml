@@ -16,7 +16,7 @@
 
 			<h:panelGrid id="gridPrincipal">
 				<p:dataTable id="dataTable" var="var"
-					value="#{typeOfActionBean.listaTiposAcoes}" rows="10"
+					value="#{requestCustomerBean.listaRequestCustomerService}" rows="10"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
@@ -42,9 +42,24 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Descrição" filterBy="#{var.description}"
-						filterMatchMode="contains" sortBy="#{var.description}">
-						<h:outputText value="#{var.description}" />
+					<p:column headerText="Criador" filterBy="#{var.USERNAME}"
+						filterMatchMode="contains" sortBy="#{var.USERNAME}">
+						<h:outputText value="#{var.USERNAME}" />
+					</p:column>
+					
+					<p:column headerText="Matricula" filterBy="#{var.username}"
+						filterMatchMode="contains" sortBy="#{var.username}">
+						<h:outputText value="#{var.username}" />
+					</p:column>
+					
+					<p:column headerText="Nome" filterBy="#{var.name}"
+						filterMatchMode="contains" sortBy="#{var.name}">
+						<h:outputText value="#{var.name}" />
+					</p:column>
+					
+					<p:column headerText="E-mail" filterBy="#{var.email}"
+						filterMatchMode="contains" sortBy="#{var.email}">
+						<h:outputText value="#{var.email}" />
 					</p:column>
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
@@ -56,7 +71,7 @@
 						<p:commandButton update=":formEditar:panelEditar"
 							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
 							<f:setPropertyActionListener value="#{var}"
-								target="#{typeOfActionBean.typeOfActionkSelecionada}" />
+								target="#{requestCustomer.requestCustomerSelecionada}" />
 						</p:commandButton>
 					</p:column>
 
@@ -79,13 +94,21 @@
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="descricao" value="Descrição:" />
-					<p:inputText id="descricao" label="descricao"
-						value="#{typeOfActionBean.description}" />
+					<h:outputLabel for="matricula" value="Matricula:" />
+					<p:inputText id="matricula" label="Matricula"
+						value="#{requestCustomerBean.username}" />
+
+					<h:outputLabel for="nome" value="Nome:" />
+					<p:inputText id="nome" label="Nome"
+						value="#{requestCustomerBean.name}" />
+						
+					<h:outputLabel for="email" value="E-mail:" />
+					<p:inputText id="email" label="E-mail"
+						value="#{requestCustomerBean.email}" />
 
 					<p:outputLabel for="statusObj" value="Status:" />
 					<p:selectOneRadio id="statusObj"
-						value="#{typeOfActionBean.statusObjectEnum}">
+						value="#{requestCustomerBean.statusObjectEnum}">
 						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 					</p:selectOneRadio>
@@ -93,7 +116,7 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
-					action="#{typeOfActionBean.adicionar}" icon="ui-icon-circle-plus"
+					action="#{requestCustomerBean.adicionar}" icon="ui-icon-circle-plus"
 					update="@formPrincipal" ajax="false" />
 
 			</p:dialog>
@@ -109,35 +132,51 @@
 				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
 
 					<h:outputText value="Id:" />
-					<h:outputText value="#{typeOfActionBean.typeOfActionkSelecionada.id}"
+					<h:outputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.id}"
 						style="font-weight:bold" />
 
 					<h:outputText value="Data Criação:" />
 					<h:outputText
-						value="#{typeOfActionBean.typeOfActionkSelecionada.createDate}">
+						value="#{requestCustomerBean.requestCustomerSelecionada.createDate}">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 					</h:outputText>
 
 					<h:outputText value="Data Atualização:" />
 					<h:outputText
-						value="#{typeOfActionBean.typeOfActionkSelecionada.lastUpdate}">
+						value="#{requestCustomerBean.requestCustomerSelecionada.lastUpdate}">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 					</h:outputText>
 
 					<p:outputLabel for="statusObjSelecionado" value="Status:" />
 					<p:selectOneRadio id="statusObjSelecionado"
-						value="#{typeOfActionBean.typeOfActionkSelecionada.statusObjectEnum}">
+						value="#{requestCustomerBean.requestCustomerSelecionada.statusObjectEnum}">
 						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 					</p:selectOneRadio>
 
-					<h:outputText value="Descrição:" />
+					<h:outputText value="Matricula:" />
 					<p:inputText
-						value="#{typeOfActionBean.typeOfActionkSelecionada.description}"
+						value="#{requestCustomerBean.requestCustomerSelecionada.username}"
+						style="font-weight:bold" />
+						
+					<h:outputText value="Nome:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.name}"
+						style="font-weight:bold" />
+						
+					<h:outputText value="E-mail:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.email}"
 						style="font-weight:bold" />
 
+					<h:outputText value="Criador:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.USERNAME}"
+						style="font-weight:bold" />
+						
 					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
-						action="#{typeOfActionBean.alterar}" icon="ui-icon-circle-plus"
+						action="#{requestCustomerBean.alterar}" icon="ui-icon-circle-plus"
 						update="@formPrincipal" ajax="false" />
 
 				</h:panelGrid>

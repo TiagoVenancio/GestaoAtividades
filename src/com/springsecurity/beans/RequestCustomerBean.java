@@ -19,7 +19,7 @@ import com.springsecurity.service.RequestCustomerService;
 
 @Controller
 @Scope(value = "session")
-public class RequestCustomerBean implements Serializable{
+public class RequestCustomerBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -117,12 +117,13 @@ public class RequestCustomerBean implements Serializable{
 		this.listaRequestCustomerService = listaRequestCustomerService;
 	}
 
-	public RequestCustomer getRequestCustomer() {
+	public RequestCustomer getRequestCustomerSelecionada() {
 		return requestCustomerSelecionada;
 	}
 
-	public void setRequestCustomer(RequestCustomer requestCustomer) {
-		this.requestCustomerSelecionada = requestCustomer;
+	public void setRequestCustomerSelecionada(
+			RequestCustomer requestCustomerSelecionada) {
+		this.requestCustomerSelecionada = requestCustomerSelecionada;
 	}
 
 	public String getUsername() {
