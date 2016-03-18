@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.RequestTaskDao;
 import com.springsecurity.entities.RequestTask;
 import com.springsecurity.service.RequestTaskService;
@@ -24,8 +25,8 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	}
 
 	@Override
-	public List<RequestTask> findAll() {
-		return findAll();
+	public List<RequestTask> getAllRequestTasks() {
+		return dao.findAll();
 	}
 
 }
