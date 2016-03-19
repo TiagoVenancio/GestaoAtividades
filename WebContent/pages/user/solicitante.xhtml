@@ -16,8 +16,8 @@
 
 			<h:panelGrid id="gridPrincipal">
 				<p:dataTable id="dataTable" var="var"
-					value="#{requestCustomerBean.listaRequestCustomerService}" rows="10"
-					paginator="true"
+					value="#{requestCustomerBean.listaRequestCustomerService}"
+					rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
 
@@ -42,21 +42,22 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Criador" filterBy="#{var.USERNAME}"
-						filterMatchMode="contains" sortBy="#{var.USERNAME}">
-						<h:outputText value="#{var.USERNAME}" />
+					<p:column headerText="Criador" filterBy="#{var.lastUserChange}"
+						filterMatchMode="contains" sortBy="#{var.lastUserChange}">
+						<h:outputText value="#{var.lastUserChange}" />
 					</p:column>
-					
-					<p:column headerText="Matricula" filterBy="#{var.username}"
-						filterMatchMode="contains" sortBy="#{var.username}">
-						<h:outputText value="#{var.username}" />
+
+					<p:column headerText="Nome" filterBy="#{var.userId}"
+						filterMatchMode="contains" sortBy="#{var.userId}">
+						<h:outputText value="#{var.userId}" />
 					</p:column>
-					
-					<p:column headerText="Nome" filterBy="#{var.name}"
-						filterMatchMode="contains" sortBy="#{var.name}">
-						<h:outputText value="#{var.name}" />
+
+
+					<p:column headerText="Matricula" filterBy="#{var.userName}"
+						filterMatchMode="contains" sortBy="#{var.userName}">
+						<h:outputText value="#{var.userName}" />
 					</p:column>
-					
+
 					<p:column headerText="E-mail" filterBy="#{var.email}"
 						filterMatchMode="contains" sortBy="#{var.email}">
 						<h:outputText value="#{var.email}" />
@@ -94,17 +95,17 @@
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="matricula" value="Matricula:" />
-					<p:inputText id="matricula" label="Matricula"
-						value="#{requestCustomerBean.username}" />
+					<h:outputLabel for="matriculaSolicitante" value="Matricula:" />
+					<p:inputText id="matriculaSolicitante" label="Matricula"
+						value="#{requestCustomerBean.matriculaSolicitante}" />
 
-					<h:outputLabel for="nome" value="Nome:" />
-					<p:inputText id="nome" label="Nome"
-						value="#{requestCustomerBean.name}" />
-						
-					<h:outputLabel for="email" value="E-mail:" />
-					<p:inputText id="email" label="E-mail"
-						value="#{requestCustomerBean.email}" />
+					<h:outputLabel for="nameSolicitante" value="Nome:" />
+					<p:inputText id="nameSolicitante" label="Nome"
+						value="#{requestCustomerBean.nameSolicitante}" />
+
+					<h:outputLabel for="emailSolicitante" value="E-mail:" />
+					<p:inputText id="emailSolicitante" label="E-mail"
+						value="#{requestCustomerBean.emailSolicitante}" />
 
 					<p:outputLabel for="statusObj" value="Status:" />
 					<p:selectOneRadio id="statusObj"
@@ -116,8 +117,8 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
-					action="#{requestCustomerBean.adicionar}" icon="ui-icon-circle-plus"
-					update="@formPrincipal" ajax="false" />
+					action="#{requestCustomerBean.adicionar}"
+					icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
 
 			</p:dialog>
 		</h:form>
@@ -157,24 +158,20 @@
 
 					<h:outputText value="Matricula:" />
 					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.username}"
+						value="#{requestCustomerBean.requestCustomerSelecionada.userId}"
 						style="font-weight:bold" />
-						
+
 					<h:outputText value="Nome:" />
 					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.name}"
+						value="#{requestCustomerBean.requestCustomerSelecionada.userName}"
 						style="font-weight:bold" />
-						
+
 					<h:outputText value="E-mail:" />
 					<p:inputText
 						value="#{requestCustomerBean.requestCustomerSelecionada.email}"
 						style="font-weight:bold" />
 
-					<h:outputText value="Criador:" />
-					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.USERNAME}"
-						style="font-weight:bold" />
-						
+
 					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
 						action="#{requestCustomerBean.alterar}" icon="ui-icon-circle-plus"
 						update="@formPrincipal" ajax="false" />

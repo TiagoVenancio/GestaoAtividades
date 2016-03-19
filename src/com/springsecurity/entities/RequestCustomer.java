@@ -41,10 +41,10 @@ public class RequestCustomer implements Serializable {
 	private Date lastUpdate;
 
 	@Column(name = "USERNAME", length = 20, nullable = false)
-	private String userName;
+	private String userId;
 
 	@Column(name = "NAME", length = 255, nullable = false)
-	private String Name;
+	private String userName;
 
 	@Column(name = "EMAIL", length = 100, nullable = false)
 	private String email;
@@ -60,8 +60,12 @@ public class RequestCustomer implements Serializable {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public List<RequestTask> getRequestTasks() {
+		return requestTasks;
+	}
+
+	public void setRequestTasks(List<RequestTask> requestTasks) {
+		this.requestTasks = requestTasks;
 	}
 
 	public Date getCreateDate() {
@@ -80,20 +84,20 @@ public class RequestCustomer implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
 	}
 
 	public String getEmail() {
@@ -119,5 +123,14 @@ public class RequestCustomer implements Serializable {
 	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
 		this.statusObjectEnum = statusObjectEnum;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 }

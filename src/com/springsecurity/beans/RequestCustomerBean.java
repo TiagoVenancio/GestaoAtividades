@@ -28,11 +28,11 @@ public class RequestCustomerBean implements Serializable {
 	private List<RequestCustomer> listaRequestCustomerService;
 	private RequestCustomer requestCustomerSelecionada;
 	
-	private String username;
-	private String name;
-	private String email;
+	private String matriculaSolicitante;
+	private String nameSolicitante;
+	private String emailSolicitante;
 	
-	private static String USERNAME = System.getProperty("user.name");
+	private static String USERNAMEL_LOGADO = System.getProperty("user.name");
 	private StatusObjectEnum statusObjectEnum;
 	
 	public RequestCustomerBean(){
@@ -50,10 +50,10 @@ public class RequestCustomerBean implements Serializable {
 			RequestCustomer RequestCustomer = new RequestCustomer();
 			RequestCustomer.setCreateDate(new Date(System.currentTimeMillis()));
 			RequestCustomer.setLastUpdate(new Date(System.currentTimeMillis()));
-			RequestCustomer.setUserName(username);
-			RequestCustomer.setName(name);
-			RequestCustomer.setEmail(email);
-			RequestCustomer.setLastUserChange(USERNAME);
+			RequestCustomer.setUserId(matriculaSolicitante);
+			RequestCustomer.setUserName(nameSolicitante);
+			RequestCustomer.setEmail(emailSolicitante);
+			RequestCustomer.setLastUserChange(USERNAMEL_LOGADO);
 			RequestCustomer.setStatusObjectEnum(statusObjectEnum);
 			requestCustomerService.adicionar(RequestCustomer);
 			listaRequestCustomerService = requestCustomerService.getAllRequestCustomers();
@@ -126,36 +126,36 @@ public class RequestCustomerBean implements Serializable {
 		this.requestCustomerSelecionada = requestCustomerSelecionada;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getMatriculaSolicitante() {
+		return matriculaSolicitante;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setMatriculaSolicitante(String matriculaSolicitante) {
+		this.matriculaSolicitante = matriculaSolicitante;
 	}
 
-	public String getName() {
-		return name;
+	public String getNameSolicitante() {
+		return nameSolicitante;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNameSolicitante(String nameSolicitante) {
+		this.nameSolicitante = nameSolicitante;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEmailSolicitante() {
+		return emailSolicitante;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailSolicitante(String emailSolicitante) {
+		this.emailSolicitante = emailSolicitante;
 	}
 
-	public static String getUSERNAME() {
-		return USERNAME;
+	public static String getUSERNAMEL_LOGADO() {
+		return USERNAMEL_LOGADO;
 	}
 
-	public static void setUSERNAME(String uSERNAME) {
-		USERNAME = uSERNAME;
+	public static void setUSERNAMEL_LOGADO(String uSERNAMEL_LOGADO) {
+		USERNAMEL_LOGADO = uSERNAMEL_LOGADO;
 	}
 
 	public StatusObjectEnum getStatusObjectEnum() {
