@@ -2,7 +2,7 @@ package com.springsecurity.enums;
 
 public enum StatusTaskEnum {
 
-	Planejada(0), Cancelada(1), Finalizada(2);
+	A_FAZER(0), FAZENDO(1), CONCLUIDA(2), CANCELADA(3);
 
 	public int valorStatusEnum;
 

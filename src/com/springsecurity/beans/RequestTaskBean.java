@@ -3,16 +3,14 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import com.springsecurity.entities.RequestCustomer;
+
 import com.springsecurity.entities.RequestTask;
-import com.springsecurity.entities.TypeOfAction;
-import com.springsecurity.entities.TypeOfActivity;
-import com.springsecurity.entities.TypeOfGroup;
-import com.springsecurity.entities.TypeOfPriority;
-import com.springsecurity.entities.TypeOfTask;
+import com.springsecurity.service.RequestTaskService;
 
 @Controller
 @Scope(value = "session")
@@ -20,93 +18,52 @@ public class RequestTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private String grupoAtendimento;
+
 	@Autowired
-	private RequestTask requestTask;
-	private List<RequestTask> listaRequestTaskService;
-	private RequestTask requestTaskSelecionada;
-	private List<TypeOfTask> typeOfTaskSelecionada;
-	private List<TypeOfAction> typeOfActionSelecionada;
-	private List<TypeOfPriority> typeOfPrioritySelecionada;
-	private List<TypeOfGroup> typeOfGroupSelecionada;
-	private List<TypeOfActivity> typeOfActivitySelecionada;
-	private List<RequestCustomer> requestCustomerSelecionada;
+	private RequestTaskService tarefaService;
+	private List<RequestTask> listaTarefas;
+	private RequestTask tarefaSelecionada;
 
-	public RequestTask getRequestTask() {
-		return requestTask;
+	public RequestTaskBean() {
 	}
 
-	public void setRequestTask(RequestTask requestTask) {
-		this.requestTask = requestTask;
+	@PostConstruct
+	public void init() {
+		listaTarefas = tarefaService.getAllRequestTasks();
+
 	}
 
-	public List<TypeOfTask> getTypeOfTaskSelecionada() {
-		return typeOfTaskSelecionada;
+	public RequestTaskService getTarefaService() {
+		return tarefaService;
 	}
 
-	public void setTypeOfTaskSelecionada(List<TypeOfTask> typeOfTaskSelecionada) {
-		this.typeOfTaskSelecionada = typeOfTaskSelecionada;
+	public void setTarefaService(RequestTaskService tarefaService) {
+		this.tarefaService = tarefaService;
 	}
 
-	public List<TypeOfAction> getTypeOfActionSelecionada() {
-		return typeOfActionSelecionada;
+	public String getGrupoAtendimento() {
+		return grupoAtendimento;
 	}
 
-	public void setTypeOfActionSelecionada(
-			List<TypeOfAction> typeOfActionSelecionada) {
-		this.typeOfActionSelecionada = typeOfActionSelecionada;
+	public void setGrupoAtendimento(String grupoAtendimento) {
+		this.grupoAtendimento = grupoAtendimento;
 	}
 
-	public List<TypeOfPriority> getTypeOfPrioritySelecionada() {
-		return typeOfPrioritySelecionada;
+	public List<RequestTask> getListaTarefas() {
+		return listaTarefas;
 	}
 
-	public void setTypeOfPrioritySelecionada(
-			List<TypeOfPriority> typeOfPrioritySelecionada) {
-		this.typeOfPrioritySelecionada = typeOfPrioritySelecionada;
+	public void setListaTarefas(List<RequestTask> listaTarefas) {
+		this.listaTarefas = listaTarefas;
 	}
 
-	public List<TypeOfGroup> getTypeOfGroupSelecionada() {
-		return typeOfGroupSelecionada;
+	public RequestTask getTarefaSelecionada() {
+		return tarefaSelecionada;
 	}
 
-	public void setTypeOfGroupSelecionada(
-			List<TypeOfGroup> typeOfGroupSelecionada) {
-		this.typeOfGroupSelecionada = typeOfGroupSelecionada;
-	}
-
-	public List<TypeOfActivity> getTypeOfActivitySelecionada() {
-		return typeOfActivitySelecionada;
-	}
-
-	public void setTypeOfActivitySelecionada(
-			List<TypeOfActivity> typeOfActivitySelecionada) {
-		this.typeOfActivitySelecionada = typeOfActivitySelecionada;
-	}
-
-	public List<RequestCustomer> getRequestCustomerSelecionada() {
-		return requestCustomerSelecionada;
-	}
-
-	public void setRequestCustomerSelecionada(
-			List<RequestCustomer> requestCustomerSelecionada) {
-		this.requestCustomerSelecionada = requestCustomerSelecionada;
-	}
-
-	public RequestTask getRequestTaskSelecionada() {
-		return requestTaskSelecionada;
-	}
-
-	public void setRequestTaskSelecionada(RequestTask requestTaskSelecionada) {
-		this.requestTaskSelecionada = requestTaskSelecionada;
-	}
-
-	public List<RequestTask> getListaRequestTaskService() {
-		return listaRequestTaskService;
-	}
-
-	public void setListaRequestTaskService(
-			List<RequestTask> listaRequestTaskService) {
-		this.listaRequestTaskService = listaRequestTaskService;
+	public void setTarefaSelecionada(RequestTask tarefaSelecionada) {
+		this.tarefaSelecionada = tarefaSelecionada;
 	}
 
 }

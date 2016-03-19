@@ -7,10 +7,270 @@
 	<ui:define name="centro">
 
 		<h:form id="formPrincipal">
-		
-		TAREFAS PENDENTES
+
+			<!-- MENSAGENS- INICIO -->
+
+			<p:growl id="msgs" showDetail="true" />
+
+			<!-- FORM PRINCIPAL -->
+
+			<h:panelGrid id="gridPrincipal">
+				<p:dataTable id="dataTable" var="var"
+					value="#{requestTaskBean.listaTarefas}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				MINHAS TAREFAS
+    				</f:facet>
+
+					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+						<h:outputText value="#{var.id}" />
+					</p:column>
+
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+						<h:outputText value="#{var.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Previsão de ínicio"
+						sortBy="#{var.lastUpdate}">
+						<h:outputText value="#{var.lastUpdate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Previsão de conclusão"
+						sortBy="#{var.conclusionDate}">
+						<h:outputText value="#{var.conclusionDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Tarefa" sortBy="#{var.resume}">
+						<h:outputText value="#{var.resume}" />
+					</p:column>
+
+					<p:column headerText="Esforço" sortBy="#{var.amountHours}">
+						<h:outputText value="#{var.amountHours}" />
+					</p:column>
+
+					<p:column headerText="Prioridade" sortBy="#{var.typeOfPriority}">
+						<h:outputText value="#{var.typeOfPriority}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{var.statusObjectEnum}">
+						<h:outputText value="#{var.statusObjectEnum}" />
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:commandButton update=":formEditar:panelEditar"
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							<f:setPropertyActionListener value="#{var}"
+								target="#{requestTaskBean.requestTaskSelecionada}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+						<p:commandButton value="Nova tarefa"
+							onclick="PF('dlgNovo').show();" type="button"
+							icon="ui-icon-circle-plus" />
+					</f:facet>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</h:form>
 
 
+
+
+		<!-- FORM NOVO -->
+
+		<h:form id="formNovo">
+			<p:dialog header="Cadastrar nova tarefa" widgetVar="dlgNovo"
+				showEffect="explode" hideEffect="bounce">
+
+				<h:panelGrid columns="1" cellpadding="3" id="panelGridNovo">
+
+					<div align="center">
+
+						<!-- PAINEL CLASSIFICACAO -->
+
+						<p:panel id="panelClassificacao" header="Classificação"
+							style="margin-bottom:20px">
+
+							<h:panelGrid columns="2" cellpadding="5"
+								id="panelGridClassificacao">
+
+								<p:outputLabel for="grupo" value="Origem:" />
+								<p:selectOneMenu id="grupo"
+									value="#" style="width:340px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="atividade" value="Atividade:" />
+								<p:selectOneMenu id="atividade" value="#{dropdownView.country}"
+									style="width:340px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{dropdownView.countries}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="tipoTarefa" value="Tipo:" />
+								<p:selectOneMenu id="tipoTarefa" value="#{dropdownView.country}"
+									style="width:340px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{dropdownView.countries}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="acao" value="Ação:" />
+								<p:selectOneMenu id="acao" value="#{dropdownView.country}"
+									style="width:340px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{dropdownView.countries}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="prioridade" value="Prioridade: " />
+								<p:selectOneMenu id="prioridade" value="#{dropdownView.country}"
+									style="width:340px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{dropdownView.countries}" />
+								</p:selectOneMenu>
+
+							</h:panelGrid>
+						</p:panel>
+
+
+						<!-- PAINEL DESCRICAO -->
+
+						<p:panel id="panelDescricao" header="Descrição"
+							style="margin-bottom:20px">
+
+							<h:panelGrid columns="2" cellpadding="6" id="panelGridDescricao">
+
+								<h:outputLabel for="name" value="Nome da tarefa:"
+									style="font-weight:bold" />
+								<p:inputText id="name" value="#{basicView.text}" size="28"
+									required="true" />
+
+								<p:outputLabel for="solicitante" value="Solicitante:" />
+								<p:selectOneMenu id="solicitante"
+									value="#{dropdownView.country}" style="width:270px">
+									<f:selectItem itemLabel="Select Country" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{dropdownView.countries}"
+										required="true" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="dataInicio" value="Início: " />
+								<p:calendar id="dataInicio" value="#{calendarView.date9}"
+									pattern="dd-MM-yyyy" mask="true" size="28" required="true" />
+
+								<p:outputLabel for="dataFim" value="Conclusão: " />
+								<p:calendar id="dataFim" value="#{calendarView.date9}"
+									pattern="dd-MM-yyyy" mask="true" size="28" required="true" />
+
+								<p:outputLabel for="time" value="Qtda Horas" />
+								<p:calendar id="time" value="#{calendarView.date11}"
+									pattern="HH:mm" size="28" required="true" />
+
+
+								<p:outputLabel for="observacao" value="Observações: " />
+								<p:inputTextarea id="observacao" rows="5" cols="30"
+									maxlength="1000" autoResize="false" />
+
+							</h:panelGrid>
+
+						</p:panel>
+
+						<!-- BOTOES -->
+
+						<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
+
+							<p:commandButton value="Incluir tarefa"
+								onclick="PF('dlg').show();"
+								action="#{requestCustomerBean.adicionar}"
+								icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
+
+
+						</h:panelGrid>
+
+
+					</div>
+
+				</h:panelGrid>
+
+			</p:dialog>
+		</h:form>
+
+
+
+
+
+		<!-- FORM EDITAR -->
+
+
+
+
+
+		<h:form id="formEditar">
+			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
+				id="Editar">
+
+				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
+
+					<h:outputText value="Id:" />
+					<h:outputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.id}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Data Criação:" />
+					<h:outputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.createDate}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+
+					<h:outputText value="Data Atualização:" />
+					<h:outputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.lastUpdate}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					</h:outputText>
+
+					<p:outputLabel for="statusObjSelecionado" value="Status:" />
+					<p:selectOneRadio id="statusObjSelecionado"
+						value="#{requestCustomerBean.requestCustomerSelecionada.statusObjectEnum}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
+					<h:outputText value="Mátricula:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.userId}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Nome:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.userName}"
+						style="font-weight:bold" />
+
+					<h:outputText value="E-mail:" />
+					<p:inputText
+						value="#{requestCustomerBean.requestCustomerSelecionada.email}"
+						style="font-weight:bold" />
+
+
+					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
+						action="#{requestCustomerBean.alterar}" icon="ui-icon-circle-plus"
+						update="@formPrincipal" ajax="false" />
+
+				</h:panelGrid>
+			</p:dialog>
 		</h:form>
 
 	</ui:define>

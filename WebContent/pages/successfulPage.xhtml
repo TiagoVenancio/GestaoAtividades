@@ -1,28 +1,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
-		<h:form>
+
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+
+			<h:panelGrid columns="3">
+
+				<p:dataTable id="dataTabAFazer" var="varTabFazer" value="#"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				A-FAZER
+    				</f:facet>
+
+					<p:column headerText="Solicitante">
+						<h:outputText value="#" />
+					</p:column>
+
+					<p:column headerText="Tarefa">
+						<h:outputText value="#" />
+					</p:column>
+
+					<p:column headerText="Previsão de início">
+						<h:outputText value="#" />
+					</p:column>
+				</p:dataTable>
 
 
+				<p:dataTable id="dataTabFazendo" var="varTabFazendo" value="#"
+					emptyMessage="Nenhum registro encontrado.">
 
-			<h:messages />
-			<h:panelGrid columns="1">
-				<h:commandButton value="User page!"
-					action="#{redirectorBean.userPage}" />
-				<h:commandButton value="Admin page!"
-					action="#{redirectorBean.adminPage}" />
-				<h:commandButton value="Index!" action="#{redirectorBean.index}" />
+					<f:facet name="header">
+        				FAZENDO
+    				</f:facet>
 
-				<h:commandButton value="#{authenticator.userLogadoWindows}" />
+					<p:column headerText="Tarefa">
+						<h:outputText value="#" />
+					</p:column>
 
-				<br />
-				<br />
+					<p:column headerText="Responsável">
+						<h:outputText value="#" />
+					</p:column>
 
-				<h:commandButton value="Logout!" action="#{authenticator.logout}" />
+					<p:column headerText="Previsão de conclusão">
+						<h:outputText value="#" />
+					</p:column>
+				</p:dataTable>
+
+
+				<p:dataTable id="dataTabConcluido" var="varTabConcluido" value="#"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				CONCLUÍDO
+    				</f:facet>
+
+					<p:column headerText="Solicitante">
+						<h:outputText value="#" />
+					</p:column>
+
+					<p:column headerText="Tarefa">
+						<h:outputText value="#" />
+					</p:column>
+
+					<p:column headerText="Data de conclusão">
+						<h:outputText value="#" />
+					</p:column>
+				</p:dataTable>
+
 			</h:panelGrid>
 		</h:form>
+
 	</ui:define>
 </ui:decorate>
 </html>

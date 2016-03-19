@@ -42,18 +42,18 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Criador" filterBy="#{var.lastUserChange}"
+					<p:column headerText="Criado por" filterBy="#{var.lastUserChange}"
 						filterMatchMode="contains" sortBy="#{var.lastUserChange}">
 						<h:outputText value="#{var.lastUserChange}" />
 					</p:column>
 
-					<p:column headerText="Nome" filterBy="#{var.userId}"
+					<p:column headerText="Mátricula" filterBy="#{var.userId}"
 						filterMatchMode="contains" sortBy="#{var.userId}">
 						<h:outputText value="#{var.userId}" />
 					</p:column>
 
 
-					<p:column headerText="Matricula" filterBy="#{var.userName}"
+					<p:column headerText="Nome" filterBy="#{var.userName}"
 						filterMatchMode="contains" sortBy="#{var.userName}">
 						<h:outputText value="#{var.userName}" />
 					</p:column>
@@ -72,7 +72,7 @@
 						<p:commandButton update=":formEditar:panelEditar"
 							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
 							<f:setPropertyActionListener value="#{var}"
-								target="#{requestCustomer.requestCustomerSelecionada}" />
+								target="#{requestCustomerBean.requestCustomerSelecionada}" />
 						</p:commandButton>
 					</p:column>
 
@@ -156,7 +156,7 @@
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 					</p:selectOneRadio>
 
-					<h:outputText value="Matricula:" />
+					<h:outputText value="Mátricula:" />
 					<p:inputText
 						value="#{requestCustomerBean.requestCustomerSelecionada.userId}"
 						style="font-weight:bold" />
