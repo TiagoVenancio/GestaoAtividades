@@ -1,21 +1,29 @@
 package com.springsecurity.beans;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
+import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.entities.RequestTask;
+import com.springsecurity.entities.TypeOfAction;
+import com.springsecurity.entities.TypeOfActivity;
+import com.springsecurity.entities.TypeOfGroup;
+import com.springsecurity.entities.TypeOfPriority;
+import com.springsecurity.entities.TypeOfTask;
+import com.springsecurity.entities.User;
+import com.springsecurity.enums.StatusObjectEnum;
+import com.springsecurity.enums.StatusTaskEnum;
 import com.springsecurity.service.RequestTaskService;
-import com.springsecurity.service.TypeOfActionService;
-import com.springsecurity.service.TypeOfActivityService;
-import com.springsecurity.service.TypeOfGroupService;
-import com.springsecurity.service.TypeOfPriorityService;
-import com.springsecurity.service.TypeOfTaskService;
 
 @Controller
 @Scope(value = "session")
@@ -23,17 +31,23 @@ public class RequestTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long idGrupoAtendimento;
+	private Date dataInicio;
+	private Date dataFinal;
+	private Date qtdaHoras;
+	private String resumo;
+	private String observacao;
 
 	@Autowired
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
-	private TypeOfGroupService taskGrupoSelecionado;
-	private TypeOfActivityService taskTipoAtividadeSelecionada;
-	private TypeOfTaskService taskTipoTarefaSelecionada;
-	private TypeOfActionService taskTipoAcaoSelecionada;
-	private TypeOfPriorityService taskTipoPrioridadeSelecionada;
+	private TypeOfGroup taskGrupoSelecionado;
+	private TypeOfActivity taskTipoAtividadeSelecionada;
+	private TypeOfTask taskTipoTarefaSelecionada;
+	private TypeOfAction taskTipoAcaoSelecionada;
+	private TypeOfPriority taskTipoPrioridadeSelecionada;
+	private RequestCustomer taskClienteSelecionado;
+	private User userSelecionado;
 
 	public RequestTaskBean() {
 	}
@@ -41,6 +55,85 @@ public class RequestTaskBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		listaTarefas = tarefaService.getAllRequestTasks();
+	}
+
+	public String adicionar() {
+		try {
+			RequestTask task = new RequestTask();
+			task.setCreateDate(new Date(System.currentTimeMillis()));
+			task.setStartDate(dataInicio);
+			task.setConclusionDate(dataFinal);
+			task.setAmountHours(qtdaHoras);
+			task.setStatusObjectEnum(StatusObjectEnum.Ativo);
+			task.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
+			task.setDescription(observacao);
+			task.setResume(resumo);
+			task.setTypeOfAction(taskTipoAcaoSelecionada);
+			task.setTypeOfActivity(taskTipoAtividadeSelecionada);
+			task.setTypeOfGroup(taskGrupoSelecionado);
+			task.setTypeOfPriority(taskTipoPrioridadeSelecionada);
+			task.setTypeOfTask(taskTipoTarefaSelecionada);
+			task.setUser(userSelecionado);
+			tarefaService.adicionar(task);
+			listaTarefas = tarefaService.getAllRequestTasks();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item adicionado com sucesso!"));
+			return null;
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não adicionado!"));
+		}
+		return null;
+
+	}
+
+	public TypeOfGroup getTaskGrupoSelecionado() {
+		return taskGrupoSelecionado;
+	}
+
+	public void setTaskGrupoSelecionado(TypeOfGroup taskGrupoSelecionado) {
+		this.taskGrupoSelecionado = taskGrupoSelecionado;
+	}
+
+	public TypeOfActivity getTaskTipoAtividadeSelecionada() {
+		return taskTipoAtividadeSelecionada;
+	}
+
+	public void setTaskTipoAtividadeSelecionada(
+			TypeOfActivity taskTipoAtividadeSelecionada) {
+		this.taskTipoAtividadeSelecionada = taskTipoAtividadeSelecionada;
+	}
+
+	public TypeOfTask getTaskTipoTarefaSelecionada() {
+		return taskTipoTarefaSelecionada;
+	}
+
+	public void setTaskTipoTarefaSelecionada(
+			TypeOfTask taskTipoTarefaSelecionada) {
+		this.taskTipoTarefaSelecionada = taskTipoTarefaSelecionada;
+	}
+
+	public TypeOfPriority getTaskTipoPrioridadeSelecionada() {
+		return taskTipoPrioridadeSelecionada;
+	}
+
+	public void setTaskTipoPrioridadeSelecionada(
+			TypeOfPriority taskTipoPrioridadeSelecionada) {
+		this.taskTipoPrioridadeSelecionada = taskTipoPrioridadeSelecionada;
+	}
+
+	public RequestCustomer getTaskClienteSelecionado() {
+		return taskClienteSelecionado;
+	}
+
+	public void setTaskClienteSelecionado(RequestCustomer taskClienteSelecionado) {
+		this.taskClienteSelecionado = taskClienteSelecionado;
 	}
 
 	public RequestTaskService getTarefaService() {
@@ -67,56 +160,60 @@ public class RequestTaskBean implements Serializable {
 		this.tarefaSelecionada = tarefaSelecionada;
 	}
 
-	public Long getIdGrupoAtendimento() {
-		return idGrupoAtendimento;
+	public Date getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setIdGrupoAtendimento(Long idGrupoAtendimento) {
-		this.idGrupoAtendimento = idGrupoAtendimento;
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
-	public TypeOfGroupService getTaskGrupoSelecionado() {
-		return taskGrupoSelecionado;
+	public Date getDataFinal() {
+		return dataFinal;
 	}
 
-	public void setTaskGrupoSelecionado(TypeOfGroupService taskGrupoSelecionado) {
-		this.taskGrupoSelecionado = taskGrupoSelecionado;
+	public void setDataFinal(Date dataFinal) {
+		this.dataFinal = dataFinal;
 	}
 
-	public TypeOfActivityService getTaskTipoAtividadeSelecionada() {
-		return taskTipoAtividadeSelecionada;
+	public String getObservacao() {
+		return observacao;
 	}
 
-	public void setTaskTipoAtividadeSelecionada(
-			TypeOfActivityService taskTipoAtividadeSelecionada) {
-		this.taskTipoAtividadeSelecionada = taskTipoAtividadeSelecionada;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
-	public TypeOfTaskService getTaskTipoTarefaSelecionada() {
-		return taskTipoTarefaSelecionada;
+	public Date getQtdaHoras() {
+		return qtdaHoras;
 	}
 
-	public void setTaskTipoTarefaSelecionada(
-			TypeOfTaskService taskTipoTarefaSelecionada) {
-		this.taskTipoTarefaSelecionada = taskTipoTarefaSelecionada;
+	public void setQtdaHoras(Date qtdaHoras) {
+		this.qtdaHoras = qtdaHoras;
 	}
 
-	public TypeOfActionService getTaskTipoAcaoSelecionada() {
+	public String getResumo() {
+		return resumo;
+	}
+
+	public void setResumo(String resumo) {
+		this.resumo = resumo;
+	}
+
+	public TypeOfAction getTaskTipoAcaoSelecionada() {
 		return taskTipoAcaoSelecionada;
 	}
 
-	public void setTaskTipoAcaoSelecionada(
-			TypeOfActionService taskTipoAcaoSelecionada) {
+	public void setTaskTipoAcaoSelecionada(TypeOfAction taskTipoAcaoSelecionada) {
 		this.taskTipoAcaoSelecionada = taskTipoAcaoSelecionada;
 	}
 
-	public TypeOfPriorityService getTaskTipoPrioridadeSelecionada() {
-		return taskTipoPrioridadeSelecionada;
+	public User getUserSelecionado() {
+		return userSelecionado;
 	}
 
-	public void setTaskTipoPrioridadeSelecionada(
-			TypeOfPriorityService taskTipoPrioridadeSelecionada) {
-		this.taskTipoPrioridadeSelecionada = taskTipoPrioridadeSelecionada;
+	public void setUserSelecionado(User userSelecionado) {
+		this.userSelecionado = userSelecionado;
 	}
 
 }

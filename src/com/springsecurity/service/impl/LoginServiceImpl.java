@@ -8,6 +8,7 @@ import com.springsecurity.service.LoginService;
 
 @Service
 public class LoginServiceImpl implements LoginService {
+	
 	@Autowired
 	private UserDAO dao;
 

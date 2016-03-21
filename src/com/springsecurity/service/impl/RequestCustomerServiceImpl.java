@@ -28,11 +28,17 @@ public class RequestCustomerServiceImpl implements RequestCustomerService {
 	public List<RequestCustomer> getAllRequestCustomers() {
 		return dao.findAll();
 	}
-	
+
 	@Override
-	public void alterar(RequestCustomer requestCustomer) throws IllegalArgumentException {
+	public void alterar(RequestCustomer requestCustomer)
+			throws IllegalArgumentException {
 		dao.update(requestCustomer);
 
 	}
-	
+
+	@Override
+	public RequestCustomer getByIdRequestCustomer(Long id) {
+		return dao.getById(id);
 	}
+
+}

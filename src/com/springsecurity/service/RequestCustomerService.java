@@ -6,10 +6,14 @@ import com.springsecurity.entities.RequestCustomer;
 
 public interface RequestCustomerService {
 
-	void adicionar(RequestCustomer requestCustomer) throws IllegalArgumentException;
+	void adicionar(RequestCustomer requestCustomer)
+			throws IllegalArgumentException;
 
-	void alterar(RequestCustomer requestCustomer) throws IllegalArgumentException;
+	void alterar(RequestCustomer requestCustomer)
+			throws IllegalArgumentException;
 
 	public List<RequestCustomer> getAllRequestCustomers();
+
+	public RequestCustomer getByIdRequestCustomer(Long id);
 
 }

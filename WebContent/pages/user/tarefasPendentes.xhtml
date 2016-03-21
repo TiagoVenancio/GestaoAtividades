@@ -89,7 +89,7 @@
 
 		<h:form id="formNovo">
 			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
-				appendTo="@(body)" modal="true" resizable="false">
+				resizable="false">
 
 				<h:panelGrid columns="1" cellpadding="3" id="panelGridNovo">
 
@@ -106,8 +106,9 @@
 								<p:selectOneMenu id="grupo"
 									value="#{requestTaskBean.taskGrupoSelecionado}" required="true"
 									requiredMessage="Campo obrigatório"
-									converter="converterGrupoAtendimento" style="width: 340px;">
-									<f:selectItem itemLabel="Origem" />
+									filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Origem" itemValue="" />
 									<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
 										var="g" itemValue="#{g}" itemLabel="#{g.description}" />
 								</p:selectOneMenu>
@@ -116,7 +117,8 @@
 								<p:selectOneMenu id="atividade"
 									value="#{requestTaskBean.taskTipoAtividadeSelecionada}"
 									required="true" requiredMessage="Campo obrigatório"
-									converter="converterGrupoAtividade" style="width: 340px;">
+									converter="converterGrupoAtividade" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Atividade" />
 									<f:selectItems
 										value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
@@ -166,38 +168,54 @@
 						<p:panel id="panelDescricao" header="Descrição"
 							style="margin-bottom:20px">
 
-							<h:panelGrid columns="2" cellpadding="6" id="panelGridDescricao">
+							<h:panelGrid columns="2" cellpadding="7" id="panelGridDescricao">
 
 								<h:outputLabel for="name" value="Nome da tarefa:"
 									style="font-weight:bold" />
-								<p:inputText id="name" value="#{basicView.text}" size="28"
-									required="true" />
+								<p:inputText id="name" value="#{requestTaskBean.resumo}"
+									size="28" required="true" />
 
-								<p:outputLabel for="solicitante" value="Solicitante:" />
 								<p:selectOneMenu id="solicitante"
-									value="#{dropdownView.country}" style="width:270px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#{dropdownView.countries}"
-										required="true" />
+									value="#{requestTaskBean.taskClienteSelecionado}"
+									required="true" requiredMessage="Campo obrigatório"
+									converter="converterGrupoClientes" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Solicitante" />
+									<f:selectItems
+										value="#{requestCustomerBean.listaRequestCustomerService}"
+										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
 								</p:selectOneMenu>
+								<p:message for="solicitante" />
+
+								<p:selectOneMenu id="responsavel"
+									value="#{requestTaskBean.userSelecionado}" required="true"
+									requiredMessage="Campo obrigatório"
+									converter="converterGrupoUsuarios" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Responsável" />
+									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+										itemValue="#{u}" itemLabel="#{u.name}" />
+								</p:selectOneMenu>
+								<p:message for="responsavel" />
 
 								<p:outputLabel for="dataInicio" value="Início: " />
-								<p:calendar id="dataInicio" value="#{calendarView.date9}"
-									pattern="dd-MM-yyyy" mask="true" size="28" required="true" />
+								<p:calendar id="dataInicio"
+									value="#{requestTaskBean.dataInicio}" pattern="dd-MM-yyyy"
+									mask="true" required="true" />
 
 								<p:outputLabel for="dataFim" value="Conclusão: " />
-								<p:calendar id="dataFim" value="#{calendarView.date9}"
-									pattern="dd-MM-yyyy" mask="true" size="28" required="true" />
+								<p:calendar id="dataFim" value="#{requestTaskBean.dataFinal}"
+									pattern="dd-MM-yyyy" mask="true" required="true" />
 
 								<p:outputLabel for="time" value="Qtda Horas" />
-								<p:calendar id="time" value="#{calendarView.date11}"
-									pattern="HH:mm" size="28" required="true" />
+								<p:inputMask id="time" value="#{requestTaskBean.qtdaHoras}"
+									mask="99:99:99" required="true" />
 
 
 								<p:outputLabel for="observacao" value="Observações: " />
 								<p:inputTextarea id="observacao" rows="5" cols="30"
-									maxlength="1000" autoResize="false" />
+									maxlength="1000" autoResize="false"
+									value="#{requestTaskBean.observacao}" />
 
 							</h:panelGrid>
 
@@ -208,8 +226,8 @@
 						<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
 
 							<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-								action="#{requestCustomerBean.adicionar}"
-								icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
+								action="#{requestTaskBean.adicionar}" icon="ui-icon-circle-plus"
+								update="@formPrincipal" ajax="false" />
 
 
 						</h:panelGrid>

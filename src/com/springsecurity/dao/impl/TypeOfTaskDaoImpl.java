@@ -6,11 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfTaskDao;
 import com.springsecurity.entities.TypeOfTask;
 
 @Repository
+@Transactional
 public class TypeOfTaskDaoImpl implements TypeOfTaskDao {
 
 	@PersistenceContext

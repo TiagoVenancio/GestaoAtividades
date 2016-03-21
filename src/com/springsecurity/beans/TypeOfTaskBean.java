@@ -37,7 +37,7 @@ public class TypeOfTaskBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+		listaTiposTarefas = typeOfTaskService.getAll();
 
 	}
 
@@ -49,7 +49,7 @@ public class TypeOfTaskBean implements Serializable {
 			typeOfTask.setDescription(description);
 			typeOfTask.setStatusObjectEnum(statusObjectEnum);
 			typeOfTaskService.adicionar(typeOfTask);
-			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+			listaTiposTarefas = typeOfTaskService.getAll();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -72,7 +72,7 @@ public class TypeOfTaskBean implements Serializable {
 			typeOfTaskSelecionada.setLastUpdate(new Date(System
 					.currentTimeMillis()));
 			typeOfTaskService.alterar(typeOfTaskSelecionada);
-			listaTiposTarefas = typeOfTaskService.getAllTipoDeTarefas();
+			listaTiposTarefas = typeOfTaskService.getAll();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",

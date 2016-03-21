@@ -7,18 +7,17 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.springsecurity.entities.TypeOfTask;
-import com.springsecurity.service.TypeOfTaskService;
+import com.springsecurity.entities.User;
+import com.springsecurity.service.UserService;
 
-@FacesConverter(value = "converterTipoTarefa")
-public class ConverterGrupoTarefas implements Converter {
+@FacesConverter(value = "converterGrupoUsuarios")
+public class ConverterGrupoUsuarios implements Converter {
 
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				TypeOfTaskService service = (TypeOfTaskService) fc
-						.getExternalContext().getApplicationMap()
-						.get("typeOfTaskBean");
+				UserService service = (UserService) fc.getExternalContext()
+						.getApplicationMap().get("userOwnerBean");
 				return service.getAll().get(Integer.parseInt(value));
 			} catch (NumberFormatException e) {
 				throw new ConverterException(new FacesMessage(
@@ -32,7 +31,7 @@ public class ConverterGrupoTarefas implements Converter {
 
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 		if (object != null) {
-			return String.valueOf(((TypeOfTask) object).getId());
+			return String.valueOf(((User) object).getId());
 		} else {
 			return null;
 		}

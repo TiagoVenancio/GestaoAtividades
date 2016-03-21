@@ -6,11 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfPriorityDao;
 import com.springsecurity.entities.TypeOfPriority;
 
 @Repository
+@Transactional
 public class TypeOfPriorityDaoImpl implements TypeOfPriorityDao {
 
 	@PersistenceContext

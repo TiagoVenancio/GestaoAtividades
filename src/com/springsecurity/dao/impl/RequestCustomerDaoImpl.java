@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.RequestTaskDao;
 import com.springsecurity.entities.RequestTask;
 
 @Repository
+@Transactional
 public class RequestCustomerDaoImpl implements RequestTaskDao {
 
 	@PersistenceContext

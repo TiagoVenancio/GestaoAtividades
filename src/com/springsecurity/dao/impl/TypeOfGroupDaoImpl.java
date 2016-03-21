@@ -6,11 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfGroupDao;
 import com.springsecurity.entities.TypeOfGroup;
 
 @Repository
+@Transactional
 public class TypeOfGroupDaoImpl implements TypeOfGroupDao {
 
 	@PersistenceContext

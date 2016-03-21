@@ -10,8 +10,8 @@ public interface TypeOfTaskService {
 
 	void alterar(TypeOfTask typeOfTask) throws IllegalArgumentException;
 
-	public List<TypeOfTask> getAllTipoDeTarefas();
-	
+	public List<TypeOfTask> getAll();
+
 	public TypeOfTask getByIdTypeOfTask(Long id);
 
 }
