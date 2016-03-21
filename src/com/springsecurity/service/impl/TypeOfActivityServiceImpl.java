@@ -36,4 +36,9 @@ public class TypeOfActivityServiceImpl implements TypeOfActivityService {
 		return dao.findAll();
 	}
 
+	@Override
+	public TypeOfActivity getByIdTypeOfActivity(Long id) {
+		return dao.getById(id);
+	}
+
 }

@@ -25,11 +25,6 @@ public class TypeOfGroupServiceImpl implements TypeOfGroupService {
 	}
 
 	@Override
-	public List<TypeOfGroup> findAll() {
-		return findAll();
-	}
-
-	@Override
 	public void alterar(TypeOfGroup typeOfGroup)
 			throws IllegalArgumentException {
 		dao.update(typeOfGroup);
@@ -37,8 +32,13 @@ public class TypeOfGroupServiceImpl implements TypeOfGroupService {
 	}
 
 	@Override
-	public List<TypeOfGroup> getAllTipoDeGrupos() {
+	public List<TypeOfGroup> getAll() {
 		return dao.findAll();
+	}
+
+	@Override
+	public TypeOfGroup getByIdTypeOfGroup(Long id) {
+		return dao.getById(id);
 	}
 
 }

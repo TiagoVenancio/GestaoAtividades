@@ -35,4 +35,9 @@ public class TypeOfTaskServiceImpl implements TypeOfTaskService {
 
 	}
 
+	@Override
+	public TypeOfTask getByIdTypeOfTask(Long id) {
+		return dao.getById(id);
+	}
+
 }

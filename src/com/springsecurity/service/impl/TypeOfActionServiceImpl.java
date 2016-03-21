@@ -28,11 +28,17 @@ public class TypeOfActionServiceImpl implements TypeOfActionService {
 	public List<TypeOfAction> getAllTipoDeAcoes() {
 		return dao.findAll();
 	}
-	
+
 	@Override
-	public void alterar(TypeOfAction typeOfAction) throws IllegalArgumentException {
+	public void alterar(TypeOfAction typeOfAction)
+			throws IllegalArgumentException {
 		dao.update(typeOfAction);
-		
+
+	}
+
+	@Override
+	public TypeOfAction getByIdTypeOfAction(Long id) {
+		return dao.getById(id);
 	}
 
 }

@@ -37,7 +37,7 @@ public class TypeOfGroupBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		listaTiposGrupos = typeOfGroupService.getAllTipoDeGrupos();
+		listaTiposGrupos = typeOfGroupService.getAll();
 
 	}
 
@@ -49,7 +49,7 @@ public class TypeOfGroupBean implements Serializable {
 			typeOfGroup.setDescription(description);
 			typeOfGroup.setStatusObjectEnum(statusObjectEnum);
 			typeOfGroupService.adicionar(typeOfGroup);
-			listaTiposGrupos = typeOfGroupService.getAllTipoDeGrupos();
+			listaTiposGrupos = typeOfGroupService.getAll();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -69,9 +69,10 @@ public class TypeOfGroupBean implements Serializable {
 
 	public String alterar() {
 		try {
-			typeOfGroupSelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
+			typeOfGroupSelecionada.setLastUpdate(new Date(System
+					.currentTimeMillis()));
 			typeOfGroupService.alterar(typeOfGroupSelecionada);
-			listaTiposGrupos = typeOfGroupService.getAllTipoDeGrupos();
+			listaTiposGrupos = typeOfGroupService.getAll();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",

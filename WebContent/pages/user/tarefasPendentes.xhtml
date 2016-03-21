@@ -88,8 +88,8 @@
 		<!-- FORM NOVO -->
 
 		<h:form id="formNovo">
-			<p:dialog header="Cadastrar nova tarefa" widgetVar="dlgNovo"
-				showEffect="explode" hideEffect="bounce">
+			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
+				appendTo="@(body)" modal="true" resizable="false">
 
 				<h:panelGrid columns="1" cellpadding="3" id="panelGridNovo">
 
@@ -103,45 +103,59 @@
 							<h:panelGrid columns="2" cellpadding="5"
 								id="panelGridClassificacao">
 
-								<p:outputLabel for="grupo" value="Origem:" />
 								<p:selectOneMenu id="grupo"
-									value="#" style="width:340px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#" />
+									value="#{requestTaskBean.taskGrupoSelecionado}" required="true"
+									requiredMessage="Campo obrigatório"
+									converter="converterGrupoAtendimento" style="width: 340px;">
+									<f:selectItem itemLabel="Origem" />
+									<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
+										var="g" itemValue="#{g}" itemLabel="#{g.description}" />
 								</p:selectOneMenu>
+								<p:message for="grupo" />
 
-								<p:outputLabel for="atividade" value="Atividade:" />
-								<p:selectOneMenu id="atividade" value="#{dropdownView.country}"
-									style="width:340px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#{dropdownView.countries}" />
+								<p:selectOneMenu id="atividade"
+									value="#{requestTaskBean.taskTipoAtividadeSelecionada}"
+									required="true" requiredMessage="Campo obrigatório"
+									converter="converterGrupoAtividade" style="width: 340px;">
+									<f:selectItem itemLabel="Atividade" />
+									<f:selectItems
+										value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
+										itemValue="#{a}" itemLabel="#{a.description}" />
 								</p:selectOneMenu>
+								<p:message for="atividade" />
 
-								<p:outputLabel for="tipoTarefa" value="Tipo:" />
-								<p:selectOneMenu id="tipoTarefa" value="#{dropdownView.country}"
-									style="width:340px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#{dropdownView.countries}" />
+								<p:selectOneMenu id="tipoTarefa"
+									value="#{requestTaskBean.taskTipoTarefaSelecionada}"
+									required="true" requiredMessage="Campo obrigatório"
+									converter="converterTipoTarefa" style="width: 340px;">
+									<f:selectItem itemLabel="Tipo" noSelectionOption="true"
+										itemValue="" />
+									<f:selectItems value="#{typeOfTaskBean.listaTiposTarefas}"
+										var="t" itemValue="#{t}" itemLabel="#{t.description}" />
 								</p:selectOneMenu>
+								<p:message for="tipoTarefa" />
 
-								<p:outputLabel for="acao" value="Ação:" />
-								<p:selectOneMenu id="acao" value="#{dropdownView.country}"
-									style="width:340px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#{dropdownView.countries}" />
+								<p:selectOneMenu id="acao"
+									value="#{requestTaskBean.taskTipoAcaoSelecionada}"
+									required="true" requiredMessage="Campo obrigatório"
+									converter="converterGrupoAcoes" style="width: 340px;">
+									<f:selectItem itemLabel="Ação" />
+									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
+										var="c" itemValue="#{c}" itemLabel="#{c.description}" />
 								</p:selectOneMenu>
+								<p:message for="acao" />
 
-								<p:outputLabel for="prioridade" value="Prioridade: " />
-								<p:selectOneMenu id="prioridade" value="#{dropdownView.country}"
-									style="width:340px">
-									<f:selectItem itemLabel="Select Country" itemValue=""
-										noSelectionOption="true" />
-									<f:selectItems value="#{dropdownView.countries}" />
+								<p:selectOneMenu id="prioridade"
+									value="#{requestTaskBean.taskTipoPrioridadeSelecionada}"
+									required="true" requiredMessage="Campo obrigatório"
+									converter="converterGrupoPrioridades" style="width: 340px;">
+									<f:selectItem itemLabel="Prioridade" />
+									<f:selectItems
+										value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
+										itemValue="#{p}" itemLabel="#{p.description}" />
 								</p:selectOneMenu>
+								<p:message for="prioridade" />
+
 
 							</h:panelGrid>
 						</p:panel>
@@ -193,8 +207,7 @@
 
 						<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
 
-							<p:commandButton value="Incluir tarefa"
-								onclick="PF('dlg').show();"
+							<p:commandButton value="Salvar" onclick="PF('dlg').show();"
 								action="#{requestCustomerBean.adicionar}"
 								icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
 

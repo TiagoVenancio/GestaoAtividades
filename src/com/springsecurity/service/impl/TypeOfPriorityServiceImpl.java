@@ -33,12 +33,17 @@ public class TypeOfPriorityServiceImpl implements TypeOfPriorityService {
 	public void alterar(TypeOfPriority typeOfPriority)
 			throws IllegalArgumentException {
 		dao.update(typeOfPriority);
-		
+
 	}
 
 	@Override
 	public List<TypeOfPriority> getAllTipoDePrioridades() {
-			return dao.findAll();
+		return dao.findAll();
+	}
+
+	@Override
+	public TypeOfPriority getByIdTypeOfPriority(Long id) {
+		return dao.getById(id);
 	}
 
 }
