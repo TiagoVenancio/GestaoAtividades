@@ -226,4 +226,148 @@ public class RequestTask implements Serializable {
 		this.typeOfPriority = typeOfPriority;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((amountHours == null) ? 0 : amountHours.hashCode());
+		result = prime * result
+				+ ((closeDate == null) ? 0 : closeDate.hashCode());
+		result = prime * result
+				+ ((conclusionDate == null) ? 0 : conclusionDate.hashCode());
+		result = prime * result
+				+ ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((requestCustomer == null) ? 0 : requestCustomer.hashCode());
+		result = prime * result + ((resume == null) ? 0 : resume.hashCode());
+		result = prime * result
+				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime
+				* result
+				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
+		result = prime * result
+				+ ((statusTaskEnum == null) ? 0 : statusTaskEnum.hashCode());
+		result = prime * result
+				+ ((typeOfAction == null) ? 0 : typeOfAction.hashCode());
+		result = prime * result
+				+ ((typeOfActivity == null) ? 0 : typeOfActivity.hashCode());
+		result = prime * result
+				+ ((typeOfGroup == null) ? 0 : typeOfGroup.hashCode());
+		result = prime * result
+				+ ((typeOfPriority == null) ? 0 : typeOfPriority.hashCode());
+		result = prime * result
+				+ ((typeOfTask == null) ? 0 : typeOfTask.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RequestTask other = (RequestTask) obj;
+		if (amountHours == null) {
+			if (other.amountHours != null)
+				return false;
+		} else if (!amountHours.equals(other.amountHours))
+			return false;
+		if (closeDate == null) {
+			if (other.closeDate != null)
+				return false;
+		} else if (!closeDate.equals(other.closeDate))
+			return false;
+		if (conclusionDate == null) {
+			if (other.conclusionDate != null)
+				return false;
+		} else if (!conclusionDate.equals(other.conclusionDate))
+			return false;
+		if (createDate == null) {
+			if (other.createDate != null)
+				return false;
+		} else if (!createDate.equals(other.createDate))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (requestCustomer == null) {
+			if (other.requestCustomer != null)
+				return false;
+		} else if (!requestCustomer.equals(other.requestCustomer))
+			return false;
+		if (resume == null) {
+			if (other.resume != null)
+				return false;
+		} else if (!resume.equals(other.resume))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
+		if (statusObjectEnum != other.statusObjectEnum)
+			return false;
+		if (statusTaskEnum != other.statusTaskEnum)
+			return false;
+		if (typeOfAction == null) {
+			if (other.typeOfAction != null)
+				return false;
+		} else if (!typeOfAction.equals(other.typeOfAction))
+			return false;
+		if (typeOfActivity == null) {
+			if (other.typeOfActivity != null)
+				return false;
+		} else if (!typeOfActivity.equals(other.typeOfActivity))
+			return false;
+		if (typeOfGroup == null) {
+			if (other.typeOfGroup != null)
+				return false;
+		} else if (!typeOfGroup.equals(other.typeOfGroup))
+			return false;
+		if (typeOfPriority == null) {
+			if (other.typeOfPriority != null)
+				return false;
+		} else if (!typeOfPriority.equals(other.typeOfPriority))
+			return false;
+		if (typeOfTask == null) {
+			if (other.typeOfTask != null)
+				return false;
+		} else if (!typeOfTask.equals(other.typeOfTask))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestTask [id=" + id + ", createDate=" + createDate
+				+ ", closeDate=" + closeDate + ", startDate=" + startDate
+				+ ", conclusionDate=" + conclusionDate + ", amountHours="
+				+ amountHours + ", statusObjectEnum=" + statusObjectEnum
+				+ ", description=" + description + ", resume=" + resume
+				+ ", typeOfActivity=" + typeOfActivity + ", typeOfTask="
+				+ typeOfTask + ", typeOfAction=" + typeOfAction
+				+ ", typeOfGroup=" + typeOfGroup + ", statusTaskEnum="
+				+ statusTaskEnum + ", requestCustomer=" + requestCustomer
+				+ ", user=" + user + ", typeOfPriority=" + typeOfPriority + "]";
+	}
+
 }

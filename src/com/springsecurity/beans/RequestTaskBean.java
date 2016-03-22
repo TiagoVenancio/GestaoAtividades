@@ -36,6 +36,8 @@ public class RequestTaskBean implements Serializable {
 	private Date qtdaHoras;
 	private String resumo;
 	private String observacao;
+	
+	private String idGrupo;
 
 	@Autowired
 	private RequestTaskService tarefaService;
@@ -214,6 +216,14 @@ public class RequestTaskBean implements Serializable {
 
 	public void setUserSelecionado(User userSelecionado) {
 		this.userSelecionado = userSelecionado;
+	}
+
+	public String getIdGrupo() {
+		return idGrupo;
+	}
+
+	public void setIdGrupo(String idGrupo) {
+		this.idGrupo = idGrupo;
 	}
 
 }

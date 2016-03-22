@@ -2,6 +2,7 @@ package com.springsecurity.entities;
 
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 @Table(name = "sg_act_type_task", schema = "gestao_atividades")
 public class TypeOfTask {
 
-	@OneToMany(mappedBy = "typeOfTask", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "typeOfTask", targetEntity = RequestTask.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<RequestTask> requestTasks;
 
 	@Id
@@ -86,7 +87,68 @@ public class TypeOfTask {
 
 	@Override
 	public String toString() {
-		return super.toString();
+		return "TypeOfTask [requestTasks=" + requestTasks + ", id=" + id
+				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
+				+ ", statusObjectEnum=" + statusObjectEnum + ", description="
+				+ description + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
+		result = prime * result
+				+ ((requestTasks == null) ? 0 : requestTasks.hashCode());
+		result = prime
+				* result
+				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TypeOfTask other = (TypeOfTask) obj;
+		if (createDate == null) {
+			if (other.createDate != null)
+				return false;
+		} else if (!createDate.equals(other.createDate))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastUpdate == null) {
+			if (other.lastUpdate != null)
+				return false;
+		} else if (!lastUpdate.equals(other.lastUpdate))
+			return false;
+		if (requestTasks == null) {
+			if (other.requestTasks != null)
+				return false;
+		} else if (!requestTasks.equals(other.requestTasks))
+			return false;
+		if (statusObjectEnum != other.statusObjectEnum)
+			return false;
+		return true;
 	}
 
 }

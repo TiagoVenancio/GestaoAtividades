@@ -24,7 +24,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 public class RequestCustomer implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
 
-	@OneToMany(mappedBy = "requestCustomer", targetEntity = RequestTask.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "requestCustomer", targetEntity = RequestTask.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<RequestTask> requestTasks;
 
 	@Id
@@ -132,5 +132,90 @@ public class RequestCustomer implements Serializable {
 		this.id = id;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
+		result = prime * result
+				+ ((lastUserChange == null) ? 0 : lastUserChange.hashCode());
+		result = prime * result
+				+ ((requestTasks == null) ? 0 : requestTasks.hashCode());
+		result = prime
+				* result
+				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result
+				+ ((userName == null) ? 0 : userName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RequestCustomer other = (RequestCustomer) obj;
+		if (createDate == null) {
+			if (other.createDate != null)
+				return false;
+		} else if (!createDate.equals(other.createDate))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastUpdate == null) {
+			if (other.lastUpdate != null)
+				return false;
+		} else if (!lastUpdate.equals(other.lastUpdate))
+			return false;
+		if (lastUserChange == null) {
+			if (other.lastUserChange != null)
+				return false;
+		} else if (!lastUserChange.equals(other.lastUserChange))
+			return false;
+		if (requestTasks == null) {
+			if (other.requestTasks != null)
+				return false;
+		} else if (!requestTasks.equals(other.requestTasks))
+			return false;
+		if (statusObjectEnum != other.statusObjectEnum)
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "RequestCustomer [requestTasks=" + requestTasks + ", id=" + id
+				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
+				+ ", userId=" + userId + ", userName=" + userName + ", email="
+				+ email + ", lastUserChange=" + lastUserChange
+				+ ", statusObjectEnum=" + statusObjectEnum + "]";
+	}
 
 }
