@@ -1,39 +1,35 @@
 package com.springsecurity.converter;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.springsecurity.entities.User;
 import com.springsecurity.service.UserService;
 
 @FacesConverter(value = "converterGrupoUsuarios")
 public class ConverterGrupoUsuarios implements Converter {
 
-	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-		if (value != null && value.trim().length() > 0) {
-			try {
-				UserService service = (UserService) fc.getExternalContext()
-						.getApplicationMap().get("userOwnerBean");
-				return service.getAll().get(Integer.parseInt(value));
-			} catch (NumberFormatException e) {
-				throw new ConverterException(new FacesMessage(
-						FacesMessage.SEVERITY_ERROR, "Conversion Error",
-						"Not a valid theme."));
-			}
-		} else {
-			return null;
+	@Autowired
+	private UserService service;
+
+	@Override
+	public Object getAsObject(FacesContext context, UIComponent component,
+			String value) {
+		if (value != null && !value.equals("")) {
+			return service.getByIdUser(Long.valueOf(value));
 		}
+		return null;
 	}
 
-	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
-		if (object != null) {
-			return String.valueOf(((User) object).getId());
-		} else {
-			return null;
+	@Override
+	public String getAsString(FacesContext context, UIComponent component,
+			Object value) {
+		if (value instanceof User) {
+			User user = (User) value;
+			return String.valueOf(user.getId());
 		}
+		return "";
 	}
 }

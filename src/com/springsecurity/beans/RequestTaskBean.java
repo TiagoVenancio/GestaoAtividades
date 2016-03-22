@@ -13,14 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
-import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.entities.RequestTask;
-import com.springsecurity.entities.TypeOfAction;
-import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfGroup;
-import com.springsecurity.entities.TypeOfPriority;
-import com.springsecurity.entities.TypeOfTask;
-import com.springsecurity.entities.User;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
 import com.springsecurity.service.RequestTaskService;
@@ -36,20 +30,12 @@ public class RequestTaskBean implements Serializable {
 	private Date qtdaHoras;
 	private String resumo;
 	private String observacao;
-	
-	private String idGrupo;
 
 	@Autowired
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
-	private TypeOfGroup taskGrupoSelecionado;
-	private TypeOfActivity taskTipoAtividadeSelecionada;
-	private TypeOfTask taskTipoTarefaSelecionada;
-	private TypeOfAction taskTipoAcaoSelecionada;
-	private TypeOfPriority taskTipoPrioridadeSelecionada;
-	private RequestCustomer taskClienteSelecionado;
-	private User userSelecionado;
+	private TypeOfGroup tipoGrupoSelected;
 
 	public RequestTaskBean() {
 	}
@@ -70,12 +56,6 @@ public class RequestTaskBean implements Serializable {
 			task.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
 			task.setDescription(observacao);
 			task.setResume(resumo);
-			task.setTypeOfAction(taskTipoAcaoSelecionada);
-			task.setTypeOfActivity(taskTipoAtividadeSelecionada);
-			task.setTypeOfGroup(taskGrupoSelecionado);
-			task.setTypeOfPriority(taskTipoPrioridadeSelecionada);
-			task.setTypeOfTask(taskTipoTarefaSelecionada);
-			task.setUser(userSelecionado);
 			tarefaService.adicionar(task);
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
@@ -93,49 +73,6 @@ public class RequestTaskBean implements Serializable {
 		}
 		return null;
 
-	}
-
-	public TypeOfGroup getTaskGrupoSelecionado() {
-		return taskGrupoSelecionado;
-	}
-
-	public void setTaskGrupoSelecionado(TypeOfGroup taskGrupoSelecionado) {
-		this.taskGrupoSelecionado = taskGrupoSelecionado;
-	}
-
-	public TypeOfActivity getTaskTipoAtividadeSelecionada() {
-		return taskTipoAtividadeSelecionada;
-	}
-
-	public void setTaskTipoAtividadeSelecionada(
-			TypeOfActivity taskTipoAtividadeSelecionada) {
-		this.taskTipoAtividadeSelecionada = taskTipoAtividadeSelecionada;
-	}
-
-	public TypeOfTask getTaskTipoTarefaSelecionada() {
-		return taskTipoTarefaSelecionada;
-	}
-
-	public void setTaskTipoTarefaSelecionada(
-			TypeOfTask taskTipoTarefaSelecionada) {
-		this.taskTipoTarefaSelecionada = taskTipoTarefaSelecionada;
-	}
-
-	public TypeOfPriority getTaskTipoPrioridadeSelecionada() {
-		return taskTipoPrioridadeSelecionada;
-	}
-
-	public void setTaskTipoPrioridadeSelecionada(
-			TypeOfPriority taskTipoPrioridadeSelecionada) {
-		this.taskTipoPrioridadeSelecionada = taskTipoPrioridadeSelecionada;
-	}
-
-	public RequestCustomer getTaskClienteSelecionado() {
-		return taskClienteSelecionado;
-	}
-
-	public void setTaskClienteSelecionado(RequestCustomer taskClienteSelecionado) {
-		this.taskClienteSelecionado = taskClienteSelecionado;
 	}
 
 	public RequestTaskService getTarefaService() {
@@ -202,28 +139,12 @@ public class RequestTaskBean implements Serializable {
 		this.resumo = resumo;
 	}
 
-	public TypeOfAction getTaskTipoAcaoSelecionada() {
-		return taskTipoAcaoSelecionada;
+	public TypeOfGroup getTipoGrupoSelected() {
+		return tipoGrupoSelected;
 	}
 
-	public void setTaskTipoAcaoSelecionada(TypeOfAction taskTipoAcaoSelecionada) {
-		this.taskTipoAcaoSelecionada = taskTipoAcaoSelecionada;
-	}
-
-	public User getUserSelecionado() {
-		return userSelecionado;
-	}
-
-	public void setUserSelecionado(User userSelecionado) {
-		this.userSelecionado = userSelecionado;
-	}
-
-	public String getIdGrupo() {
-		return idGrupo;
-	}
-
-	public void setIdGrupo(String idGrupo) {
-		this.idGrupo = idGrupo;
+	public void setTipoGrupoSelected(TypeOfGroup tipoGrupoSelected) {
+		this.tipoGrupoSelected = tipoGrupoSelected;
 	}
 
 }

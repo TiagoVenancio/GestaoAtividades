@@ -104,59 +104,48 @@
 								id="panelGridClassificacao">
 
 								<p:selectOneMenu id="grupo"
-									value="#{requestTaskBean.taskGrupoSelecionado}" required="true"
-									requiredMessage="Campo obrigatório"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfGroup}"
 									converter="converterGrupoAtendimento" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Origem" />
 									<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
 										var="g" itemValue="#{g}" itemLabel="#{g.description}" />
 								</p:selectOneMenu>
-								<p:message for="grupo" />
 
 								<p:selectOneMenu id="atividade"
-									value="#{requestTaskBean.taskTipoAtividadeSelecionada}"
-									required="true" requiredMessage="Campo obrigatório"
-									filter="true" filterMatchMode="startsWith"
-									style="width: 340px;">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+									converter="converterGrupoAtividade" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Atividade" />
 									<f:selectItems
 										value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
 										itemValue="#{a}" itemLabel="#{a.description}" />
 								</p:selectOneMenu>
-								<p:message for="atividade" />
 
 								<p:selectOneMenu id="tipoTarefa"
-									value="#{requestTaskBean.taskTipoTarefaSelecionada}"
-									required="true" requiredMessage="Campo obrigatório"
-									style="width: 340px;">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfTask}"
+									converter="converterTipoTarefa" style="width: 340px;">
 									<f:selectItem itemLabel="Tipo" />
 									<f:selectItems value="#{typeOfTaskBean.listaTiposTarefas}"
 										var="t" itemValue="#{t}" itemLabel="#{t.description}" />
 								</p:selectOneMenu>
-								<p:message for="tipoTarefa" />
 
 								<p:selectOneMenu id="acao"
-									value="#{requestTaskBean.taskTipoAcaoSelecionada}"
-									required="true" requiredMessage="Campo obrigatório"
-									style="width: 340px;">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+									converter="converterGrupoAcoes" style="width: 340px;">
 									<f:selectItem itemLabel="Ação" />
 									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
 										var="c" itemValue="#{c}" itemLabel="#{c.description}" />
 								</p:selectOneMenu>
-								<p:message for="acao" />
 
 								<p:selectOneMenu id="prioridade"
-									value="#{requestTaskBean.taskTipoPrioridadeSelecionada}"
-									required="true" requiredMessage="Campo obrigatório"
-									style="width: 340px;">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+									converter="converterGrupoPrioridades" style="width: 340px;">
 									<f:selectItem itemLabel="Prioridade" />
 									<f:selectItems
 										value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
 										itemValue="#{p}" itemLabel="#{p.description}" />
 								</p:selectOneMenu>
-								<p:message for="prioridade" />
-
 
 							</h:panelGrid>
 						</p:panel>
@@ -175,40 +164,36 @@
 									size="28" required="true" />
 
 								<p:selectOneMenu id="solicitante"
-									value="#{requestTaskBean.taskClienteSelecionado}"
-									required="true" requiredMessage="Campo obrigatório"
-									filter="true" filterMatchMode="startsWith"
-									style="width: 340px;">
+									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+									converter="converterGrupoClientes" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Solicitante" />
 									<f:selectItems
 										value="#{requestCustomerBean.listaRequestCustomerService}"
 										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
 								</p:selectOneMenu>
-								<p:message for="solicitante" />
 
 								<p:selectOneMenu id="responsavel"
-									value="#{requestTaskBean.userSelecionado}" required="true"
-									requiredMessage="Campo obrigatório" filter="true"
+									value="#{requestTaskBean.tarefaSelecionada.user}"
+									converter="converterGrupoUsuarios" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Responsável" />
 									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
 										itemValue="#{u}" itemLabel="#{u.name}" />
 								</p:selectOneMenu>
-								<p:message for="responsavel" />
 
 								<p:outputLabel for="dataInicio" value="Início: " />
 								<p:calendar id="dataInicio"
 									value="#{requestTaskBean.dataInicio}" pattern="dd-MM-yyyy"
-									mask="true" required="true" />
+									mask="true" />
 
 								<p:outputLabel for="dataFim" value="Conclusão: " />
 								<p:calendar id="dataFim" value="#{requestTaskBean.dataFinal}"
-									pattern="dd-MM-yyyy" mask="true" required="true" />
+									pattern="dd-MM-yyyy" mask="true" />
 
 								<p:outputLabel for="time" value="Qtda Horas" />
 								<p:inputMask id="time" value="#{requestTaskBean.qtdaHoras}"
-									mask="99:99:99" required="true" />
-
+									mask="99:99:99" />
 
 								<p:outputLabel for="observacao" value="Observações: " />
 								<p:inputTextarea id="observacao" rows="5" cols="30"
