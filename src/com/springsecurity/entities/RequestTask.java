@@ -44,9 +44,8 @@ public class RequestTask implements Serializable {
 	@Column(name = "CONCLUSION_DATE")
 	private Date conclusionDate;
 
-	@Temporal(TemporalType.TIME)
-	@Column(name = "AMOUNT_HOURS", nullable = false)
-	private Date amountHours;
+	@Column(name = "AMOUNT_HOURS", length = 10, nullable = false)
+	private String amountHours;
 
 	@Enumerated(value = EnumType.ORDINAL)
 	@Column(name = "STATUS_ROW_ITEM", length = 1, nullable = false)
@@ -98,6 +97,14 @@ public class RequestTask implements Serializable {
 		return statusTaskEnum;
 	}
 
+	public String getAmountHours() {
+		return amountHours;
+	}
+
+	public void setAmountHours(String amountHours) {
+		this.amountHours = amountHours;
+	}
+
 	public void setStatusTaskEnum(StatusTaskEnum statusTaskEnum) {
 		this.statusTaskEnum = statusTaskEnum;
 	}
@@ -136,14 +143,6 @@ public class RequestTask implements Serializable {
 
 	public void setConclusionDate(Date conclusionDate) {
 		this.conclusionDate = conclusionDate;
-	}
-
-	public Date getAmountHours() {
-		return amountHours;
-	}
-
-	public void setAmountHours(Date amountHours) {
-		this.amountHours = amountHours;
 	}
 
 	public StatusObjectEnum getStatusObjectEnum() {

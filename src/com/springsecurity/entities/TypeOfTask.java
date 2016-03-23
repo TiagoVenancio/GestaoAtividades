@@ -86,14 +86,6 @@ public class TypeOfTask {
 	}
 
 	@Override
-	public String toString() {
-		return "TypeOfTask [requestTasks=" + requestTasks + ", id=" + id
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
-				+ ", statusObjectEnum=" + statusObjectEnum + ", description="
-				+ description + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -149,6 +141,14 @@ public class TypeOfTask {
 		if (statusObjectEnum != other.statusObjectEnum)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "TypeOfTask [requestTasks=" + requestTasks + ", id=" + id
+				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
+				+ ", statusObjectEnum=" + statusObjectEnum + ", description="
+				+ description + "]";
 	}
 
 }

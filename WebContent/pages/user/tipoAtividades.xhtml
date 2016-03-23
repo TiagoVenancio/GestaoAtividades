@@ -83,13 +83,6 @@
 					<p:inputText id="descricao" label="descricao"
 						value="#{typeOfActivityBean.description}" />
 
-					<p:outputLabel for="statusObj" value="Status:" />
-					<p:selectOneRadio id="statusObj"
-						value="#{typeOfActivityBean.statusObjectEnum}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
-
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"

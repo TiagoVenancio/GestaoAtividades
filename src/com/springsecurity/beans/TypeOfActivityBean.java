@@ -30,7 +30,6 @@ public class TypeOfActivityBean implements Serializable {
 
 	private String description;
 	private StatusObjectEnum statusObjectEnum;
-	
 
 	public TypeOfActivityBean() {
 
@@ -43,14 +42,12 @@ public class TypeOfActivityBean implements Serializable {
 
 	public String adicionar() {
 		try {
-			
-			
 
 			TypeOfActivity TypeOfActivity = new TypeOfActivity();
 			TypeOfActivity.setCreateDate(new Date(System.currentTimeMillis()));
 			TypeOfActivity.setLastUpdate(new Date(System.currentTimeMillis()));
-			TypeOfActivity.setDescription(description);	
-			TypeOfActivity.setStatusObjectEnum(statusObjectEnum);
+			TypeOfActivity.setDescription(description);
+			TypeOfActivity.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			typeOfActivityService.adicionar(TypeOfActivity);
 			listaTiposAtividades = typeOfActivityService
 					.getAllTipoDeAtividades();

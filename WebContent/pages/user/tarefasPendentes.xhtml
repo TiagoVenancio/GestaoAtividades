@@ -21,30 +21,29 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				MINHAS TAREFAS
+        				MINHAS TAREFAS PENDENTES
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="Tarefa" sortBy="#{var.id}" style="width:5%">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
 					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
 						<h:outputText value="#{var.createDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Previsão de ínicio"
-						sortBy="#{var.lastUpdate}">
-						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+					<p:column headerText="Previsão de ínicio" sortBy="#{var.startDate}">
+						<h:outputText value="#{var.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Previsão de conclusão"
 						sortBy="#{var.conclusionDate}">
 						<h:outputText value="#{var.conclusionDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
@@ -54,14 +53,6 @@
 
 					<p:column headerText="Esforço" sortBy="#{var.amountHours}">
 						<h:outputText value="#{var.amountHours}" />
-					</p:column>
-
-					<p:column headerText="Prioridade" sortBy="#{var.typeOfPriority}">
-						<h:outputText value="#{var.typeOfPriority}" />
-					</p:column>
-
-					<p:column headerText="Status" sortBy="#{var.statusObjectEnum}">
-						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
 					<p:column style="width:32px">
@@ -104,16 +95,30 @@
 								id="panelGridClassificacao">
 
 								<p:selectOneMenu id="grupo"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfGroup}"
-									converter="converterGrupoAtendimento" filter="true"
+									value="#{requestTaskBean.grupoSelecionado}"
+									converter="converterListaTipoGrupos" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Origem" />
 									<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
-										var="g" itemValue="#{g}" itemLabel="#{g.description}" />
+										var="g" itemLabel="#{g.description}" itemValue="#{g}" />
 								</p:selectOneMenu>
 
+
+								<!-- CORRIGIR TaskBean
+								
+								<p:selectOneMenu id="tarefa"
+									value="#{requestTaskBean.tipoTarefaSelecionada}"
+									converter="tipoTarefaConverter" filter="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Tipo" />
+									<f:selectItems value="#{typeOfTaskBean.listaTiposTarefas}"
+										var="tarefa" itemLabel="#{tarefa.description}"
+										itemValue="#{tarefa}" />
+								</p:selectOneMenu> -->
+
+
 								<p:selectOneMenu id="atividade"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+									value="#{requestTaskBean.atividadeSelecionada}"
 									converter="converterGrupoAtividade" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Atividade" />
@@ -122,16 +127,9 @@
 										itemValue="#{a}" itemLabel="#{a.description}" />
 								</p:selectOneMenu>
 
-								<p:selectOneMenu id="tipoTarefa"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfTask}"
-									converter="converterTipoTarefa" style="width: 340px;">
-									<f:selectItem itemLabel="Tipo" />
-									<f:selectItems value="#{typeOfTaskBean.listaTiposTarefas}"
-										var="t" itemValue="#{t}" itemLabel="#{t.description}" />
-								</p:selectOneMenu>
 
 								<p:selectOneMenu id="acao"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+									value="#{requestTaskBean.acaoSelecionada}"
 									converter="converterGrupoAcoes" style="width: 340px;">
 									<f:selectItem itemLabel="Ação" />
 									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
@@ -139,7 +137,7 @@
 								</p:selectOneMenu>
 
 								<p:selectOneMenu id="prioridade"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+									value="#{requestTaskBean.prioridadeSelecionada}"
 									converter="converterGrupoPrioridades" style="width: 340px;">
 									<f:selectItem itemLabel="Prioridade" />
 									<f:selectItems
@@ -164,7 +162,7 @@
 									size="28" required="true" />
 
 								<p:selectOneMenu id="solicitante"
-									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+									value="#{requestTaskBean.clienteSelecionado}"
 									converter="converterGrupoClientes" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Solicitante" />
@@ -173,14 +171,18 @@
 										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
 								</p:selectOneMenu>
 
-								<p:selectOneMenu id="responsavel"
-									value="#{requestTaskBean.tarefaSelecionada.user}"
-									converter="converterGrupoUsuarios" filter="true"
+								<!-- CORRIGIR userOwnerBean
+								
+									<p:selectOneMenu id="responsavel"
+									value="#{requestTaskBean.userSelecionado}"
+									converter="converterGrupoUsuarios" required="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Responsável" />
 									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
 										itemValue="#{u}" itemLabel="#{u.name}" />
 								</p:selectOneMenu>
+								
+								-->
 
 								<p:outputLabel for="dataInicio" value="Início: " />
 								<p:calendar id="dataInicio"
@@ -193,7 +195,7 @@
 
 								<p:outputLabel for="time" value="Qtda Horas" />
 								<p:inputMask id="time" value="#{requestTaskBean.qtdaHoras}"
-									mask="99:99:99" />
+									mask="99:99" />
 
 								<p:outputLabel for="observacao" value="Observações: " />
 								<p:inputTextarea id="observacao" rows="5" cols="30"
@@ -229,59 +231,12 @@
 
 		<!-- FORM EDITAR -->
 
-
-
-
-
 		<h:form id="formEditar">
 			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
 				id="Editar">
 
 				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
 
-					<h:outputText value="Id:" />
-					<h:outputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.id}"
-						style="font-weight:bold" />
-
-					<h:outputText value="Data Criação:" />
-					<h:outputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.createDate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-					</h:outputText>
-
-					<h:outputText value="Data Atualização:" />
-					<h:outputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.lastUpdate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-					</h:outputText>
-
-					<p:outputLabel for="statusObjSelecionado" value="Status:" />
-					<p:selectOneRadio id="statusObjSelecionado"
-						value="#{requestCustomerBean.requestCustomerSelecionada.statusObjectEnum}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
-
-					<h:outputText value="Mátricula:" />
-					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.userId}"
-						style="font-weight:bold" />
-
-					<h:outputText value="Nome:" />
-					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.userName}"
-						style="font-weight:bold" />
-
-					<h:outputText value="E-mail:" />
-					<p:inputText
-						value="#{requestCustomerBean.requestCustomerSelecionada.email}"
-						style="font-weight:bold" />
-
-
-					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
-						action="#{requestCustomerBean.alterar}" icon="ui-icon-circle-plus"
-						update="@formPrincipal" ajax="false" />
 
 				</h:panelGrid>
 			</p:dialog>
