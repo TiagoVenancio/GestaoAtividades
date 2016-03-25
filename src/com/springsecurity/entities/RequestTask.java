@@ -62,16 +62,8 @@ public class RequestTask implements Serializable {
 	private TypeOfActivity typeOfActivity;
 
 	@ManyToOne
-	@JoinColumn(name = "TYPE_TASK_ID")
-	private TypeOfTask typeOfTask;
-
-	@ManyToOne
 	@JoinColumn(name = "TYPE_ACTION_ID")
 	private TypeOfAction typeOfAction;
-
-	@ManyToOne
-	@JoinColumn(name = "TYPE_GROUP_ID")
-	private TypeOfGroup typeOfGroup;
 
 	@Enumerated(value = EnumType.ORDINAL)
 	@Column(name = "STATUS_TASK_ID", length = 1, nullable = false)
@@ -177,28 +169,12 @@ public class RequestTask implements Serializable {
 		this.typeOfActivity = typeOfActivity;
 	}
 
-	public TypeOfTask getTypeOfTask() {
-		return typeOfTask;
-	}
-
-	public void setTypeOfTask(TypeOfTask typeOfTask) {
-		this.typeOfTask = typeOfTask;
-	}
-
 	public TypeOfAction getTypeOfAction() {
 		return typeOfAction;
 	}
 
 	public void setTypeOfAction(TypeOfAction typeOfAction) {
 		this.typeOfAction = typeOfAction;
-	}
-
-	public TypeOfGroup getTypeOfGroup() {
-		return typeOfGroup;
-	}
-
-	public void setTypeOfGroup(TypeOfGroup typeOfGroup) {
-		this.typeOfGroup = typeOfGroup;
 	}
 
 	public RequestCustomer getRequestCustomer() {
@@ -255,11 +231,7 @@ public class RequestTask implements Serializable {
 		result = prime * result
 				+ ((typeOfActivity == null) ? 0 : typeOfActivity.hashCode());
 		result = prime * result
-				+ ((typeOfGroup == null) ? 0 : typeOfGroup.hashCode());
-		result = prime * result
 				+ ((typeOfPriority == null) ? 0 : typeOfPriority.hashCode());
-		result = prime * result
-				+ ((typeOfTask == null) ? 0 : typeOfTask.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -332,20 +304,10 @@ public class RequestTask implements Serializable {
 				return false;
 		} else if (!typeOfActivity.equals(other.typeOfActivity))
 			return false;
-		if (typeOfGroup == null) {
-			if (other.typeOfGroup != null)
-				return false;
-		} else if (!typeOfGroup.equals(other.typeOfGroup))
-			return false;
 		if (typeOfPriority == null) {
 			if (other.typeOfPriority != null)
 				return false;
 		} else if (!typeOfPriority.equals(other.typeOfPriority))
-			return false;
-		if (typeOfTask == null) {
-			if (other.typeOfTask != null)
-				return false;
-		} else if (!typeOfTask.equals(other.typeOfTask))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -362,11 +324,10 @@ public class RequestTask implements Serializable {
 				+ ", conclusionDate=" + conclusionDate + ", amountHours="
 				+ amountHours + ", statusObjectEnum=" + statusObjectEnum
 				+ ", description=" + description + ", resume=" + resume
-				+ ", typeOfActivity=" + typeOfActivity + ", typeOfTask="
-				+ typeOfTask + ", typeOfAction=" + typeOfAction
-				+ ", typeOfGroup=" + typeOfGroup + ", statusTaskEnum="
-				+ statusTaskEnum + ", requestCustomer=" + requestCustomer
-				+ ", user=" + user + ", typeOfPriority=" + typeOfPriority + "]";
+				+ ", typeOfActivity=" + typeOfActivity + ", typeOfAction="
+				+ typeOfAction + ", statusTaskEnum=" + statusTaskEnum
+				+ ", requestCustomer=" + requestCustomer + ", user=" + user
+				+ ", typeOfPriority=" + typeOfPriority + "]";
 	}
 
 }

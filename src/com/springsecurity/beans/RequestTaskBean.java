@@ -3,23 +3,18 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-
 import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.entities.RequestTask;
 import com.springsecurity.entities.TypeOfAction;
 import com.springsecurity.entities.TypeOfActivity;
-import com.springsecurity.entities.TypeOfGroup;
 import com.springsecurity.entities.TypeOfPriority;
-import com.springsecurity.entities.TypeOfTask;
 import com.springsecurity.entities.User;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
@@ -41,11 +36,9 @@ public class RequestTaskBean implements Serializable {
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
-	private TypeOfGroup grupoSelecionado;
 	private TypeOfAction acaoSelecionada;
 	private User userSelecionado;
 	private TypeOfActivity atividadeSelecionada;
-	private TypeOfTask tipoTarefaSelecionada;
 	private TypeOfPriority prioridadeSelecionada;
 	private RequestCustomer clienteSelecionado;
 
@@ -62,11 +55,9 @@ public class RequestTaskBean implements Serializable {
 		try {
 			RequestTask task = new RequestTask();
 			task.setCreateDate(new Date(System.currentTimeMillis()));
-			task.setTypeOfGroup(grupoSelecionado);
 			task.setTypeOfAction(acaoSelecionada);
 			task.setUser(userSelecionado);
 			task.setTypeOfActivity(atividadeSelecionada);
-			task.setTypeOfTask(tipoTarefaSelecionada);
 			task.setTypeOfPriority(prioridadeSelecionada);
 			task.setRequestCustomer(clienteSelecionado);
 			task.setStartDate(dataInicio);
@@ -159,14 +150,6 @@ public class RequestTaskBean implements Serializable {
 		this.resumo = resumo;
 	}
 
-	public TypeOfGroup getGrupoSelecionado() {
-		return grupoSelecionado;
-	}
-
-	public void setGrupoSelecionado(TypeOfGroup grupoSelecionado) {
-		this.grupoSelecionado = grupoSelecionado;
-	}
-
 	public TypeOfAction getAcaoSelecionada() {
 		return acaoSelecionada;
 	}
@@ -189,14 +172,6 @@ public class RequestTaskBean implements Serializable {
 
 	public void setAtividadeSelecionada(TypeOfActivity atividadeSelecionada) {
 		this.atividadeSelecionada = atividadeSelecionada;
-	}
-
-	public TypeOfTask getTipoTarefaSelecionada() {
-		return tipoTarefaSelecionada;
-	}
-
-	public void setTipoTarefaSelecionada(TypeOfTask tipoTarefaSelecionada) {
-		this.tipoTarefaSelecionada = tipoTarefaSelecionada;
 	}
 
 	public TypeOfPriority getPrioridadeSelecionada() {

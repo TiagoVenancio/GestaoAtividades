@@ -94,27 +94,6 @@
 							<h:panelGrid columns="2" cellpadding="5"
 								id="panelGridClassificacao">
 
-								<p:selectOneMenu id="grupo"
-									value="#{requestTaskBean.grupoSelecionado}"
-									converter="converterListaTipoGrupos" filter="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Origem" />
-									<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
-										var="g" itemLabel="#{g.description}" itemValue="#{g}" />
-								</p:selectOneMenu>
-
-
-								<!-- CORRIGIR TaskBean
-								
-								<p:selectOneMenu id="tarefa"
-									value="#{requestTaskBean.tipoTarefaSelecionada}"
-									converter="tipoTarefaConverter" filter="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Tipo" />
-									<f:selectItems value="#{typeOfTaskBean.listaTiposTarefas}"
-										var="tarefa" itemLabel="#{tarefa.description}"
-										itemValue="#{tarefa}" />
-								</p:selectOneMenu> -->
 
 
 								<p:selectOneMenu id="atividade"
