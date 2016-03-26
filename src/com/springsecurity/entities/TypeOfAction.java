@@ -2,17 +2,13 @@ package com.springsecurity.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,9 +19,6 @@ import com.springsecurity.enums.StatusObjectEnum;
 @Table(name = "sg_act_type_action", schema = "gestao_atividades")
 public class TypeOfAction implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
-
-	@OneToMany(mappedBy = "typeOfAction", targetEntity = RequestTask.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<RequestTask> requestTasks;
 
 	@Id
 	@GeneratedValue
@@ -98,8 +91,6 @@ public class TypeOfAction implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
-		result = prime * result
-				+ ((requestTasks == null) ? 0 : requestTasks.hashCode());
 		result = prime
 				* result
 				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
@@ -135,11 +126,6 @@ public class TypeOfAction implements Serializable {
 				return false;
 		} else if (!lastUpdate.equals(other.lastUpdate))
 			return false;
-		if (requestTasks == null) {
-			if (other.requestTasks != null)
-				return false;
-		} else if (!requestTasks.equals(other.requestTasks))
-			return false;
 		if (statusObjectEnum != other.statusObjectEnum)
 			return false;
 		return true;
@@ -147,10 +133,9 @@ public class TypeOfAction implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TypeOfAction [requestTasks=" + requestTasks + ", id=" + id
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
-				+ ", statusObjectEnum=" + statusObjectEnum + ", description="
-				+ description + "]";
+		return "TypeOfAction [id=" + id + ", createDate=" + createDate
+				+ ", lastUpdate=" + lastUpdate + ", statusObjectEnum="
+				+ statusObjectEnum + ", description=" + description + "]";
 	}
 
 }

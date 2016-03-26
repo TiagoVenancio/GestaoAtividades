@@ -21,6 +21,7 @@ import com.springsecurity.enums.StatusTaskEnum;
 @Entity
 @Table(name = "sg_act_request_task", schema = "gestao_atividades")
 public class RequestTask implements Serializable {
+
 	private static final long serialVersionUID = -7590317347612436291L;
 
 	@Id
@@ -74,8 +75,8 @@ public class RequestTask implements Serializable {
 	private RequestCustomer requestCustomer;
 
 	@ManyToOne
-	@JoinColumn(name = "USER_ID")
-	private User user;
+	@JoinColumn(name = "USER_OWNER_ID")
+	private UserOwnerTask userOwnerTask;
 
 	@ManyToOne
 	@JoinColumn(name = "PRIORITY_ID")
@@ -185,20 +186,20 @@ public class RequestTask implements Serializable {
 		this.requestCustomer = requestCustomer;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public TypeOfPriority getTypeOfPriority() {
 		return typeOfPriority;
 	}
 
 	public void setTypeOfPriority(TypeOfPriority typeOfPriority) {
 		this.typeOfPriority = typeOfPriority;
+	}
+
+	public UserOwnerTask getUserOwnerTask() {
+		return userOwnerTask;
+	}
+
+	public void setUserOwnerTask(UserOwnerTask userOwnerTask) {
+		this.userOwnerTask = userOwnerTask;
 	}
 
 	@Override
@@ -232,7 +233,8 @@ public class RequestTask implements Serializable {
 				+ ((typeOfActivity == null) ? 0 : typeOfActivity.hashCode());
 		result = prime * result
 				+ ((typeOfPriority == null) ? 0 : typeOfPriority.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result
+				+ ((userOwnerTask == null) ? 0 : userOwnerTask.hashCode());
 		return result;
 	}
 
@@ -309,10 +311,10 @@ public class RequestTask implements Serializable {
 				return false;
 		} else if (!typeOfPriority.equals(other.typeOfPriority))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (userOwnerTask == null) {
+			if (other.userOwnerTask != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!userOwnerTask.equals(other.userOwnerTask))
 			return false;
 		return true;
 	}
@@ -326,8 +328,8 @@ public class RequestTask implements Serializable {
 				+ ", description=" + description + ", resume=" + resume
 				+ ", typeOfActivity=" + typeOfActivity + ", typeOfAction="
 				+ typeOfAction + ", statusTaskEnum=" + statusTaskEnum
-				+ ", requestCustomer=" + requestCustomer + ", user=" + user
-				+ ", typeOfPriority=" + typeOfPriority + "]";
+				+ ", requestCustomer=" + requestCustomer + ", userOwnerTask="
+				+ userOwnerTask + ", typeOfPriority=" + typeOfPriority + "]";
 	}
 
 }

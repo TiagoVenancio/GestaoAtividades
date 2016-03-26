@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
+
 import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.entities.RequestTask;
 import com.springsecurity.entities.TypeOfAction;
 import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfPriority;
-import com.springsecurity.entities.User;
+import com.springsecurity.entities.UserOwnerTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
 import com.springsecurity.service.RequestTaskService;
@@ -37,7 +38,7 @@ public class RequestTaskBean implements Serializable {
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
 	private TypeOfAction acaoSelecionada;
-	private User userSelecionado;
+	private UserOwnerTask userSelecionado;
 	private TypeOfActivity atividadeSelecionada;
 	private TypeOfPriority prioridadeSelecionada;
 	private RequestCustomer clienteSelecionado;
@@ -56,7 +57,7 @@ public class RequestTaskBean implements Serializable {
 			RequestTask task = new RequestTask();
 			task.setCreateDate(new Date(System.currentTimeMillis()));
 			task.setTypeOfAction(acaoSelecionada);
-			task.setUser(userSelecionado);
+			task.setUserOwnerTask(userSelecionado);
 			task.setTypeOfActivity(atividadeSelecionada);
 			task.setTypeOfPriority(prioridadeSelecionada);
 			task.setRequestCustomer(clienteSelecionado);
@@ -158,14 +159,6 @@ public class RequestTaskBean implements Serializable {
 		this.acaoSelecionada = acaoSelecionada;
 	}
 
-	public User getUserSelecionado() {
-		return userSelecionado;
-	}
-
-	public void setUserSelecionado(User userSelecionado) {
-		this.userSelecionado = userSelecionado;
-	}
-
 	public TypeOfActivity getAtividadeSelecionada() {
 		return atividadeSelecionada;
 	}
@@ -188,6 +181,14 @@ public class RequestTaskBean implements Serializable {
 
 	public void setClienteSelecionado(RequestCustomer clienteSelecionado) {
 		this.clienteSelecionado = clienteSelecionado;
+	}
+
+	public UserOwnerTask getUserSelecionado() {
+		return userSelecionado;
+	}
+
+	public void setUserSelecionado(UserOwnerTask userSelecionado) {
+		this.userSelecionado = userSelecionado;
 	}
 
 }

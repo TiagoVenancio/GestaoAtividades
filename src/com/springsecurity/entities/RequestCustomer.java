@@ -2,17 +2,13 @@ package com.springsecurity.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,9 +19,6 @@ import com.springsecurity.enums.StatusObjectEnum;
 @Table(name = "sg_act_request_customer", schema = "gestao_atividades")
 public class RequestCustomer implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
-
-	@OneToMany(mappedBy = "requestCustomer", targetEntity = RequestTask.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<RequestTask> requestTasks;
 
 	@Id
 	@GeneratedValue
@@ -58,14 +51,6 @@ public class RequestCustomer implements Serializable {
 
 	public Long getId() {
 		return id;
-	}
-
-	public List<RequestTask> getRequestTasks() {
-		return requestTasks;
-	}
-
-	public void setRequestTasks(List<RequestTask> requestTasks) {
-		this.requestTasks = requestTasks;
 	}
 
 	public Date getCreateDate() {
@@ -144,8 +129,6 @@ public class RequestCustomer implements Serializable {
 				+ ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
 		result = prime * result
 				+ ((lastUserChange == null) ? 0 : lastUserChange.hashCode());
-		result = prime * result
-				+ ((requestTasks == null) ? 0 : requestTasks.hashCode());
 		result = prime
 				* result
 				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
@@ -189,11 +172,6 @@ public class RequestCustomer implements Serializable {
 				return false;
 		} else if (!lastUserChange.equals(other.lastUserChange))
 			return false;
-		if (requestTasks == null) {
-			if (other.requestTasks != null)
-				return false;
-		} else if (!requestTasks.equals(other.requestTasks))
-			return false;
 		if (statusObjectEnum != other.statusObjectEnum)
 			return false;
 		if (userId == null) {
@@ -211,11 +189,11 @@ public class RequestCustomer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "RequestCustomer [requestTasks=" + requestTasks + ", id=" + id
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
-				+ ", userId=" + userId + ", userName=" + userName + ", email="
-				+ email + ", lastUserChange=" + lastUserChange
-				+ ", statusObjectEnum=" + statusObjectEnum + "]";
+		return "RequestCustomer [id=" + id + ", createDate=" + createDate
+				+ ", lastUpdate=" + lastUpdate + ", userId=" + userId
+				+ ", userName=" + userName + ", email=" + email
+				+ ", lastUserChange=" + lastUserChange + ", statusObjectEnum="
+				+ statusObjectEnum + "]";
 	}
 
 }

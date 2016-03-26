@@ -16,6 +16,7 @@
 		<class>com.springsecurity.entities.TypeOfGroup</class>
 		<class>com.springsecurity.entities.TypeOfPriority</class>
 		<class>com.springsecurity.entities.TypeOfTask</class>
+		<class>com.springsecurity.entities.UserOwnerTask</class>
 
 		<properties>
 	

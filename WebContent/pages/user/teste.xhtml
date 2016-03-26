@@ -80,133 +80,76 @@
 
 		<h:form id="formNovo">
 
-			<p:dialog header="Login" widgetVar="dlgNovo" resizable="false"
-				responsive="true">
+			<p:dialog header="Criar Tarefa" widgetVar="dlgNovo" resizable="false">
 
-				<div class="row">
-					<div class="col s2">
+				<h:panelGrid columns="2" cellpadding="1" id="panelNovoTarefa">
 
-						<!-- PAINEL CLASSIFICACAO -->
+					<p:inputText id="titulaTarefa" style="width: 470px;" />
 
+				</h:panelGrid>
 
+				<h:panelGrid columns="2" cellpadding="4" id="panelNovoClassificacao">
 
-						<h:panelGrid columns="2" id="panelGridClassificacao">
+					<p:outputLabel for="responsavel" value="Responsável: " />
+					<p:selectOneMenu id="responsavel"
+						value="#{requestTaskBean.userSelecionado}"
+						converter="converterGrupoUsuarios" required="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Responsável" />
+						<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+							itemValue="#{u}" itemLabel="#{u.name}" />
+					</p:selectOneMenu>
 
-							<p:panel id="panelClassificacao" header="Classificação">
-								<h:panelGrid columns="1" id="panelGridClassificacaoUm"
-									cellpadding="7">
+					<p:outputLabel for="atividade" value="Tema: " />
+					<p:selectOneMenu id="atividade"
+						value="#{requestTaskBean.atividadeSelecionada}"
+						converter="converterGrupoAtividade" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Atividade" />
+						<f:selectItems value="#{typeOfActivityBean.listaTiposAtividades}"
+							var="a" itemValue="#{a}" itemLabel="#{a.description}" />
+					</p:selectOneMenu>
 
-
-									<p:selectOneMenu id="grupo"
-										value="#{requestTaskBean.grupoSelecionado}"
-										converter="converterListaTipoGrupos" filter="true"
-										filterMatchMode="startsWith" style="width: 340px;">
-										<f:selectItem itemLabel="Origem" />
-										<f:selectItems value="#{typeOfGroupBean.listaTiposGrupos}"
-											var="g" itemLabel="#{g.description}" itemValue="#{g}" />
-									</p:selectOneMenu>
-
-									<p:selectOneMenu id="prioridade"
-										value="#{requestTaskBean.prioridadeSelecionada}"
-										converter="converterGrupoPrioridades" style="width: 340px;">
-										<f:selectItem itemLabel="Prioridade" />
-										<f:selectItems
-											value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
-											itemValue="#{p}" itemLabel="#{p.description}" />
-									</p:selectOneMenu>
-
-
-									<p:selectOneMenu id="atividade"
-										value="#{requestTaskBean.atividadeSelecionada}"
-										converter="converterGrupoAtividade" filter="true"
-										filterMatchMode="startsWith" style="width: 340px;">
-										<f:selectItem itemLabel="Atividade" />
-										<f:selectItems
-											value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
-											itemValue="#{a}" itemLabel="#{a.description}" />
-									</p:selectOneMenu>
+					<p:outputLabel for="solicitante" value="Solicitante: " />
+					<p:selectOneMenu id="solicitante"
+						value="#{requestTaskBean.clienteSelecionado}"
+						converter="converterGrupoClientes" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Solicitante" />
+						<f:selectItems
+							value="#{requestCustomerBean.listaRequestCustomerService}"
+							var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+					</p:selectOneMenu>
 
 
-									<p:selectOneMenu id="acao"
-										value="#{requestTaskBean.acaoSelecionada}"
-										converter="converterGrupoAcoes" style="width: 340px;">
-										<f:selectItem itemLabel="Ação" />
-										<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
-											var="c" itemValue="#{c}" itemLabel="#{c.description}" />
-									</p:selectOneMenu>
-								</h:panelGrid>
-							</p:panel>
-							<p:panel id="panelObservacao" header="Observação">
-								<h:panelGrid columns="1" id="panelGridClassificacaoDois">
+					<p:outputLabel for="prioridade" value="Prioridade: " />
+					<p:selectOneMenu id="prioridade"
+						value="#{requestTaskBean.prioridadeSelecionada}"
+						converter="converterGrupoPrioridades" required="true"
+						style="width: 340px;">
+						<f:selectItem itemLabel="Prioridade" />
+						<f:selectItems value="#{typeOfPriorityBean.listaTiposPrioridades}"
+							var="p" itemValue="#{p}" itemLabel="#{p.description}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+
+				<h:panelGrid columns="1" cellpadding="1" id="panelNovoObservacao">
+
+					<p:inputTextarea rows="8" cols="55" id="textAreaObservacao" />
+
+				</h:panelGrid>
+
+				<!-- BOTOES -->
+
+				<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
+
+					<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+						action="#{requestTaskBean.adicionar}" icon="ui-icon-circle-plus"
+						update="@formPrincipal" ajax="false" />
 
 
-									<p:inputTextarea id="observacao" rows="10" cols="50"
-										maxlength="1000" autoResize="false"
-										value="#{requestTaskBean.observacao}" />
-
-
-								</h:panelGrid>
-							</p:panel>
-						</h:panelGrid>
-
-
-					</div>
-
-					<div class="col s2">
-
-						<!-- PAINEL DESCRICAO -->
-
-						<p:panel id="panelDescricao" header="Descrição">
-
-							<h:panelGrid columns="4" id="panelGridDescricao">
-
-								<h:outputLabel for="name" value="Nome da tarefa:"
-									style="font-weight:bold" />
-								<p:inputText id="name" value="#{requestTaskBean.resumo}"
-									size="28" required="true" label="Teste" />
-
-								<p:outputLabel for="dataInicio" value="Início: " />
-								<p:calendar id="dataInicio"
-									value="#{requestTaskBean.dataInicio}" pattern="dd-MM-yyyy"
-									mask="true" />
-
-								<p:outputLabel for="solicitante" value="Solicitante:" />
-								<p:selectOneMenu id="solicitante"
-									value="#{requestTaskBean.clienteSelecionado}"
-									converter="converterGrupoClientes" filter="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Selecione" />
-									<f:selectItems
-										value="#{requestCustomerBean.listaRequestCustomerService}"
-										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
-								</p:selectOneMenu>
-
-								<p:outputLabel for="dataFim" value="Conclusão: " />
-								<p:calendar id="dataFim" value="#{requestTaskBean.dataFinal}"
-									pattern="dd-MM-yyyy" mask="true" />
-
-
-								<p:outputLabel for="responsavel" value="Responsável:" />
-								<p:selectOneMenu id="responsavel"
-									value="#{requestTaskBean.userSelecionado}"
-									converter="converterGrupoUsuarios" required="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Responsável" />
-									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-										itemValue="#{u}" itemLabel="#{u.name}" />
-								</p:selectOneMenu>
-
-
-								<p:outputLabel for="time" value="Qtda Horas" />
-								<p:inputMask id="time" value="#{requestTaskBean.qtdaHoras}"
-									mask="99:99" />
-
-							</h:panelGrid>
-
-						</p:panel>
-					</div>
-					<div class="col s1"></div>
-				</div>
+				</h:panelGrid>
 
 
 			</p:dialog>

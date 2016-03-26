@@ -82,130 +82,79 @@
 			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
 				resizable="false" responsive="true">
 
-				<h:panelGrid columns="1" cellpadding="3" id="panelGridNovo">
+				<h:panelGrid columns="2" cellpadding="1" id="panelNovoTarefa">
 
-					<div align="center">
+					<p:inputText id="titulaTarefa" value="#{requestTaskBean.resumo}"
+						required="true" style="width: 470px;" />
 
-						<!-- PAINEL CLASSIFICACAO -->
+				</h:panelGrid>
 
-						<p:panel id="panelClassificacao" header="Classificação"
-							style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="4" id="panelNovoClassificacao">
 
-							<h:panelGrid columns="2" cellpadding="5"
-								id="panelGridClassificacao">
+					<p:outputLabel for="responsavel" value="Responsável: " />
+					<p:selectOneMenu id="responsavel"
+						value="#{requestTaskBean.userSelecionado}"
+						converter="converterGrupoUsuarios" required="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Responsável" />
+						<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+							itemValue="#{u}" itemLabel="#{u.name}" />
+					</p:selectOneMenu>
 
+					<p:outputLabel for="atividade" value="Tema: " />
+					<p:selectOneMenu id="atividade"
+						value="#{requestTaskBean.atividadeSelecionada}"
+						converter="converterGrupoAtividade" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Atividade" />
+						<f:selectItems value="#{typeOfActivityBean.listaTiposAtividades}"
+							var="a" itemValue="#{a}" itemLabel="#{a.description}" />
+					</p:selectOneMenu>
 
-
-								<p:selectOneMenu id="atividade"
-									value="#{requestTaskBean.atividadeSelecionada}"
-									converter="converterGrupoAtividade" filter="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Atividade" />
-									<f:selectItems
-										value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
-										itemValue="#{a}" itemLabel="#{a.description}" />
-								</p:selectOneMenu>
-
-
-								<p:selectOneMenu id="acao"
-									value="#{requestTaskBean.acaoSelecionada}"
-									converter="converterGrupoAcoes" style="width: 340px;">
-									<f:selectItem itemLabel="Ação" />
-									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
-										var="c" itemValue="#{c}" itemLabel="#{c.description}" />
-								</p:selectOneMenu>
-
-								<p:selectOneMenu id="prioridade"
-									value="#{requestTaskBean.prioridadeSelecionada}"
-									converter="converterGrupoPrioridades" style="width: 340px;">
-									<f:selectItem itemLabel="Prioridade" />
-									<f:selectItems
-										value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
-										itemValue="#{p}" itemLabel="#{p.description}" />
-								</p:selectOneMenu>
-
-							</h:panelGrid>
-						</p:panel>
+					<p:outputLabel for="solicitante" value="Solicitante: " />
+					<p:selectOneMenu id="solicitante"
+						value="#{requestTaskBean.clienteSelecionado}"
+						converter="converterGrupoClientes" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 340px;">
+						<f:selectItem itemLabel="Solicitante" />
+						<f:selectItems
+							value="#{requestCustomerBean.listaRequestCustomerService}"
+							var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+					</p:selectOneMenu>
 
 
-						<!-- PAINEL DESCRICAO -->
+					<p:outputLabel for="prioridade" value="Prioridade: " />
+					<p:selectOneMenu id="prioridade"
+						value="#{requestTaskBean.prioridadeSelecionada}"
+						converter="converterGrupoPrioridades" required="true"
+						style="width: 340px;">
+						<f:selectItem itemLabel="Prioridade" />
+						<f:selectItems value="#{typeOfPriorityBean.listaTiposPrioridades}"
+							var="p" itemValue="#{p}" itemLabel="#{p.description}" />
+					</p:selectOneMenu>
 
-						<p:panel id="panelDescricao" header="Descrição"
-							style="margin-bottom:20px">
+				</h:panelGrid>
 
-							<h:panelGrid columns="2" cellpadding="7" id="panelGridDescricao">
+				<h:panelGrid columns="1" cellpadding="1" id="panelNovoObservacao">
 
-								<h:outputLabel for="name" value="Nome da tarefa:"
-									style="font-weight:bold" />
-								<p:inputText id="name" value="#{requestTaskBean.resumo}"
-									size="28" required="true" />
+					<p:inputTextarea rows="8" cols="55" id="textAreaObservacao"
+						maxlength="1000" autoResize="false"
+						value="#{requestTaskBean.observacao}" />
 
-								<p:selectOneMenu id="solicitante"
-									value="#{requestTaskBean.clienteSelecionado}"
-									converter="converterGrupoClientes" filter="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Solicitante" />
-									<f:selectItems
-										value="#{requestCustomerBean.listaRequestCustomerService}"
-										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
-								</p:selectOneMenu>
+				</h:panelGrid>
 
-								<!-- CORRIGIR userOwnerBean
-								
-									<p:selectOneMenu id="responsavel"
-									value="#{requestTaskBean.userSelecionado}"
-									converter="converterGrupoUsuarios" required="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Responsável" />
-									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-										itemValue="#{u}" itemLabel="#{u.name}" />
-								</p:selectOneMenu>
-								
-								-->
+				<!-- BOTOES -->
 
-								<p:outputLabel for="dataInicio" value="Início: " />
-								<p:calendar id="dataInicio"
-									value="#{requestTaskBean.dataInicio}" pattern="dd-MM-yyyy"
-									mask="true" />
+				<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
 
-								<p:outputLabel for="dataFim" value="Conclusão: " />
-								<p:calendar id="dataFim" value="#{requestTaskBean.dataFinal}"
-									pattern="dd-MM-yyyy" mask="true" />
-
-								<p:outputLabel for="time" value="Qtda Horas" />
-								<p:inputMask id="time" value="#{requestTaskBean.qtdaHoras}"
-									mask="99:99" />
-
-								<p:outputLabel for="observacao" value="Observações: " />
-								<p:inputTextarea id="observacao" rows="5" cols="30"
-									maxlength="1000" autoResize="false"
-									value="#{requestTaskBean.observacao}" />
-
-							</h:panelGrid>
-
-						</p:panel>
-
-						<!-- BOTOES -->
-
-						<h:panelGrid columns="1" cellpadding="1" id="panelGridBotoes">
-
-							<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-								action="#{requestTaskBean.adicionar}" icon="ui-icon-circle-plus"
-								update="@formPrincipal" ajax="false" />
-
-
-						</h:panelGrid>
-
-
-					</div>
+					<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+						action="#{requestTaskBean.adicionar}" icon="ui-icon-circle-plus"
+						update="@formPrincipal" ajax="false" />
 
 				</h:panelGrid>
 
 			</p:dialog>
 		</h:form>
-
-
-
 
 
 		<!-- FORM EDITAR -->

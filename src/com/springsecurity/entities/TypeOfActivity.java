@@ -2,17 +2,13 @@ package com.springsecurity.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,9 +19,6 @@ import com.springsecurity.enums.StatusObjectEnum;
 @Table(name = "sg_act_type_activity", schema = "gestao_atividades")
 public class TypeOfActivity implements Serializable {
 	private static final long serialVersionUID = -7590317347612436291L;
-
-	@OneToMany(mappedBy = "typeOfActivity", targetEntity = RequestTask.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<RequestTask> requestTasks;
 
 	@Id
 	@GeneratedValue
@@ -88,14 +81,6 @@ public class TypeOfActivity implements Serializable {
 		this.description = description;
 	}
 
-	public List<RequestTask> getRequestTasks() {
-		return requestTasks;
-	}
-
-	public void setRequestTasks(List<RequestTask> requestTasks) {
-		this.requestTasks = requestTasks;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -107,8 +92,6 @@ public class TypeOfActivity implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
 				+ ((lastUpdate == null) ? 0 : lastUpdate.hashCode());
-		result = prime * result
-				+ ((requestTasks == null) ? 0 : requestTasks.hashCode());
 		result = prime
 				* result
 				+ ((statusObjectEnum == null) ? 0 : statusObjectEnum.hashCode());
@@ -144,11 +127,6 @@ public class TypeOfActivity implements Serializable {
 				return false;
 		} else if (!lastUpdate.equals(other.lastUpdate))
 			return false;
-		if (requestTasks == null) {
-			if (other.requestTasks != null)
-				return false;
-		} else if (!requestTasks.equals(other.requestTasks))
-			return false;
 		if (statusObjectEnum != other.statusObjectEnum)
 			return false;
 		return true;
@@ -156,10 +134,9 @@ public class TypeOfActivity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TypeOfActivity [requestTasks=" + requestTasks + ", id=" + id
-				+ ", createDate=" + createDate + ", lastUpdate=" + lastUpdate
-				+ ", statusObjectEnum=" + statusObjectEnum + ", description="
-				+ description + "]";
+		return "TypeOfActivity [id=" + id + ", createDate=" + createDate
+				+ ", lastUpdate=" + lastUpdate + ", statusObjectEnum="
+				+ statusObjectEnum + ", description=" + description + "]";
 	}
 
 }
