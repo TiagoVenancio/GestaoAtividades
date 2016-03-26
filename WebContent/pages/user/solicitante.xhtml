@@ -22,7 +22,7 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				Manutenção Solicitante
+        				MANUTENÇÃO DE SOLICITANTES
     				</f:facet>
 
 					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
@@ -42,12 +42,12 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Criado por" filterBy="#{var.lastUserChange}"
+					<p:column headerText="Criador" filterBy="#{var.lastUserChange}"
 						filterMatchMode="contains" sortBy="#{var.lastUserChange}">
 						<h:outputText value="#{var.lastUserChange}" />
 					</p:column>
 
-					<p:column headerText="Mátricula" filterBy="#{var.userId}"
+					<p:column headerText="Matrícula" filterBy="#{var.userId}"
 						filterMatchMode="contains" sortBy="#{var.userId}">
 						<h:outputText value="#{var.userId}" />
 					</p:column>
@@ -90,12 +90,12 @@
 
 		<h:form id="formNovo">
 			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
-				hideEffect="bounce" height="350">
+				hideEffect="bounce" height="350" resizable="false">
 
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="matriculaSolicitante" value="Matricula:" />
+					<h:outputLabel for="matriculaSolicitante" value="Matrícula:" />
 					<p:inputText id="matriculaSolicitante" label="Matricula"
 						value="#{requestCustomerBean.matriculaSolicitante}" />
 
@@ -107,12 +107,6 @@
 					<p:inputText id="emailSolicitante" label="E-mail"
 						value="#{requestCustomerBean.emailSolicitante}" />
 
-					<p:outputLabel for="statusObj" value="Status:" />
-					<p:selectOneRadio id="statusObj"
-						value="#{requestCustomerBean.statusObjectEnum}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
 
 				</h:panelGrid>
 
@@ -128,7 +122,7 @@
 
 		<h:form id="formEditar">
 			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
-				id="Editar">
+				id="Editar" resizable="false">
 
 				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
 

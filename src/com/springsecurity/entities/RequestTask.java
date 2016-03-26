@@ -38,14 +38,14 @@ public class RequestTask implements Serializable {
 	private Date closeDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "START_DATE", nullable = false)
+	@Column(name = "START_DATE")
 	private Date startDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CONCLUSION_DATE")
 	private Date conclusionDate;
 
-	@Column(name = "AMOUNT_HOURS", length = 10, nullable = false)
+	@Column(name = "AMOUNT_HOURS")
 	private String amountHours;
 
 	@Enumerated(value = EnumType.ORDINAL)

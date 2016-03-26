@@ -22,7 +22,7 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				Manutenção Tipos de Ações
+        				MANUTENÇÃO DE AÇÕES
     				</f:facet>
 
 					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
@@ -31,14 +31,14 @@
 
 					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
 						<h:outputText value="#{var.createDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
 						sortBy="#{var.lastUpdate}">
 						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
@@ -74,7 +74,7 @@
 
 		<h:form id="formNovo">
 			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
-				hideEffect="bounce" height="350">
+				hideEffect="bounce" height="350" resizable="false">
 
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
@@ -83,12 +83,6 @@
 					<p:inputText id="descricao" label="descricao"
 						value="#{typeOfActionBean.description}" />
 
-					<p:outputLabel for="statusObj" value="Status:" />
-					<p:selectOneRadio id="statusObj"
-						value="#{typeOfActionBean.statusObjectEnum}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
 
 				</h:panelGrid>
 
@@ -104,24 +98,25 @@
 
 		<h:form id="formEditar">
 			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
-				id="Editar">
+				id="Editar" resizable="false">
 
 				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
 
 					<h:outputText value="Id:" />
-					<h:outputText value="#{typeOfActionBean.typeOfActionkSelecionada.id}"
+					<h:outputText
+						value="#{typeOfActionBean.typeOfActionkSelecionada.id}"
 						style="font-weight:bold" />
 
 					<h:outputText value="Data Criação:" />
 					<h:outputText
 						value="#{typeOfActionBean.typeOfActionkSelecionada.createDate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<h:outputText value="Data Atualização:" />
 					<h:outputText
 						value="#{typeOfActionBean.typeOfActionkSelecionada.lastUpdate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<p:outputLabel for="statusObjSelecionado" value="Status:" />

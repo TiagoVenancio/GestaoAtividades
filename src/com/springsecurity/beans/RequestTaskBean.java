@@ -61,9 +61,6 @@ public class RequestTaskBean implements Serializable {
 			task.setTypeOfActivity(atividadeSelecionada);
 			task.setTypeOfPriority(prioridadeSelecionada);
 			task.setRequestCustomer(clienteSelecionado);
-			task.setStartDate(dataInicio);
-			task.setConclusionDate(dataFinal);
-			task.setAmountHours(qtdaHoras);
 			task.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			task.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
 			task.setDescription(observacao);

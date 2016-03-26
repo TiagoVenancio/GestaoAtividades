@@ -22,7 +22,7 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				Manutenção Tipos de Prioridade
+        				MANUTENÇÃO DE PRIORIDADES
     				</f:facet>
 
 					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
@@ -31,14 +31,14 @@
 
 					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
 						<h:outputText value="#{var.createDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
 						sortBy="#{var.lastUpdate}">
 						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
@@ -83,13 +83,6 @@
 					<p:inputText id="descricao" label="descricao"
 						value="#{typeOfPriorityBean.description}" />
 
-					<p:outputLabel for="statusObj" value="Status:" />
-					<p:selectOneRadio id="statusObj"
-						value="#{typeOfPriorityBean.statusObjectEnum}">
-						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
-						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
-					</p:selectOneRadio>
-
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
@@ -116,13 +109,13 @@
 					<h:outputText value="Data Criação:" />
 					<h:outputText
 						value="#{typeOfPriorityBean.typeOfPrioritySelecionada.createDate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<h:outputText value="Data Atualização:" />
 					<h:outputText
 						value="#{typeOfPriorityBean.typeOfPrioritySelecionada.lastUpdate}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<p:outputLabel for="statusObjSelecionado" value="Status:" />

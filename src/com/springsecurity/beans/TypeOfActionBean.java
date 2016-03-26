@@ -47,7 +47,7 @@ public class TypeOfActionBean implements Serializable {
 			TypeOfAction.setCreateDate(new Date(System.currentTimeMillis()));
 			TypeOfAction.setLastUpdate(new Date(System.currentTimeMillis()));
 			TypeOfAction.setDescription(description);
-			TypeOfAction.setStatusObjectEnum(statusObjectEnum);
+			TypeOfAction.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			typeOfActionService.adicionar(TypeOfAction);
 			listaTiposAcoes = typeOfActionService.getAllTipoDeAcoes();
 			FacesContext.getCurrentInstance().addMessage(

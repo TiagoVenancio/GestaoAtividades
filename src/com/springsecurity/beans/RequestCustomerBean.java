@@ -54,7 +54,7 @@ public class RequestCustomerBean implements Serializable {
 			RequestCustomer.setUserName(nameSolicitante);
 			RequestCustomer.setEmail(emailSolicitante);
 			RequestCustomer.setLastUserChange(USERNAMEL_LOGADO);
-			RequestCustomer.setStatusObjectEnum(statusObjectEnum);
+			RequestCustomer.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			requestCustomerService.adicionar(RequestCustomer);
 			listaRequestCustomerService = requestCustomerService.getAllRequestCustomers();
 			FacesContext.getCurrentInstance().addMessage(

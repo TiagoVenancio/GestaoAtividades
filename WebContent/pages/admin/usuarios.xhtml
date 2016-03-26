@@ -1,17 +1,183 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
-		<h:form>
 
-			<p:panel id="contato"
-				header="Entre em contato com o administrador do Sistema" />
+		<h:form id="formPrincipal">
+
+			<!-- MENSAGENS- INICIO -->
+
+			<p:growl id="msgs" showDetail="true" />
+
+			<!-- FORM PRINCIPAL -->
+
+			<h:panelGrid id="gridPrincipal">
+				<p:dataTable id="dataTable" var="var"
+					value="#{userOwnerBean.listaUsuarios}" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				MANUTENÇÃO DE USUÁRIOS
+    				</f:facet>
+
+					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+						<h:outputText value="#{var.id}" />
+					</p:column>
+
+					<p:column headerText="Data de Criação" sortBy="#{var.dateCreate}">
+						<h:outputText value="#{var.dateCreate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Última Atualização"
+						sortBy="#{var.lastUpdate}">
+						<h:outputText value="#{var.lastUpdate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Nome" filterBy="#{var.name}"
+						filterMatchMode="contains" sortBy="#{var.name}">
+						<h:outputText value="#{var.name}" />
+					</p:column>
+
+					<p:column headerText="Matrícula" filterBy="#{var.username}"
+						filterMatchMode="contains" sortBy="#{var.username}">
+						<h:outputText value="#{var.username}" />
+					</p:column>
+
+					<p:column headerText="E-mail" filterBy="#{var.email}"
+						filterMatchMode="contains" sortBy="#{var.email}">
+						<h:outputText value="#{var.email}" />
+					</p:column>
+
+					<p:column headerText="Grupo" filterBy="#{var.businessGroup}"
+						filterMatchMode="contains" sortBy="#{var.businessGroup}">
+						<h:outputText value="#{var.businessGroup}" />
+					</p:column>
 
 
+					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						<h:outputText value="#{var.statusObjectEnum}" />
+					</p:column>
 
+					<p:column style="width:32px">
+						<p:commandButton update=":formEditar:panelEditar"
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							<f:setPropertyActionListener value="#{var}"
+								target="#{userOwnerBean.userOwnerTaskSelecionado}" />
+						</p:commandButton>
+					</p:column>
+
+					<f:facet name="footer">
+						<p:commandButton value="Novo" onclick="PF('dlgNovo').show();"
+							type="button" icon="ui-icon-circle-plus" />
+					</f:facet>
+
+				</p:dataTable>
+			</h:panelGrid>
 		</h:form>
+
+
+		<!-- FORM NOVO -->
+
+		<h:form id="formNovo">
+			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
+				hideEffect="bounce" height="350" resizable="false">
+
+
+				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
+
+					<h:outputLabel for="registro" value="Matrícula:" />
+					<p:inputText id="registro" label="descricao"
+						value="#{userOwnerBean.registroUser}" />
+
+					<h:outputLabel for="userName" value="Nome:" />
+					<p:inputText id="userName" label="Nome"
+						value="#{userOwnerBean.nameUser}" />
+
+					<h:outputLabel for="emailUser" value="Email:" />
+					<p:inputText id="emailUser" label="Email"
+						value="#{userOwnerBean.emailUser}" />
+
+					<h:outputLabel for="groupUser" value="Grupo:" />
+					<p:inputText id="groupUser" label="Grupo"
+						value="#{userOwnerBean.groupUser}" />
+
+				</h:panelGrid>
+
+				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
+					action="#{userOwnerBean.adicionar}" icon="ui-icon-circle-plus"
+					update="@formPrincipal" ajax="false" />
+
+			</p:dialog>
+		</h:form>
+
+
+		<!-- FORM EDITAR -->
+
+		<h:form id="formEditar">
+			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
+				id="Editar" resizable="false">
+
+				<h:panelGrid columns="2" id="panelEditar">
+
+					<h:outputText value="Id:" />
+					<h:outputText value="#{userOwnerBean.userOwnerTaskSelecionado.id}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Data Criação:" />
+					<h:outputText
+						value="#{userOwnerBean.userOwnerTaskSelecionado.dateCreate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+
+					<h:outputText value="Data Atualização:" />
+					<h:outputText
+						value="#{userOwnerBean.userOwnerTaskSelecionado.lastUpdate}">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:outputText>
+
+					<h:outputText value="Matrícula:" />
+					<p:inputText
+						value="#{userOwnerBean.userOwnerTaskSelecionado.username}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Nome:" />
+					<p:inputText value="#{userOwnerBean.userOwnerTaskSelecionado.name}"
+						style="font-weight:bold" />
+
+					<h:outputText value="E-Mail:" />
+					<p:inputText
+						value="#{userOwnerBean.userOwnerTaskSelecionado.email}"
+						style="font-weight:bold" />
+
+					<h:outputText value="Grupo:" />
+					<p:inputText
+						value="#{userOwnerBean.userOwnerTaskSelecionado.businessGroup}"
+						style="font-weight:bold" />
+
+					<p:outputLabel for="statusObjSelecionado" value="Status:" />
+					<p:selectOneRadio id="statusObjSelecionado"
+						value="#{userOwnerBean.userOwnerTaskSelecionado.statusObjectEnum}">
+						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
+						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
+					</p:selectOneRadio>
+
+					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
+						action="#{userOwnerBean.alterar}" icon="ui-icon-circle-plus"
+						update="@formPrincipal" ajax="false" />
+
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+
 	</ui:define>
 </ui:decorate>
 </html>
