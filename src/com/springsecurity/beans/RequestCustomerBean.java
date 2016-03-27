@@ -18,7 +18,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.RequestCustomerService;
 
 @Controller
-@Scope(value = "session")
+@Scope("session")
 public class RequestCustomerBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

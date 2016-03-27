@@ -28,4 +28,9 @@ public class RedirectorBean {
 
 	}
 
+	public String tarefasPendentes() {
+		return "tarefasPendentes";
+
+	}
+
 }

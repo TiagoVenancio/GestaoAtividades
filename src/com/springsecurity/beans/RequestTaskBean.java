@@ -3,45 +3,32 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.event.CloseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
-import com.springsecurity.entities.RequestCustomer;
 import com.springsecurity.entities.RequestTask;
-import com.springsecurity.entities.TypeOfAction;
-import com.springsecurity.entities.TypeOfActivity;
-import com.springsecurity.entities.TypeOfPriority;
-import com.springsecurity.entities.UserOwnerTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
 import com.springsecurity.service.RequestTaskService;
 
 @Controller
-@Scope(value = "session")
+@Scope("request")
 public class RequestTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private Date dataInicio;
-	private Date dataFinal;
-	private String qtdaHoras;
-	private String resumo;
-	private String observacao;
 
 	@Autowired
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
-	private TypeOfAction acaoSelecionada;
-	private UserOwnerTask userSelecionado;
-	private TypeOfActivity atividadeSelecionada;
-	private TypeOfPriority prioridadeSelecionada;
-	private RequestCustomer clienteSelecionado;
 
 	public RequestTaskBean() {
 	}
@@ -49,23 +36,49 @@ public class RequestTaskBean implements Serializable {
 	@PostConstruct
 	public void init() {
 		listaTarefas = tarefaService.getAllRequestTasks();
+		tarefaSelecionada = new RequestTask();
+	}
+
+	public void handleClose(CloseEvent event) {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				event.getComponent().getId() + " closed",
+				"So you don't like nature?");
+		facesContext.addMessage(null, message);
+	}
+
+	public String incluirFila() {
+		try {
+			tarefaSelecionada
+					.setCreateDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
+			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
+			tarefaService.adicionar(tarefaSelecionada);
+			listaTarefas = tarefaService.getAllRequestTasks();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item adicionado com sucesso!"));
+			return "tarefasPendentes";
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não adicionado!"));
+		}
+		return null;
 
 	}
 
-	public String adicionar() {
+	public String executar() {
 		try {
-			RequestTask task = new RequestTask();
-			task.setCreateDate(new Date(System.currentTimeMillis()));
-			task.setTypeOfAction(acaoSelecionada);
-			task.setUserOwnerTask(userSelecionado);
-			task.setTypeOfActivity(atividadeSelecionada);
-			task.setTypeOfPriority(prioridadeSelecionada);
-			task.setRequestCustomer(clienteSelecionado);
-			task.setStatusObjectEnum(StatusObjectEnum.Ativo);
-			task.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
-			task.setDescription(observacao);
-			task.setResume(resumo);
-			tarefaService.adicionar(task);
+			tarefaSelecionada
+					.setCreateDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
+			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.FAZENDO);
+			tarefaService.adicionar(tarefaSelecionada);
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -84,12 +97,57 @@ public class RequestTaskBean implements Serializable {
 
 	}
 
-	public String getQtdaHoras() {
-		return qtdaHoras;
+	public String concluir() {
+		try {
+			tarefaSelecionada
+					.setCreateDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada
+					.setCloseDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Inativo);
+			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.CONCLUIDA);
+			listaTarefas = tarefaService.getAllRequestTasks();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item adicionado com sucesso!"));
+			return null;
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não adicionado!"));
+		}
+		return null;
+
 	}
 
-	public void setQtdaHoras(String qtdaHoras) {
-		this.qtdaHoras = qtdaHoras;
+	public String cancelar() {
+		try {
+			tarefaSelecionada
+					.setCreateDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada
+					.setCloseDate(new Date(System.currentTimeMillis()));
+			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Inativo);
+			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.CANCELADA);
+			tarefaService.adicionar(tarefaSelecionada);
+			listaTarefas = tarefaService.getAllRequestTasks();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
+							"Item adicionado com sucesso!"));
+			return null;
+
+		} catch (DataAccessException e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
+							"Item não adicionado!"));
+		}
+		return null;
+
 	}
 
 	public RequestTaskService getTarefaService() {
@@ -114,78 +172,6 @@ public class RequestTaskBean implements Serializable {
 
 	public void setTarefaSelecionada(RequestTask tarefaSelecionada) {
 		this.tarefaSelecionada = tarefaSelecionada;
-	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(Date dataFinal) {
-		this.dataFinal = dataFinal;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-
-	public String getResumo() {
-		return resumo;
-	}
-
-	public void setResumo(String resumo) {
-		this.resumo = resumo;
-	}
-
-	public TypeOfAction getAcaoSelecionada() {
-		return acaoSelecionada;
-	}
-
-	public void setAcaoSelecionada(TypeOfAction acaoSelecionada) {
-		this.acaoSelecionada = acaoSelecionada;
-	}
-
-	public TypeOfActivity getAtividadeSelecionada() {
-		return atividadeSelecionada;
-	}
-
-	public void setAtividadeSelecionada(TypeOfActivity atividadeSelecionada) {
-		this.atividadeSelecionada = atividadeSelecionada;
-	}
-
-	public TypeOfPriority getPrioridadeSelecionada() {
-		return prioridadeSelecionada;
-	}
-
-	public void setPrioridadeSelecionada(TypeOfPriority prioridadeSelecionada) {
-		this.prioridadeSelecionada = prioridadeSelecionada;
-	}
-
-	public RequestCustomer getClienteSelecionado() {
-		return clienteSelecionado;
-	}
-
-	public void setClienteSelecionado(RequestCustomer clienteSelecionado) {
-		this.clienteSelecionado = clienteSelecionado;
-	}
-
-	public UserOwnerTask getUserSelecionado() {
-		return userSelecionado;
-	}
-
-	public void setUserSelecionado(UserOwnerTask userSelecionado) {
-		this.userSelecionado = userSelecionado;
 	}
 
 }

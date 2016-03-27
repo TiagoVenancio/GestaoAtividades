@@ -15,7 +15,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfPriorityService;
 
 @Controller
-@Scope(value = "session")
+@Scope("session")
 public class TypeOfPriorityBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
