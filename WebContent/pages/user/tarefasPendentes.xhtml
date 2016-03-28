@@ -48,6 +48,11 @@
 						</h:outputText>
 					</p:column>
 
+					<p:column headerText="Tema Associado"
+						sortBy="#{var.typeOfActivity}">
+						<h:outputText value="#{var.typeOfActivity.description}" />
+					</p:column>
+
 					<p:column headerText="Tarefa" sortBy="#{var.resume}">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
