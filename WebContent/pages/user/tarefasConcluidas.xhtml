@@ -7,10 +7,69 @@
 	<ui:define name="centro">
 
 		<h:form id="formPrincipal">
-		
-		TAREFAS CONCLUIDAS
+			<!-- MENSAGENS- INICIO -->
+
+			<p:growl id="msgs" showDetail="true" />
+
+			<!-- FORM PRINCIPAL -->
+
+			<h:panelGrid id="gridPrincipal">
+				<p:dataTable id="dataTable" var="var"
+					value="#{requestTaskBean.listaTarefas}"
+					rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					emptyMessage="Nenhum registro encontrado.">
+
+					<f:facet name="header">
+        				Manutenção Solicitante
+    				</f:facet>
+
+					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+						<h:outputText value="#{var.id}" />
+					</p:column>
+
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+						<h:outputText value="#{var.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Data Da Conclusao"
+						sortBy="#{var.conclusionDate}">
+						<h:outputText value="#{var.conclusionDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Titulo Da Tarefa" filterBy="#{var.resumo}"
+						filterMatchMode="contains" sortBy="#{var.resumo}">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Mátricula" filterBy="#{var.userId}"
+						filterMatchMode="contains" sortBy="#{var.userId}">
+						<h:outputText value="#{var.userId}" />
+					</p:column>
 
 
+					<p:column headerText="Nome" filterBy="#{var.userName}"
+						filterMatchMode="contains" sortBy="#{var.userName}">
+						<h:outputText value="#{var.userName}" />
+					</p:column>
+
+					<p:column headerText="E-mail" filterBy="#{var.email}"
+						filterMatchMode="contains" sortBy="#{var.email}">
+						<h:outputText value="#{var.email}" />
+					</p:column>
+
+					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						<h:outputText value="#{var.statusObjectEnum}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+			
 		</h:form>
 
 	</ui:define>
