@@ -3,22 +3,19 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-
 import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfActivityService;
 
 @Controller
-@Scope(value = "session")
+@Scope("session")
 public class TypeOfActivityBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

@@ -31,7 +31,7 @@ public class Authenticator implements AuthenticationProvider {
 
 	public String login() {
 		try {
-			User user = service.login(userName);
+			User user = service.login(userName.toLowerCase());
 			loginSpringSecurity(user);
 			session.setUser(user);
 			return "successfulPage";

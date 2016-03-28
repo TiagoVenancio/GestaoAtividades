@@ -43,6 +43,14 @@
 
 	<navigation-rule>
 		<navigation-case>
+			<from-outcome>tarefasPendentes</from-outcome>
+			<to-view-id>/pages/user/tarefasPendentes.jsf</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<navigation-case>
 			<from-outcome>adminPage</from-outcome>
 			<to-view-id>/pages/admin/adminPage.jsf</to-view-id>
 			<redirect />

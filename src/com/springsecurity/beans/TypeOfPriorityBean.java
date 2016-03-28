@@ -3,22 +3,19 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
-
 import com.springsecurity.entities.TypeOfPriority;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfPriorityService;
 
 @Controller
-@Scope(value = "session")
+@Scope("session")
 public class TypeOfPriorityBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,9 +44,10 @@ public class TypeOfPriorityBean implements Serializable {
 			typeOfPriority.setCreateDate(new Date(System.currentTimeMillis()));
 			typeOfPriority.setLastUpdate(new Date(System.currentTimeMillis()));
 			typeOfPriority.setDescription(description);
-			typeOfPriority.setStatusObjectEnum(statusObjectEnum);
+			typeOfPriority.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			typeOfPriorityService.adicionar(typeOfPriority);
-			listaTiposPrioridades = typeOfPriorityService.getAllTipoDePrioridades();
+			listaTiposPrioridades = typeOfPriorityService
+					.getAllTipoDePrioridades();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -69,9 +67,11 @@ public class TypeOfPriorityBean implements Serializable {
 
 	public String alterar() {
 		try {
-			typeOfPrioritySelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
+			typeOfPrioritySelecionada.setLastUpdate(new Date(System
+					.currentTimeMillis()));
 			typeOfPriorityService.alterar(typeOfPrioritySelecionada);
-			listaTiposPrioridades = typeOfPriorityService.getAllTipoDePrioridades();
+			listaTiposPrioridades = typeOfPriorityService
+					.getAllTipoDePrioridades();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -94,7 +94,8 @@ public class TypeOfPriorityBean implements Serializable {
 		return typeOfPriorityService;
 	}
 
-	public void setTypeOfPriorityService(TypeOfPriorityService typeOfPriorityService) {
+	public void setTypeOfPriorityService(
+			TypeOfPriorityService typeOfPriorityService) {
 		this.typeOfPriorityService = typeOfPriorityService;
 	}
 
@@ -102,7 +103,8 @@ public class TypeOfPriorityBean implements Serializable {
 		return listaTiposPrioridades;
 	}
 
-	public void setListaTiposPrioridades(List<TypeOfPriority> listaTiposPrioridades) {
+	public void setListaTiposPrioridades(
+			List<TypeOfPriority> listaTiposPrioridades) {
 		this.listaTiposPrioridades = listaTiposPrioridades;
 	}
 
@@ -131,6 +133,4 @@ public class TypeOfPriorityBean implements Serializable {
 		this.statusObjectEnum = statusObjectEnum;
 	}
 
-
-		
 }

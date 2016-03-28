@@ -1,7 +1,7 @@
 package com.springsecurity.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,11 +27,11 @@ public class UserOwnerTask implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_DATE")
-	private Calendar dateCreate;
+	private Date dateCreate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "LAST_UPDATE")
-	private Calendar lastUpdate;
+	private Date lastUpdate;
 
 	@Column(name = "NAME", unique = true, length = 255, nullable = false)
 	private String name;
@@ -81,19 +81,19 @@ public class UserOwnerTask implements Serializable {
 		this.email = email;
 	}
 
-	public Calendar getDateCreate() {
+	public Date getDateCreate() {
 		return dateCreate;
 	}
 
-	public void setDateCreate(Calendar dateCreate) {
+	public void setDateCreate(Date dateCreate) {
 		this.dateCreate = dateCreate;
 	}
 
-	public Calendar getLastUpdate() {
+	public Date getLastUpdate() {
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Calendar lastUpdate) {
+	public void setLastUpdate(Date lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 

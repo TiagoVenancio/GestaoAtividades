@@ -39,7 +39,6 @@ public class UserOwnerTaskDAOImpl implements UserOwnerTaskDAO {
 
 	@Override
 	public void remove(UserOwnerTask userOwnerTask) {
-		// TODO Auto-generated method stub
 
 	}
 

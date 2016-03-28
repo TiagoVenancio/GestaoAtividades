@@ -18,7 +18,7 @@ import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfActionService;
 
 @Controller
-@Scope(value = "session")
+@Scope("session")
 public class TypeOfActionBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class TypeOfActionBean implements Serializable {
 			TypeOfAction.setCreateDate(new Date(System.currentTimeMillis()));
 			TypeOfAction.setLastUpdate(new Date(System.currentTimeMillis()));
 			TypeOfAction.setDescription(description);
-			TypeOfAction.setStatusObjectEnum(statusObjectEnum);
+			TypeOfAction.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			typeOfActionService.adicionar(TypeOfAction);
 			listaTiposAcoes = typeOfActionService.getAllTipoDeAcoes();
 			FacesContext.getCurrentInstance().addMessage(
