@@ -6,27 +6,14 @@
 <ui:decorate template="/template/default.xhtml">
 
 	<ui:define name="centro">
-	
-	<!-- PENDENTES:
-	-- Criar metodo handleClose para Dialog;
-	-- Ajustar Class com objeto selecionado;
-	-- Iniciar o objeto nessas Class;
-	-- Reiniciar a lista após salvar objeto;
-	-- Mudar para Request Scope;
-	-- Criar mensagem de erro antes de fechar Dialog;
-	-- Retornar somente lista de Ativos para ComboBox
-	-- Retornar somente tarefas pendentes tela de TarefasPendentes;
-	
-	 -->
 
 		<h:form id="formPrincipal">
 
 			<!-- MENSAGENS- GROWL -->
-
 			<p:growl id="msgs" showDetail="true" />
 
-			<!-- GRID PRINCIPAL -->
 
+			<!-- GRID PRINCIPAL -->
 			<h:panelGrid id="gridPrincipal">
 
 				<p:dataTable id="dataTable" var="var"
@@ -82,180 +69,152 @@
 						<p:commandButton value="Nova tarefa"
 							onclick="PF('dlgNovo').show();" type="button"
 							icon="ui-icon-circle-plus" />
-
-
 					</f:facet>
-
-
 				</p:dataTable>
-
 			</h:panelGrid>
 
 
 
-
 			<!-- DIALOG NOVO -->
+			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
+				resizable="false"
+				closeListener="#{resetValuesDialogBean.handleClose}">
 
-			<h:form id="formNovo">
+				<p:tabView id="tabViewNovaTarefa">
 
-				<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
-					resizable="false" closeListener="#{requestTaskBean.handleClose}">
+					<!-- TAB DESCRICAO -->
 
-					<p:tabView id="tabViewNovaTarefa">
+					<p:tab title="Descrição">
+						<h:panelGrid columns="2" cellpadding="1" id="panelNovoTarefa">
 
-						<!-- TAB DESCRICAO -->
+							<p:inputText id="titulaTarefa"
+								value="#{requestTaskBean.tarefaSelecionada.resume}"
+								required="true" style="width: 470px;" />
 
-						<p:tab title="Descrição">
-							<h:panelGrid columns="2" cellpadding="1" id="panelNovoTarefa">
+						</h:panelGrid>
 
-								<p:inputText id="titulaTarefa"
-									value="#{requestTaskBean.tarefaSelecionada.resume}"
-									required="true" style="width: 470px;" />
+						<h:panelGrid columns="2" cellpadding="4"
+							id="panelNovoClassificacao">
 
-							</h:panelGrid>
+							<p:outputLabel for="responsavel" value="Responsável: " />
+							<p:selectOneMenu id="responsavel"
+								value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+								converter="converterGrupoUsuarios" required="true"
+								filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione um responsável" />
+								<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+									itemValue="#{u}" itemLabel="#{u.name}" />
+							</p:selectOneMenu>
 
-							<h:panelGrid columns="2" cellpadding="4"
-								id="panelNovoClassificacao">
+							<p:outputLabel for="atividade" value="Tema: " />
+							<p:selectOneMenu id="atividade"
+								value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+								converter="converterGrupoAtividade" required="true"
+								filter="true" filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione um tema" />
+								<f:selectItems
+									value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
+									itemValue="#{a}" itemLabel="#{a.description}" />
+							</p:selectOneMenu>
 
-								<p:outputLabel for="responsavel" value="Responsável: " />
-								<p:selectOneMenu id="responsavel"
-									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
-									converter="converterGrupoUsuarios" required="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Selecione um responsável" />
-									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-										itemValue="#{u}" itemLabel="#{u.name}" />
-								</p:selectOneMenu>
-
-								<p:outputLabel for="atividade" value="Tema: " />
-								<p:selectOneMenu id="atividade"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
-									converter="converterGrupoAtividade" required="true"
-									filter="true" filterMatchMode="startsWith"
-									style="width: 340px;">
-									<f:selectItem itemLabel="Selecione um tema" />
-									<f:selectItems
-										value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
-										itemValue="#{a}" itemLabel="#{a.description}" />
-								</p:selectOneMenu>
-
-								<p:outputLabel for="solicitante" value="Solicitante: " />
-								<p:selectOneMenu id="solicitante"
-									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
-									converter="converterGrupoClientes" required="true"
-									filter="true" filterMatchMode="startsWith"
-									style="width: 340px;">
-									<f:selectItem itemLabel="Selecione um solicitante" />
-									<f:selectItems
-										value="#{requestCustomerBean.listaRequestCustomerService}"
-										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
-								</p:selectOneMenu>
+							<p:outputLabel for="solicitante" value="Solicitante: " />
+							<p:selectOneMenu id="solicitante"
+								value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+								converter="converterGrupoClientes" required="true" filter="true"
+								filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione um solicitante" />
+								<f:selectItems
+									value="#{requestCustomerBean.listaRequestCustomerService}"
+									var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+							</p:selectOneMenu>
 
 
-								<p:outputLabel for="prioridade" value="Prioridade: " />
-								<p:selectOneMenu id="prioridade"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
-									converter="converterGrupoPrioridades" required="true"
-									style="width: 340px;">
-									<f:selectItem itemLabel="Selecione uma prioridade" />
-									<f:selectItems
-										value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
-										itemValue="#{p}" itemLabel="#{p.description}" />
-								</p:selectOneMenu>
+							<p:outputLabel for="prioridade" value="Prioridade: " />
+							<p:selectOneMenu id="prioridade"
+								value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+								converter="converterGrupoPrioridades" required="true"
+								style="width: 340px;">
+								<f:selectItem itemLabel="Selecione uma prioridade" />
+								<f:selectItems
+									value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
+									itemValue="#{p}" itemLabel="#{p.description}" />
+							</p:selectOneMenu>
 
-							</h:panelGrid>
+						</h:panelGrid>
 
-							<h:panelGrid columns="1" cellpadding="1" id="panelNovoObservacao">
+						<h:panelGrid columns="1" cellpadding="1" id="panelNovoObservacao">
 
-								<p:inputTextarea rows="8" cols="55" id="textAreaObservacao"
-									maxlength="1000" autoResize="false"
-									value="#{requestTaskBean.tarefaSelecionada.description}" />
+							<p:inputTextarea rows="8" cols="55" id="textAreaObservacao"
+								maxlength="1000" autoResize="false"
+								value="#{requestTaskBean.tarefaSelecionada.description}" />
 
-							</h:panelGrid>
+						</h:panelGrid>
 
-							<!-- TAB DETALHE -->
+						<!-- TAB DETALHE -->
+					</p:tab>
+					<p:tab title="Detalhe">
 
-						</p:tab>
+						<h:outputScript name="locale-primefaces.js" library="js" />
 
-						<p:tab title="Detalhe">
+						<h:panelGrid columns="2" id="panelNovoDetalheAcao">
 
-							<h:outputScript name="locale-primefaces.js" library="js" />
+							<p:outputLabel for="acaoRealizacao" value="Ação realizada: " />
+							<p:selectOneMenu id="acaoRealizacao"
+								value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+								converter="converterGrupoAcoes" required="true"
+								filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione uma ação" />
+								<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
+									var="ac" itemValue="#{ac}" itemLabel="#{ac.description}" />
+							</p:selectOneMenu>
 
-							<h:panelGrid columns="2" id="panelNovoDetalheAcao">
+							<p:outputLabel for="dataInicio" value="Data de Início:  " />
+							<p:calendar id="dataInicio"
+								value="#{requestTaskBean.tarefaSelecionada.startDate}"
+								pattern="dd-MM-yyyy" mask="true" required="true" size="37"
+								locale="pt" navigator="true" />
 
-								<p:outputLabel for="acaoRealizacao" value="Ação realizada: " />
-								<p:selectOneMenu id="acaoRealizacao"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
-									converter="converterGrupoAcoes" required="true"
-									filterMatchMode="startsWith" style="width: 340px;">
-									<f:selectItem itemLabel="Selecione uma ação" />
-									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
-										var="ac" itemValue="#{ac}" itemLabel="#{ac.description}" />
-								</p:selectOneMenu>
+							<p:outputLabel for="dataFim" value="Data de Fim: " />
+							<p:calendar id="dataFim"
+								value="#{requestTaskBean.tarefaSelecionada.conclusionDate}"
+								pattern="dd-MM-yyyy" mask="true" required="true" size="37"
+								locale="pt" navigator="true" />
 
-								<p:outputLabel for="dataInicio" value="Data de Início:  " />
-								<p:calendar id="dataInicio"
-									value="#{requestTaskBean.tarefaSelecionada.startDate}"
-									pattern="dd-MM-yyyy" mask="true" required="true" size="37"
-									locale="pt" navigator="true" />
-
-								<p:outputLabel for="dataFim" value="Data de Fim: " />
-								<p:calendar id="dataFim"
-									value="#{requestTaskBean.tarefaSelecionada.conclusionDate}"
-									pattern="dd-MM-yyyy" mask="true" required="true" size="37"
-									locale="pt" navigator="true" />
-
-								<p:outputLabel for="qtdaHoras" value="Tempo (hh:mm): " />
-								<p:inputMask id="qtdaHoras"
-									value="#{requestTaskBean.tarefaSelecionada.amountHours}"
-									mask="99:99" style="width: 340px;" required="true" />
-
-
-							</h:panelGrid>
-							<br> </br>
-
-							<!-- BOTOES -->
-
-							<h:panelGrid columns="4" id="panelGridBotoes">
+							<p:outputLabel for="qtdaHoras" value="Tempo (hh:mm): " />
+							<p:inputMask id="qtdaHoras"
+								value="#{requestTaskBean.tarefaSelecionada.amountHours}"
+								mask="99:99" style="width: 340px;" required="true" />
+						</h:panelGrid>
+						<br> </br>
 
 
-								<p:commandButton value="Inclui na fila"
-									onclick="PF('dlg').show();"
-									action="#{requestTaskBean.incluirFila}" icon="ui-icon-wrench">
-								</p:commandButton>
 
-								<p:commandButton value="Executar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.executar}" icon="ui-icon-wrench"
-									process="@none" update="@all" ajax="false" />
+						<!-- BOTOES -->
+						<h:panelGrid columns="4" id="panelGridBotoes">
 
-								<p:commandButton value="Concluir" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.concluir}"
-									icon="ui-icon-circle-check" process="@none" update="@all"
-									ajax="false" />
+							<p:commandButton value="Inclui na fila"
+								onclick="PF('dlg').show();"
+								action="#{requestTaskBean.incluirFila}" icon="ui-icon-wrench" />
 
-								<p:commandButton value="Cancelar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.cancelar}"
-									icon="ui-icon-circle-close" process="@none" update="@all"
-									ajax="false" />
-							</h:panelGrid>
+							<p:commandButton value="Executar" onclick="PF('dlg').show();"
+								action="#{requestTaskBean.executar}" icon="ui-icon-wrench" />
+
+							<p:commandButton value="Concluir" onclick="PF('dlg').show();"
+								action="#{requestTaskBean.concluir}" icon="ui-icon-circle-check" />
+
+							<p:commandButton value="Cancelar" onclick="PF('dlg').show();"
+								action="#{requestTaskBean.cancelar}" icon="ui-icon-circle-close" />
+						</h:panelGrid>
 
 
-						</p:tab>
-
-					</p:tabView>
-
-				</p:dialog>
-
-
-			</h:form>
-
+					</p:tab>
+				</p:tabView>
+			</p:dialog>
 
 
 
 
 			<!-- DIALOG EDITAR -->
-
-
 			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
 				id="Editar">
 
