@@ -120,8 +120,8 @@
 								filter="true" filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione um tema" />
 								<f:selectItems
-									value="#{typeOfActivityBean.listaTiposAtividades}" var="a"
-									itemValue="#{a}" itemLabel="#{a.description}" />
+									value="#{typeOfActivityListActiveBean.listaPrioridadeAtivas}"
+									var="a" itemValue="#{a}" itemLabel="#{a.description}" />
 							</p:selectOneMenu>
 
 							<p:outputLabel for="solicitante" value="Solicitante: " />

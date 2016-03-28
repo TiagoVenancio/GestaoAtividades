@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfActivityDao;
 import com.springsecurity.entities.TypeOfActivity;
+import com.springsecurity.enums.StatusObjectEnum;
 
 @Repository
 @Transactional
@@ -26,8 +28,8 @@ public class TypeOfActivityDaoImpl implements TypeOfActivityDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<TypeOfActivity> findAll() {
-		return entityManager.createQuery("FROM " + TypeOfActivity.class.getName())
-				.getResultList();
+		return entityManager.createQuery(
+				"FROM " + TypeOfActivity.class.getName()).getResultList();
 	}
 
 	@Override
@@ -40,6 +42,15 @@ public class TypeOfActivityDaoImpl implements TypeOfActivityDao {
 	public void update(TypeOfActivity typeOfActivity) {
 		entityManager.merge(typeOfActivity);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TypeOfActivity> findAllActivityAtivas() {
+		Query query = entityManager
+				.createQuery("select t from TypeOfActivity t where statusObjectEnum = :statusObjectEnum");
+		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
+		return query.getResultList();
 	}
 
 }
