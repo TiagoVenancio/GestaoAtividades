@@ -80,6 +80,8 @@
 
 
 
+
+
 			<!-- DIALOG NOVO -->
 			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
 				resizable="false"
@@ -141,8 +143,8 @@
 								style="width: 340px;">
 								<f:selectItem itemLabel="Selecione uma prioridade" />
 								<f:selectItems
-									value="#{typeOfPriorityBean.listaTiposPrioridades}" var="p"
-									itemValue="#{p}" itemLabel="#{p.description}" />
+									value="#{typeOfPriorityListActiveBean.listaPrioridadeAtivas}"
+									var="p" itemValue="#{p}" itemLabel="#{p.description}" />
 							</p:selectOneMenu>
 
 						</h:panelGrid>

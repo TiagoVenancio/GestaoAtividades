@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfPriorityDao;
 import com.springsecurity.entities.TypeOfPriority;
+import com.springsecurity.enums.StatusObjectEnum;
 
 @Repository
 @Transactional
@@ -40,6 +42,15 @@ public class TypeOfPriorityDaoImpl implements TypeOfPriorityDao {
 	public void update(TypeOfPriority typeOfPriority) {
 		entityManager.merge(typeOfPriority);
 
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TypeOfPriority> findAllPrioridadesAtivas() {
+		Query query = entityManager
+				.createQuery("select t from TypeOfPriority t where statusObjectEnum = :statusObjectEnum");
+		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
+		return query.getResultList();
 	}
 
 }

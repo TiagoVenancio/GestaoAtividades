@@ -8,6 +8,8 @@ public interface TypeOfPriorityDao {
 
 	List<TypeOfPriority> findAll();
 
+	List<TypeOfPriority> findAllPrioridadesAtivas();
+
 	void save(TypeOfPriority typeOfPriority);
 
 	void update(TypeOfPriority typeOfPriority);
