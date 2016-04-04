@@ -62,13 +62,6 @@ body {
 							<p:submenu label="Cadastro" icon="ui-icon-gear">
 
 
-								<p:menuitem value="Temas" url="/pages/user/tipoAtividades.jsf"
-									icon="ui-icon-tag" update="messages" />
-
-								<p:menuitem value="Ações" url="/pages/user/tipoAcoes.jsf"
-									icon="ui-icon-wrench" update="messages" />
-
-
 								<p:menuitem value="Solicitantes"
 									url="/pages/user/solicitante.jsf" icon="ui-icon-person"
 									update="messages" />
@@ -78,27 +71,44 @@ body {
 
 							<p:submenu label="Configuração" icon="ui-icon-locked">
 
-								<p:menuitem value="Usuários" url="/pages/admin/usuarios.jsf"
-									icon="ui-icon-person" update="messages" />
+								<p:menuitem value="Ações" url="/pages/admin/tipoAcoes.jsf"
+									icon="ui-icon-wrench" update="messages" />
 
 								<p:menuitem value="Prioridades"
 									url="/pages/admin/prioridades.jsf" icon="ui-icon-alert"
 									update="messages" />
 
+								<p:menuitem value="Usuários" url="/pages/admin/usuarios.jsf"
+									icon="ui-icon-person" update="messages" />
+
+								<p:submenu label="Temas" icon="ui-icon-tag">
+
+									<p:menuitem value="Assuntos"
+										url="/pages/admin/tipoAtividades.jsf" icon="ui-icon-tag"
+										update="messages" />
+
+									<p:menuitem value="Sub-Assuntos"
+										url="/pages/admin/tipoAtividades.jsf" icon="ui-icon-tag"
+										update="messages" />
+
+								</p:submenu>
+
+
 
 							</p:submenu>
 
-							<p:submenu label="Tarefas" icon="ui-icon-clipboard">
+							<p:submenu label="Tarefas" icon="ui-icon-pin-s">
 
-								<p:menuitem value="Pendentes"
-									url="/pages/user/tarefasPendentes.jsf" icon="ui-icon-flag"
-									update="messages" />
-
-								<p:menuitem value="Concluídas"
-									url="/pages/user/tarefasConcluidas.jsf" icon="ui-icon-check"
+								<p:menuitem value="Minhas tarefas"
+									url="/pages/user/tarefasPendentes.jsf" icon="ui-icon-pin-w"
 									update="messages" />
 
 							</p:submenu>
+
+							<p:menuitem value="Relatórios"
+								url="/pages/admin/tarefasConcluidas.jsf"
+								icon="ui-icon-clipboard" />
+
 
 							<f:facet name="options">
 
