@@ -29,4 +29,9 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 		return dao.findAll();
 	}
 
+	@Override
+	public List<RequestTask> buscarTaskPor(RequestTask requestTask) {
+		return dao.buscarTaskPor(requestTask);
+	}
+
 }

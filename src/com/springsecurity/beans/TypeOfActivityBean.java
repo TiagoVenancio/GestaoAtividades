@@ -67,8 +67,7 @@ public class TypeOfActivityBean implements Serializable {
 
 	public String alterar() {
 		try {
-			typeOfActivitySelecionada.setLastUpdate(new Date(System
-					.currentTimeMillis()));
+			typeOfActivitySelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
 			typeOfActivityService.alterar(typeOfActivitySelecionada);
 			listaTiposAtividades = typeOfActivityService
 					.getAllTipoDeAtividades();
