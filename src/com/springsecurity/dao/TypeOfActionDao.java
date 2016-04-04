@@ -15,5 +15,4 @@ public interface TypeOfActionDao {
 	void update(TypeOfAction typeOfAction);
 
 	
-
 }
