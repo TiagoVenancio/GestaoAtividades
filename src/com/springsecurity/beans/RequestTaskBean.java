@@ -36,6 +36,7 @@ public class RequestTaskBean implements Serializable {
 	public void init() {
 		listaTarefas = tarefaService.getAllRequestTasks();
 		tarefaSelecionada = new RequestTask();
+
 	}
 
 	public String incluirFila() {

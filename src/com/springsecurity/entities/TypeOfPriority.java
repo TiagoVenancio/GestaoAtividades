@@ -26,11 +26,11 @@ public class TypeOfPriority implements Serializable {
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE", nullable = false)
+	@Column(name = "CREATE_DATE")
 	private Date createDate;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "LAST_UPDATE", nullable = false)
+	@Column(name = "LAST_UPDATE")
 	private Date lastUpdate;
 
 	@Enumerated(value = EnumType.ORDINAL)

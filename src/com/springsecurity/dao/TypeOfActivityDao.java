@@ -8,6 +8,8 @@ public interface TypeOfActivityDao {
 
 	List<TypeOfActivity> findAll();
 
+	List<TypeOfActivity> findAllActivityAtivas();
+
 	void save(TypeOfActivity typeOfActivity);
 
 	void update(TypeOfActivity typeOfActivity);
