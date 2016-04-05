@@ -34,4 +34,10 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 		return dao.buscarTaskPor(requestTask);
 	}
 
+	@Override
+	public void editar(RequestTask requestTask) throws IllegalArgumentException {
+		dao.update(requestTask);
+
+	}
+
 }

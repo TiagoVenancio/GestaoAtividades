@@ -65,28 +65,10 @@
 
 					<p:column headerText="Ação" style="width:120px">
 
-						<p:commandButton oncomplete="PF('dlgEditar').show()"
-							icon="ui-icon-pencil">
+						<p:commandButton update=":formEditar:displayEditar"
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
 							<f:setPropertyActionListener value="#{var}"
-								target="#{requestTaskBean.requestTaskSelecionada}" />
-						</p:commandButton>
-
-						<p:commandButton oncomplete="PF('dlgEditar').show()"
-							icon="ui-icon-wrench">
-							<f:setPropertyActionListener value="#{var}"
-								target="#{requestTaskBean.requestTaskSelecionada}" />
-						</p:commandButton>
-
-						<p:commandButton oncomplete="PF('dlgEditar').show()"
-							icon="ui-icon-circle-check">
-							<f:setPropertyActionListener value="#{var}"
-								target="#{requestTaskBean.requestTaskSelecionada}" />
-						</p:commandButton>
-
-						<p:commandButton oncomplete="PF('dlgEditar').show()"
-							icon="ui-icon-circle-close">
-							<f:setPropertyActionListener value="#{var}"
-								target="#{requestTaskBean.requestTaskSelecionada}" />
+								target="#{requestTaskBean.tarefaSelecionada}" />
 						</p:commandButton>
 
 					</p:column>
@@ -99,18 +81,20 @@
 				</p:dataTable>
 			</h:panelGrid>
 
+		</h:form>
 
 
 
 
-			<!-- DIALOG NOVO -->
+		<!-- DIALOG NOVO -->
+
+		<h:form id="formNovo">
+
 			<p:dialog header="Incluir Nova Tarefa" widgetVar="dlgNovo"
 				resizable="false"
 				closeListener="#{resetValuesDialogBean.handleClose}">
 
 				<p:tabView id="tabViewNovaTarefa">
-
-					<!-- TAB DESCRICAO -->
 
 					<p:tab title="Descrição">
 						<h:panelGrid columns="2" cellpadding="1" id="panelNovoTarefa">
@@ -178,7 +162,6 @@
 
 						</h:panelGrid>
 
-						<!-- TAB DETALHE -->
 					</p:tab>
 					<p:tab title="Detalhe">
 
@@ -213,37 +196,186 @@
 								value="#{requestTaskBean.tarefaSelecionada.amountHours}"
 								mask="99:99" style="width: 340px;" required="true" />
 						</h:panelGrid>
+
 						<br> </br>
 
-
-
-						<!-- BOTOES -->
 						<h:panelGrid columns="4" id="panelGridBotoes">
 
 							<p:commandButton value="Salvar" onclick="PF('dlg').show();"
 								action="#{requestTaskBean.incluirFila}" icon="ui-icon-wrench" />
 
 						</h:panelGrid>
-
-
 					</p:tab>
 				</p:tabView>
 			</p:dialog>
 
+		</h:form>
 
 
 
-			<!-- DIALOG EDITAR -->
-			<p:dialog header="Editar" widgetVar="dlgEditar" modal="false"
-				id="Editar">
 
-				<h:panelGrid columns="2" cellpadding="4" id="panelEditar">
+
+		<!-- DIALOG EDITAR -->
+
+		<h:form id="formEditar">
+
+			<p:dialog header="Editar Tarefa" widgetVar="dlgEditar"
+				resizable="false"
+				closeListener="#{resetValuesDialogBean.handleClose}">
+
+				<h:panelGrid id="displayEditar">
+
+					<p:tabView id="tabViewTarefaEditar">
+
+						<!-- DIALOG NOVO - TAB DESCRICAO -->
+
+						<p:tab title="Descrição">
+							<h:panelGrid columns="2" cellpadding="1" id="panelEditarTarefa">
+
+								<p:inputText id="titulaTarefaEditar"
+									value="#{requestTaskBean.tarefaSelecionada.resume}"
+									style="width: 470px;" />
+
+							</h:panelGrid>
+
+							<h:panelGrid columns="2" cellpadding="4"
+								id="panelEditarClassificacao">
+
+								<p:outputLabel for="responsavelEditar" value="Responsável: " />
+								<p:selectOneMenu id="responsavelEditar"
+									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+									converter="converterGrupoUsuarios" required="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Selecione um responsável" />
+									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+										itemValue="#{u}" itemLabel="#{u.name}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="atividadeEditar" value="Tema: " />
+								<p:selectOneMenu id="atividadeEditar"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+									converter="converterGrupoAtividade" required="true"
+									filter="true" filterMatchMode="startsWith"
+									style="width: 340px;">
+									<f:selectItem itemLabel="Selecione um tema" />
+									<f:selectItems
+										value="#{typeOfActivityListActiveBean.listaPrioridadeAtivas}"
+										var="a" itemValue="#{a}" itemLabel="#{a.description}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="solicitanteEditar" value="Solicitante: " />
+								<p:selectOneMenu id="solicitanteEditar"
+									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+									converter="converterGrupoClientes" required="true"
+									filter="true" filterMatchMode="startsWith"
+									style="width: 340px;">
+									<f:selectItem itemLabel="Selecione um solicitante" />
+									<f:selectItems
+										value="#{requestCustomerBean.listaRequestCustomerService}"
+										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+								</p:selectOneMenu>
+
+
+								<p:outputLabel for="prioridadeEditar" value="Prioridade: " />
+								<p:selectOneMenu id="prioridadeEditar"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+									converter="converterGrupoPrioridades" required="true"
+									style="width: 340px;">
+									<f:selectItem itemLabel="Selecione uma prioridade" />
+									<f:selectItems
+										value="#{typeOfPriorityListActiveBean.listaPrioridadeAtivas}"
+										var="p" itemValue="#{p}" itemLabel="#{p.description}" />
+								</p:selectOneMenu>
+
+							</h:panelGrid>
+
+							<h:panelGrid columns="1" cellpadding="1"
+								id="panelNovoObservacaoEditar">
+
+								<p:inputTextarea rows="8" cols="55"
+									id="textAreaObservacaoEditar" maxlength="1000"
+									autoResize="false"
+									value="#{requestTaskBean.tarefaSelecionada.description}" />
+
+							</h:panelGrid>
+
+						</p:tab>
+						<p:tab title="Detalhe">
+
+							<h:outputScript name="locale-primefaces.js" library="js" />
+
+							<h:panelGrid columns="2" id="panelEditarDetalheAcao">
+
+								<p:outputLabel for="acaoRealizacaoEditar"
+									value="Ação realizada: " />
+								<p:selectOneMenu id="acaoRealizacaoEditar"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+									converter="converterGrupoAcoes" required="true"
+									filterMatchMode="startsWith" style="width: 340px;">
+									<f:selectItem itemLabel="Selecione uma ação" />
+									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
+										var="ac" itemValue="#{ac}" itemLabel="#{ac.description}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="dataInicioEditar" value="Data de Início:  " />
+								<p:calendar id="dataInicioEditar"
+									value="#{requestTaskBean.tarefaSelecionada.startDate}"
+									pattern="dd-MM-yyyy" mask="true" required="true" size="37"
+									locale="pt" navigator="true" />
+
+								<p:outputLabel for="dataFimEditar" value="Data de Fim: " />
+								<p:calendar id="dataFimEditar"
+									value="#{requestTaskBean.tarefaSelecionada.conclusionDate}"
+									pattern="dd-MM-yyyy" mask="true" required="true" size="37"
+									locale="pt" navigator="true" />
+
+								<p:outputLabel for="qtdaHorasEditar" value="Tempo (hh:mm): " />
+								<p:inputMask id="qtdaHorasEditar"
+									value="#{requestTaskBean.tarefaSelecionada.amountHours}"
+									mask="99:99" style="width: 340px;" required="true" />
+							</h:panelGrid>
+
+							<br> </br>
+
+							<h:panelGrid columns="4" id="panelGridBotoesEditar">
+
+								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+									action="#{requestTaskBean.editar}" icon="ui-icon-wrench">
+								</p:commandButton>
+
+							</h:panelGrid>
+						</p:tab>
+
+						<p:tab title="Informações adicionais">
+
+							<h:panelGrid columns="2" id="panelEditarInfoAdicional">
+
+
+								<h:outputText value="Tarefa:" />
+								<h:outputText value="#{requestTaskBean.tarefaSelecionada.id}" />
+
+								<h:outputText value="Data Criação:" />
+								<h:outputText
+									value="#{requestTaskBean.tarefaSelecionada.createDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</h:outputText>
+
+								<h:outputText value="Data Conclusão:" />
+								<h:outputText
+									value="#{requestTaskBean.tarefaSelecionada.closeDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</h:outputText>
+
+							</h:panelGrid>
+
+						</p:tab>
+					</p:tabView>
 
 				</h:panelGrid>
 			</p:dialog>
-
-
 		</h:form>
+
+
 
 	</ui:define>
 </ui:decorate>
