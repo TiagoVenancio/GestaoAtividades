@@ -3,8 +3,69 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
+
 <ui:decorate template="/template/default.xhtml">
+
 	<ui:define name="centro">
+
+		<h:form id="formFiltros">
+
+			<h:panelGrid columns="4" cellpadding="4" id="panelFiltros"
+				style="float: left;">
+
+				<f:facet name="header">
+        				Filtros Avançados
+    				</f:facet>
+
+				<p:outputLabel for="responsavel" value="Responsável:" />
+				<p:selectOneMenu id="responsavel"
+					value="#{taskCompletedBean.tarefaSelecionada.userOwnerTask}"
+					converter="converterGrupoUsuarios" required="false"
+					filterMatchMode="startsWith" style="width: 250px;">
+					<f:selectItem itemLabel="Selecione um Responsável" />
+					<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+						itemValue="#{u}" itemLabel="#{u.name}" />
+				</p:selectOneMenu>
+
+					<h:outputLabel for="nomeTarefa" value="Nome Da Tarefa:" />
+					<p:inputText id="nomeTarefa" label="nomeTarefa" size="25"
+						value="#{typeOfActionBean.description}" />
+
+				<p:outputLabel for="assunto" value="Assunto:" />
+				<p:selectOneMenu id="assunto"
+					value="#{taskCompletedBean.tarefaSelecionada.typeOfActivity}"
+					converter="converterGrupoUsuarios" required="false"
+					filterMatchMode="startsWith" style="width: 250px;">
+					<f:selectItem itemLabel="Selecione um Assunto" />
+					<f:selectItems value="#{typeOfActivityBean.listaTiposAtividades}"
+						var="u" itemValue="#{u}" itemLabel="#{u.description}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="dataInicio" value="Data de Início:" />
+				<p:calendar id="dataInicio"
+					value="#{requestTaskBean.tarefaSelecionada.startDate}"
+					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
+					locale="pt" navigator="true" />
+
+				<p:outputLabel for="subAssunto" value="Sub Assunto:" />
+				<p:selectOneMenu id="subAssunto"
+					value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+					converter="converterGrupoUsuarios" required="false"
+					filterMatchMode="startsWith" style="width: 250px;">
+					<f:selectItem itemLabel="Selecione um Sub Assunto" />
+					<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
+						itemValue="#{u}" itemLabel="#{u.name}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="dataFim" value="Data de Fim:" />
+				<p:calendar id="dataFim"
+					value="#{requestTaskBean.tarefaSelecionada.conclusionDate}"
+					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
+					locale="pt" navigator="true" />
+
+			</h:panelGrid>
+
+		</h:form>
 
 		<h:form id="formPrincipal">
 			<!-- MENSAGENS- INICIO -->
@@ -15,8 +76,8 @@
 
 			<h:panelGrid id="gridPrincipal">
 				<p:dataTable id="dataTable" var="var"
-					value="#{requestTaskBean.listaTarefas}"
-					rows="10" paginator="true"
+					value="#{taskCompletedBean.listaTarefas}" rows="25"
+					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
 
@@ -24,54 +85,62 @@
         				Manutenção Solicitante
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="ID" style="width: 20px;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+					<p:column headerText="Nome Da Tarefa" style="width: 200px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Assunto" style="width: 200px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Sub Assunto" style="width: 200px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Ação Realizada" style="width: 200px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Status" style="width: 100px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Prioridade" style="width: 100px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Responsável" style="width: 100px;">
+						<h:outputText value="#{var.resumo}" />
+					</p:column>
+
+					<p:column headerText="Data Início" style="width: 100px;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Data Da Conclusao"
-						sortBy="#{var.conclusionDate}">
+					<p:column headerText="Data Fim" style="width: 100px;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Titulo Da Tarefa" filterBy="#{var.resumo}"
-						filterMatchMode="contains" sortBy="#{var.resumo}">
-						<h:outputText value="#{var.resumo}" />
-					</p:column>
-
-					<p:column headerText="Mátricula" filterBy="#{var.userId}"
-						filterMatchMode="contains" sortBy="#{var.userId}">
-						<h:outputText value="#{var.userId}" />
-					</p:column>
-
-
-					<p:column headerText="Nome" filterBy="#{var.userName}"
-						filterMatchMode="contains" sortBy="#{var.userName}">
-						<h:outputText value="#{var.userName}" />
-					</p:column>
-
-					<p:column headerText="E-mail" filterBy="#{var.email}"
-						filterMatchMode="contains" sortBy="#{var.email}">
-						<h:outputText value="#{var.email}" />
-					</p:column>
-
-					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
-						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
-						<h:outputText value="#{var.statusObjectEnum}" />
+					<p:column headerText="Tempo Desenvolvimento" style="width: 120px;">
+						<h:outputText value="#{var.amountHours}" />
 					</p:column>
 
 				</p:dataTable>
+
 			</h:panelGrid>
-			
+
 		</h:form>
 
 	</ui:define>
+
 </ui:decorate>
+
 </html>
