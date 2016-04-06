@@ -18,7 +18,7 @@
     				</f:facet>
 
 				<p:outputLabel for="responsavel" value="Responsável:" />
-				<p:selectOneMenu id="responsavel"
+				<p:selectOneMenu id="responsavel" onchange="PF('teste').pesquisar()"
 					value="#{taskCompletedBean.tarefaSelecionada.userOwnerTask}"
 					converter="converterGrupoUsuarios" required="false"
 					filterMatchMode="startsWith" style="width: 250px;">
@@ -29,7 +29,7 @@
 
 					<h:outputLabel for="nomeTarefa" value="Nome Da Tarefa:" />
 					<p:inputText id="nomeTarefa" label="nomeTarefa" size="25"
-						value="#{typeOfActionBean.description}" />
+						value="#{taskCompletedBean.tarefaSelecionada.resume}" />
 
 				<p:outputLabel for="assunto" value="Assunto:" />
 				<p:selectOneMenu id="assunto"
@@ -43,7 +43,7 @@
 
 				<p:outputLabel for="dataInicio" value="Data de Início:" />
 				<p:calendar id="dataInicio"
-					value="#{requestTaskBean.tarefaSelecionada.startDate}"
+					value="#{taskCompletedBean.tarefaSelecionada.createDate}"
 					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
 					locale="pt" navigator="true" />
 
@@ -59,7 +59,7 @@
 
 				<p:outputLabel for="dataFim" value="Data de Fim:" />
 				<p:calendar id="dataFim"
-					value="#{requestTaskBean.tarefaSelecionada.conclusionDate}"
+					value="#{taskCompletedBean.tarefaSelecionada.closeDate}"
 					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
 					locale="pt" navigator="true" />
 
@@ -75,7 +75,7 @@
 			<!-- FORM PRINCIPAL -->
 
 			<h:panelGrid id="gridPrincipal">
-				<p:dataTable id="dataTable" var="var"
+				<p:dataTable id="dataTable" var="var" widgetVar="teste"
 					value="#{taskCompletedBean.listaTarefas}" rows="25"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
