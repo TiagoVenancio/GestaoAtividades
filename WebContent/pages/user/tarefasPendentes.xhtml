@@ -340,8 +340,8 @@
 							<h:panelGrid columns="4" id="panelGridBotoesEditar">
 
 								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.editar}" icon="ui-icon-wrench">
-								</p:commandButton>
+									action="#{requestTaskBean.editar}" icon="ui-icon-circle-plus"
+									update="@formPrincipal" ajax="false" />
 
 							</h:panelGrid>
 						</p:tab>

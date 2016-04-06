@@ -40,4 +40,9 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 
 	}
 
+	@Override
+	public RequestTask getById(Long id) {
+		return dao.getById(id);
+	}
+
 }

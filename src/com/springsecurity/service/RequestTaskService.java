@@ -12,6 +12,8 @@ public interface RequestTaskService {
 
 	void editar(RequestTask requestTask) throws IllegalArgumentException;
 
+	public RequestTask getById(Long id);
+
 	public List<RequestTask> getAllRequestTasks();
 
 }

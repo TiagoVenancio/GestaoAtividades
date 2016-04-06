@@ -29,6 +29,7 @@ public class RequestTaskBean implements Serializable {
 	private RequestTask tarefaSelecionada;
 
 	public RequestTaskBean() {
+		tarefaSelecionada = new RequestTask();
 	}
 
 	@PostConstruct
@@ -63,7 +64,7 @@ public class RequestTaskBean implements Serializable {
 
 	public String editar() {
 		try {
-			tarefaService.editar(tarefaSelecionada);
+			tarefaService.editar(getTarefaSelecionada());
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -99,10 +100,6 @@ public class RequestTaskBean implements Serializable {
 	}
 
 	public RequestTask getTarefaSelecionada() {
-		if (tarefaSelecionada == null) {
-			tarefaSelecionada = new RequestTask();
-		}
-
 		return tarefaSelecionada;
 	}
 
