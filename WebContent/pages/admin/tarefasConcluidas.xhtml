@@ -18,7 +18,7 @@
     				</f:facet>
 
 				<p:outputLabel for="responsavel" value="Responsável:" />
-				<p:selectOneMenu id="responsavel" onchange="PF('teste').pesquisar()"
+				<p:selectOneMenu id="responsavel"
 					value="#{taskCompletedBean.tarefaSelecionada.userOwnerTask}"
 					converter="converterGrupoUsuarios" required="false"
 					filterMatchMode="startsWith" style="width: 250px;">
@@ -27,9 +27,9 @@
 						itemValue="#{u}" itemLabel="#{u.name}" />
 				</p:selectOneMenu>
 
-					<h:outputLabel for="nomeTarefa" value="Nome Da Tarefa:" />
-					<p:inputText id="nomeTarefa" label="nomeTarefa" size="25"
-						value="#{taskCompletedBean.tarefaSelecionada.resume}" />
+				<h:outputLabel for="nomeTarefa" value="Nome Da Tarefa:" />
+				<p:inputText id="nomeTarefa" label="nomeTarefa" size="25"
+					value="#{taskCompletedBean.tarefaSelecionada.resume}" />
 
 				<p:outputLabel for="assunto" value="Assunto:" />
 				<p:selectOneMenu id="assunto"
@@ -63,6 +63,10 @@
 					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
 					locale="pt" navigator="true" />
 
+				<p:commandButton value="Salvar"
+					actionListener="#{taskCompletedBean.pesquisar}"
+					update=":formPrincipal:gridPrincipal" icon="ui-icon-wrench" />
+
 			</h:panelGrid>
 
 		</h:form>
@@ -75,9 +79,8 @@
 			<!-- FORM PRINCIPAL -->
 
 			<h:panelGrid id="gridPrincipal">
-				<p:dataTable id="dataTable" var="var" widgetVar="teste"
-					value="#{taskCompletedBean.listaTarefas}" rows="25"
-					paginator="true"
+				<p:dataTable id="dataTable" var="var"
+					value="#{requestTaskBean.listaTarefas}" rows="25" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
 
@@ -90,40 +93,40 @@
 					</p:column>
 
 					<p:column headerText="Nome Da Tarefa" style="width: 200px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.resume}" />
 					</p:column>
 
 					<p:column headerText="Assunto" style="width: 200px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.typeOfActivity.description}" />
 					</p:column>
 
 					<p:column headerText="Sub Assunto" style="width: 200px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.description}" />
 					</p:column>
 
 					<p:column headerText="Ação Realizada" style="width: 200px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.typeOfAction.description}" />
 					</p:column>
 
 					<p:column headerText="Status" style="width: 100px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.statusTaskEnum}" />
 					</p:column>
 
 					<p:column headerText="Prioridade" style="width: 100px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.typeOfPriority.description}" />
 					</p:column>
 
 					<p:column headerText="Responsável" style="width: 100px;">
-						<h:outputText value="#{var.resumo}" />
+						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
-					<p:column headerText="Data Início" style="width: 100px;">
+					<p:column headerText="Data Início" style="width: 180px;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Data Fim" style="width: 100px;">
+					<p:column headerText="Data Fim" style="width: 180px;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>

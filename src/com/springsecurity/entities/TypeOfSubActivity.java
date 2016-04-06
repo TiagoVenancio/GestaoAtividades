@@ -46,6 +46,8 @@ public class TypeOfSubActivity implements Serializable {
 	@JoinColumn(name = "TYPE_ACTIVITY_ID")
 	private TypeOfActivity typeOfActivity;
 
+	
+	
 	public Long getId() {
 		return id;
 	}

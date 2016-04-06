@@ -16,7 +16,7 @@
 
 			<h:panelGrid id="gridPrincipal">
 				<p:dataTable id="dataTable" var="var"
-					value="#{typeOfActivityBean.listaTiposAtividades}" rows="10"
+					value="#{typeOfSubActivityBean.listaTiposAtividades}" rows="10"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
@@ -56,7 +56,7 @@
 						<p:commandButton update=":formEditar:panelEditar"
 							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
 							<f:setPropertyActionListener value="#{var}"
-								target="#{typeOfActivityBean.typeOfActivitySelecionada}" />
+								target="#{typeOfSubActivityBean.typeOfSubActivitySelecionada}" />
 						</p:commandButton>
 					</p:column>
 
@@ -81,12 +81,12 @@
 
 					<h:outputLabel for="descricao" value="Descrição:" />
 					<p:inputText id="descricao" label="descricao"
-						value="#{typeOfActivityBean.description}" />
+						value="#{typeOfSubActivityBean.description}" />
 
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
-					action="#{typeOfActivityBean.adicionar}" icon="ui-icon-circle-plus"
+					action="#{typeOfSubActivityBean.adicionar}" icon="ui-icon-circle-plus"
 					update="@formPrincipal" ajax="false" />
 
 			</p:dialog>
@@ -103,35 +103,35 @@
 
 					<h:outputText value="Id:" />
 					<h:outputText
-						value="#{typeOfActivityBean.typeOfActivitySelecionada.id}"
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.id}"
 						style="font-weight:bold" />
 
 					<h:outputText value="Data Criação:" />
 					<h:outputText
-						value="#{typeOfActivityBean.typeOfActivitySelecionada.createDate}">
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.createDate}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<h:outputText value="Data Atualização:" />
 					<h:outputText
-						value="#{typeOfActivityBean.typeOfActivitySelecionada.lastUpdate}">
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.lastUpdate}">
 						<f:convertDateTime pattern="dd/MM/yyyy" />
 					</h:outputText>
 
 					<p:outputLabel for="statusObjSelecionado" value="Status:" />
 					<p:selectOneRadio id="statusObjSelecionado"
-						value="#{typeOfActivityBean.typeOfActivitySelecionada.statusObjectEnum}">
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.statusObjectEnum}">
 						<f:selectItem itemLabel="Ativo" itemValue="Ativo" />
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 					</p:selectOneRadio>
 
 					<h:outputText value="Descrição:" />
 					<p:inputText
-						value="#{typeOfActivityBean.typeOfActivitySelecionada.description}"
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.description}"
 						style="font-weight:bold" />
 
 					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
-						action="#{typeOfActivityBean.alterar}" icon="ui-icon-circle-plus"
+						action="#{typeOfSubActivityBean.alterar}" icon="ui-icon-circle-plus"
 						update="@formPrincipal" ajax="false" />
 
 				</h:panelGrid>
