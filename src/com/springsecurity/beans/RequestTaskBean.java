@@ -3,7 +3,6 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -30,13 +29,12 @@ public class RequestTaskBean implements Serializable {
 	private RequestTask tarefaSelecionada;
 
 	public RequestTaskBean() {
+		tarefaSelecionada = new RequestTask();
 	}
 
 	@PostConstruct
 	public void init() {
 		listaTarefas = tarefaService.getAllRequestTasks();
-		tarefaSelecionada = new RequestTask();
-
 	}
 
 	public String incluirFila() {
@@ -64,18 +62,14 @@ public class RequestTaskBean implements Serializable {
 
 	}
 
-	public String executar() {
+	public String editar() {
 		try {
-			tarefaSelecionada
-					.setCreateDate(new Date(System.currentTimeMillis()));
-			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
-			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.FAZENDO);
-			tarefaService.adicionar(tarefaSelecionada);
+			tarefaService.editar(getTarefaSelecionada());
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
-							"Item adicionado com sucesso!"));
+							"Item alterado com sucesso!"));
 			return null;
 
 		} catch (DataAccessException e) {
@@ -83,60 +77,7 @@ public class RequestTaskBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
-							"Item não adicionado!"));
-		}
-		return null;
-
-	}
-
-	public String concluir() {
-		try {
-			tarefaSelecionada
-					.setCreateDate(new Date(System.currentTimeMillis()));
-			tarefaSelecionada
-					.setCloseDate(new Date(System.currentTimeMillis()));
-			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Inativo);
-			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.CONCLUIDA);
-			listaTarefas = tarefaService.getAllRequestTasks();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
-							"Item adicionado com sucesso!"));
-			return null;
-
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
-							"Item não adicionado!"));
-		}
-		return null;
-
-	}
-
-	public String cancelar() {
-		try {
-			tarefaSelecionada
-					.setCreateDate(new Date(System.currentTimeMillis()));
-			tarefaSelecionada
-					.setCloseDate(new Date(System.currentTimeMillis()));
-			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Inativo);
-			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.CANCELADA);
-			tarefaService.adicionar(tarefaSelecionada);
-			listaTarefas = tarefaService.getAllRequestTasks();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
-							"Item adicionado com sucesso!"));
-			return null;
-
-		} catch (DataAccessException e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
-							"Item não adicionado!"));
+							"Item não alterado!"));
 		}
 		return null;
 

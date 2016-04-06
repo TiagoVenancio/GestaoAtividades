@@ -7,8 +7,12 @@ import com.springsecurity.entities.RequestTask;
 public interface RequestTaskService {
 
 	List<RequestTask> buscarTaskPor(RequestTask requestTask);
-	
+
 	void adicionar(RequestTask requestTask) throws IllegalArgumentException;
+
+	void editar(RequestTask requestTask) throws IllegalArgumentException;
+
+	public RequestTask getById(Long id);
 
 	public List<RequestTask> getAllRequestTasks();
 
