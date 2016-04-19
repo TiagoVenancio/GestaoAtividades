@@ -2,7 +2,7 @@ package com.springsecurity.enums;
 
 public enum StatusObjectEnum {
 
-	Ativo(1), Inativo(0);
+	Ativo(0), Inativo(1);
 
 	public int valorStatusEnum;
 

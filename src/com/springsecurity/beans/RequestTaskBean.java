@@ -88,9 +88,6 @@ public class RequestTaskBean implements Serializable {
 			editarTarefa.setUserOwnerTask(tarefaSelecionada.getUserOwnerTask());
 
 			tarefaService.editar(editarTarefa);
-
-			tarefaService.editar(getTarefaSelecionada());
-
 			listaTarefas = tarefaService.getAllRequestTasks();
 
 			FacesContext.getCurrentInstance().addMessage(
