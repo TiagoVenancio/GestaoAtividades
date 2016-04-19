@@ -20,24 +20,24 @@ public class TypeOfActivityListActiveBean implements Serializable {
 
 	@Autowired
 	private TypeOfActivityService service;
-	private List<TypeOfActivity> listaPrioridadeAtivas;
+	private List<TypeOfActivity> listaAtividadesAtivas;
 
 	public TypeOfActivityListActiveBean() {
 	}
 
 	@PostConstruct
 	public void init() {
-		setListaPrioridadeAtivas(service.listarAtividadesAtivas());
+		listaAtividadesAtivas = service.listarAtividadesAtivas();
 
 	}
 
-	public List<TypeOfActivity> getListaPrioridadeAtivas() {
-		return listaPrioridadeAtivas;
+	public List<TypeOfActivity> getListaAtividadesAtivas() {
+		return listaAtividadesAtivas;
 	}
 
-	public void setListaPrioridadeAtivas(
-			List<TypeOfActivity> listaPrioridadeAtivas) {
-		this.listaPrioridadeAtivas = listaPrioridadeAtivas;
+	public void setListaAtividadesAtivas(
+			List<TypeOfActivity> listaAtividadesAtivas) {
+		this.listaAtividadesAtivas = listaAtividadesAtivas;
 	}
 
 }

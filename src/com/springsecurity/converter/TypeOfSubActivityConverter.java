@@ -7,7 +7,7 @@ import javax.faces.convert.FacesConverter;
 
 import com.springsecurity.entities.TypeOfSubActivity;
 
-@FacesConverter(forClass = TypeOfSubActivity.class, value = "converterGrupoAtividade")
+@FacesConverter(forClass = TypeOfSubActivity.class, value = "converterSubGrupoAtividade")
 public class TypeOfSubActivityConverter implements Converter {
 
 	@Override
