@@ -21,14 +21,10 @@ public class RequestTaskBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long idTarefa;
-
 	@Autowired
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
-
-	private StatusObjectEnum statusObjectEnum;
 
 	public RequestTaskBean() {
 		tarefaSelecionada = new RequestTask();
@@ -44,7 +40,9 @@ public class RequestTaskBean implements Serializable {
 			tarefaSelecionada.setCreateDate(new Date(System.currentTimeMillis()));
 			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
+			
 			tarefaService.adicionar(tarefaSelecionada);
+			
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -129,22 +127,6 @@ public class RequestTaskBean implements Serializable {
 
 	public void setTarefaSelecionada(RequestTask tarefaSelecionada) {
 		this.tarefaSelecionada = tarefaSelecionada;
-	}
-
-	public Long getIdTarefa() {
-		return idTarefa;
-	}
-
-	public void setIdTarefa(Long idTarefa) {
-		this.idTarefa = idTarefa;
-	}
-
-	public StatusObjectEnum getStatusObjectEnum() {
-		return statusObjectEnum;
-	}
-
-	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
-		this.statusObjectEnum = statusObjectEnum;
 	}
 
 }
