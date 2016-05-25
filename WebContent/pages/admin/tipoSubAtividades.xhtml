@@ -42,9 +42,14 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Descrição" filterBy="#{var.description}"
+					<p:column headerText="Assunto" filterBy="#{var.description}"
 						filterMatchMode="contains" sortBy="#{var.description}">
 						<h:outputText value="#{var.description}" />
+					</p:column>
+
+					<p:column headerText="Descrição" filterBy="#{var.typeOfActivity}"
+						filterMatchMode="contains" sortBy="#{var.typeOfActivity}">
+						<h:outputText value="#{var.typeOfActivity.description}" />
 					</p:column>
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
@@ -79,15 +84,26 @@
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
+					<h:outputLabel for="assunto" value="Assunto:" />
+					<p:selectOneMenu id="assunto"
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.typeOfActivity}"
+						converter="converterGrupoAtividade" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 200px;">
+						<f:selectItem itemLabel="Selecione Um Assunto" />
+						<f:selectItems
+							value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
+							var="x" itemValue="#{x}" itemLabel="#{x.description}" />
+					</p:selectOneMenu>
+
 					<h:outputLabel for="descricao" value="Descrição:" />
 					<p:inputText id="descricao" label="descricao"
-						value="#{typeOfSubActivityBean.description}" />
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.description}" />
 
 				</h:panelGrid>
 
 				<p:commandButton value="Adicionar" onclick="PF('dlg').show();"
-					action="#{typeOfSubActivityBean.adicionar}" icon="ui-icon-circle-plus"
-					update="@formPrincipal" ajax="false" />
+					action="#{typeOfSubActivityBean.adicionar}"
+					icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
 
 			</p:dialog>
 		</h:form>
@@ -131,8 +147,8 @@
 						style="font-weight:bold" />
 
 					<p:commandButton value="Concluir" onclick="PF('dlg').show();"
-						action="#{typeOfSubActivityBean.alterar}" icon="ui-icon-circle-plus"
-						update="@formPrincipal" ajax="false" />
+						action="#{typeOfSubActivityBean.alterar}"
+						icon="ui-icon-circle-plus" update="@formPrincipal" ajax="false" />
 
 				</h:panelGrid>
 			</p:dialog>

@@ -27,12 +27,13 @@ public class TypeOfSubActivityBean implements Serializable {
 	private TypeOfSubActivityService typeOfSubActivityService;
 	private List<TypeOfSubActivity> listaTiposAtividades;
 	private TypeOfSubActivity typeOfSubActivitySelecionada;
+	
 
 	private String description;
 	private StatusObjectEnum statusObjectEnum;
 
 	public TypeOfSubActivityBean() {
-
+		typeOfSubActivitySelecionada = new TypeOfSubActivity();
 	}
 
 	@PostConstruct
@@ -42,15 +43,12 @@ public class TypeOfSubActivityBean implements Serializable {
 
 	public String adicionar() {
 		try {
-
-			TypeOfSubActivity TypeOfSubActivity = new TypeOfSubActivity();
-			TypeOfSubActivity.setCreateDate(new Date(System.currentTimeMillis()));
-			TypeOfSubActivity.setLastUpdate(new Date(System.currentTimeMillis()));
-			TypeOfSubActivity.setDescription(description);
-			TypeOfSubActivity.setStatusObjectEnum(StatusObjectEnum.Ativo);
-			typeOfSubActivityService.adicionar(TypeOfSubActivity);
-			listaTiposAtividades = typeOfSubActivityService
-					.getAllTipoDeAtividades();
+			
+			typeOfSubActivitySelecionada.setCreateDate(new Date(System.currentTimeMillis()));
+			typeOfSubActivitySelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
+			typeOfSubActivitySelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
+			typeOfSubActivityService.adicionar(typeOfSubActivitySelecionada);
+			listaTiposAtividades = typeOfSubActivityService.getAllTipoDeAtividades();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",

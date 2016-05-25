@@ -17,7 +17,8 @@
 		<class>com.springsecurity.entities.TypeOfPriority</class>
 		<class>com.springsecurity.entities.TypeOfTask</class>
 		<class>com.springsecurity.entities.UserOwnerTask</class>
-
+		<class>com.springsecurity.entities.TypeOfSubActivity</class>
+		
 		<properties>
 	
 			<property name="hibernate.show_sql" value="true" />
