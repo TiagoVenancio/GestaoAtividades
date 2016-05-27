@@ -63,10 +63,22 @@
 					</p:column>
 
 
-					<p:column headerText="Ação" style="width:120px">
+					<p:column headerText="Ação" style="width:90px">
 
 						<p:commandButton update=":formEditar:displayEditar"
-							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
+							<f:setPropertyActionListener value="#{var}"
+								target="#{requestTaskBean.tarefaSelecionada}" />
+						</p:commandButton>
+
+						<p:commandButton update=":formConcluir:displayConcluir"
+							oncomplete="PF('dlgConcluir').show()" icon="ui-icon-check">
+							<f:setPropertyActionListener value="#{var}"
+								target="#{requestTaskBean.tarefaSelecionada}" />
+						</p:commandButton>
+
+						<p:commandButton update=":formCancelar:displayCancelar"
+							oncomplete="PF('dlgCancelar').show()" icon="ui-icon-circle-close">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{requestTaskBean.tarefaSelecionada}" />
 						</p:commandButton>
@@ -376,7 +388,81 @@
 
 		</p:dialog>
 
+		<p:dialog header="Concluir Tarefa" widgetVar="dlgConcluir"
+			resizable="false"
+			closeListener="#{resetValuesDialogBean.handleClose}">
 
+			<h:form id="formConcluir">
+
+				<h:panelGrid id="displayConcluir">
+
+					<p:tabView id="tabViewTarefaConcluir">
+
+						<!-- DIALOG NOVO - TAB DESCRICAO -->
+
+						<p:tab title="Deseja Concluir Essa Tarefa?">
+							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
+
+								<p:outputLabel for="concluirObjSelecionado" value="Status:" />
+								<p:selectOneRadio id="concluirObjSelecionado"
+									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+									<f:selectItem itemLabel="Concluir" itemValue="CONCLUIDA" />
+								</p:selectOneRadio>
+
+								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+									action="#{requestTaskBean.editar}" icon="ui-icon-circle-plus"
+									update=":formPrincipal" />
+
+
+							</h:panelGrid>
+
+
+						</p:tab>
+
+					</p:tabView>
+
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Cancelar Tarefa" widgetVar="dlgCancelar"
+			resizable="false"
+			closeListener="#{resetValuesDialogBean.handleClose}">
+
+			<h:form id="formCancelar">
+
+				<h:panelGrid id="displayCancelar">
+
+					<p:tabView id="tabViewTarefaCancelar">
+
+						<!-- DIALOG NOVO - TAB DESCRICAO -->
+
+						<p:tab title="Deseja Cancelar Essa Tarefa?">
+							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
+
+								<p:outputLabel for="statusObjSelecionado" value="Status:" />
+								<p:selectOneRadio id="statusObjSelecionado"
+									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+									<f:selectItem itemLabel="Cancelar" itemValue="CANCELADA" />
+								</p:selectOneRadio>
+
+								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+									action="#{requestTaskBean.editar}" icon="ui-icon-circle-plus"
+									update=":formPrincipal" />
+
+
+							</h:panelGrid>
+
+
+						</p:tab>
+
+					</p:tabView>
+
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
 
 	</ui:define>
 </ui:decorate>

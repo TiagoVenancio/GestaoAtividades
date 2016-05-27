@@ -90,8 +90,7 @@ public class TypeOfSubActivityBean implements Serializable {
 
 	}
 	
-	@SuppressWarnings("unused")
-	private void listarSubAssunto(AjaxBehaviorEvent event) {
+	public void listarSubAssunto(AjaxBehaviorEvent event) {
 		
 		listaSubActivityByActivity = typeOfSubActivityService.listaSubActivityByActivity(typeOfActivity);
 

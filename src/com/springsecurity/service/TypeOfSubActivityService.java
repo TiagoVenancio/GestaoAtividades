@@ -12,7 +12,7 @@ public interface TypeOfSubActivityService {
 
 	void alterar(TypeOfSubActivity typeOfSubActivity) throws IllegalArgumentException;
 	
-	List<TypeOfSubActivity> listaSubActivityByActivity (TypeOfActivity typeOfActivity);
+	public List<TypeOfSubActivity> listaSubActivityByActivity (TypeOfActivity typeOfActivity);
 
 	public List<TypeOfSubActivity> getAllTipoDeAtividades();
 
