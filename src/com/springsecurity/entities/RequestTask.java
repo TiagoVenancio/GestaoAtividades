@@ -63,6 +63,10 @@ public class RequestTask implements Serializable {
 	private TypeOfActivity typeOfActivity;
 
 	@ManyToOne
+	@JoinColumn(name = "TYPE_SUB_ACTIVITY_ID")
+	private TypeOfSubActivity typeOfSubActivity;
+	
+	@ManyToOne
 	@JoinColumn(name = "TYPE_ACTION_ID")
 	private TypeOfAction typeOfAction;
 
@@ -200,6 +204,14 @@ public class RequestTask implements Serializable {
 
 	public void setUserOwnerTask(UserOwnerTask userOwnerTask) {
 		this.userOwnerTask = userOwnerTask;
+	}
+	
+	public TypeOfSubActivity getTypeOfSubActivity() {
+		return typeOfSubActivity;
+	}
+
+	public void setTypeOfSubActivity(TypeOfSubActivity typeOfSubActivity) {
+		this.typeOfSubActivity = typeOfSubActivity;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.springsecurity.service;
 
 import java.util.List;
 
+import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfSubActivity;
 
 public interface TypeOfSubActivityService {
@@ -10,6 +11,8 @@ public interface TypeOfSubActivityService {
 			throws IllegalArgumentException;
 
 	void alterar(TypeOfSubActivity typeOfSubActivity) throws IllegalArgumentException;
+	
+	List<TypeOfSubActivity> listaSubActivityByActivity (TypeOfActivity typeOfActivity);
 
 	public List<TypeOfSubActivity> getAllTipoDeAtividades();
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfSubActivityDao;
+import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfSubActivity;
 import com.springsecurity.service.TypeOfSubActivityService;
 
@@ -44,6 +45,12 @@ public class TypeOfSubActivityServiceImpl implements TypeOfSubActivityService {
 	@Override
 	public List<TypeOfSubActivity> listarAtividadesAtivas() {
 		return dao.findAllActivityAtivas();
+	}
+
+	@Override
+	public List<TypeOfSubActivity> listaSubActivityByActivity(
+			TypeOfActivity typeOfActivity) {
+		return dao.listaSubActivityByActivity(typeOfActivity);
 	}
 
 }

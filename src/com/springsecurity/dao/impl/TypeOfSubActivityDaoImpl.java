@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.TypeOfSubActivityDao;
+import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfSubActivity;
 import com.springsecurity.enums.StatusObjectEnum;
 
@@ -50,6 +51,16 @@ public class TypeOfSubActivityDaoImpl implements TypeOfSubActivityDao {
 		Query query = entityManager
 				.createQuery("select t from TypeOfSubActivity t where statusObjectEnum = :statusObjectEnum");
 		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TypeOfSubActivity> listaSubActivityByActivity(
+			TypeOfActivity typeOfActivity) {
+		Query query = entityManager
+				.createQuery("select t from TypeOfSubActivity t where typeOfActivity = :typeOfActivity");
+		query.setParameter("typeOfActivity", typeOfActivity);
 		return query.getResultList();
 	}
 

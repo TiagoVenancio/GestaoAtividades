@@ -7,12 +7,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
+import com.springsecurity.entities.TypeOfActivity;
 import com.springsecurity.entities.TypeOfSubActivity;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.service.TypeOfSubActivityService;
@@ -27,6 +29,8 @@ public class TypeOfSubActivityBean implements Serializable {
 	private TypeOfSubActivityService typeOfSubActivityService;
 	private List<TypeOfSubActivity> listaTiposAtividades;
 	private TypeOfSubActivity typeOfSubActivitySelecionada;
+	private List<TypeOfSubActivity> listaSubActivityByActivity;
+	private TypeOfActivity typeOfActivity;
 	
 
 	private String description;
@@ -47,20 +51,15 @@ public class TypeOfSubActivityBean implements Serializable {
 			typeOfSubActivitySelecionada.setCreateDate(new Date(System.currentTimeMillis()));
 			typeOfSubActivitySelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
 			typeOfSubActivitySelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
+			
 			typeOfSubActivityService.adicionar(typeOfSubActivitySelecionada);
 			listaTiposAtividades = typeOfSubActivityService.getAllTipoDeAtividades();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
-							"Item adicionado com sucesso!"));
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!","Item adicionado com sucesso!"));
 			return "Sucesso";
 
 		} catch (DataAccessException e) {
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
-							"Item não adicionado!"));
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!","Item não adicionado!"));
 		}
 		return null;
 
@@ -69,9 +68,10 @@ public class TypeOfSubActivityBean implements Serializable {
 	public String alterar() {
 		try {
 			typeOfSubActivitySelecionada.setLastUpdate(new Date(System.currentTimeMillis()));
+			
 			typeOfSubActivityService.alterar(typeOfSubActivitySelecionada);
-			listaTiposAtividades = typeOfSubActivityService
-					.getAllTipoDeAtividades();
+			
+			listaTiposAtividades = typeOfSubActivityService.getAllTipoDeAtividades();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
@@ -87,6 +87,13 @@ public class TypeOfSubActivityBean implements Serializable {
 							"Item não alterado!"));
 		}
 		return null;
+
+	}
+	
+	@SuppressWarnings("unused")
+	private void listarSubAssunto(AjaxBehaviorEvent event) {
+		
+		listaSubActivityByActivity = typeOfSubActivityService.listaSubActivityByActivity(typeOfActivity);
 
 	}
 
@@ -130,6 +137,23 @@ public class TypeOfSubActivityBean implements Serializable {
 
 	public void setStatusObjectEnum(StatusObjectEnum statusObjectEnum) {
 		this.statusObjectEnum = statusObjectEnum;
+	}
+
+	public List<TypeOfSubActivity> getListaSubActivityByActivity() {
+		return listaSubActivityByActivity;
+	}
+
+	public void setListaSubActivityByActivity(
+			List<TypeOfSubActivity> listaSubActivityByActivity) {
+		this.listaSubActivityByActivity = listaSubActivityByActivity;
+	}
+
+	public TypeOfActivity getTypeOfActivity() {
+		return typeOfActivity;
+	}
+
+	public void setTypeOfActivity(TypeOfActivity typeOfActivity) {
+		this.typeOfActivity = typeOfActivity;
 	}
 
 	

@@ -108,6 +108,17 @@
 						<h:panelGrid columns="2" cellpadding="4"
 							id="panelNovoClassificacao">
 
+							<p:outputLabel for="solicitante" value="Solicitante: " />
+							<p:selectOneMenu id="solicitante"
+								value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+								converter="converterGrupoClientes" required="true" filter="true"
+								filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione um solicitante" />
+								<f:selectItems
+									value="#{requestCustomerBean.listaRequestCustomerService}"
+									var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+							</p:selectOneMenu>
+
 							<p:outputLabel for="responsavel" value="Responsável: " />
 							<p:selectOneMenu id="responsavel"
 								value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
@@ -118,26 +129,28 @@
 									itemValue="#{u}" itemLabel="#{u.name}" />
 							</p:selectOneMenu>
 
-							<p:outputLabel for="atividade" value="Tema: " />
+							<p:outputLabel for="atividade" value="Assunto: " />
 							<p:selectOneMenu id="atividade"
 								value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
 								converter="converterGrupoAtividade" required="true"
 								filter="true" filterMatchMode="startsWith" style="width: 340px;">
-								<f:selectItem itemLabel="Selecione um tema" />
+								<f:selectItem itemLabel="Selecione Um Assunto" />
 								<f:selectItems
 									value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
 									var="a" itemValue="#{a}" itemLabel="#{a.description}" />
+								<f:ajax render="subassunto" event="change"
+									listener="#{typeOfSubActivityBean.listarSubAssunto}" />
 							</p:selectOneMenu>
 
-							<p:outputLabel for="solicitante" value="Solicitante: " />
-							<p:selectOneMenu id="solicitante"
-								value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
-								converter="converterGrupoClientes" required="true" filter="true"
-								filterMatchMode="startsWith" style="width: 340px;">
-								<f:selectItem itemLabel="Selecione um solicitante" />
+							<h:outputLabel for="subassunto" value="Sub-Assunto:" />
+							<p:selectOneMenu id="subassunto"
+								value="#{requestTaskBean.tarefaSelecionada.typeOfSubActivity}"
+								converter="converterSubGrupoAtividade" required="true"
+								filter="true" filterMatchMode="startsWith" style="width: 340px;">
+								<f:selectItem itemLabel="Selecione Um Sub-Assunto" />
 								<f:selectItems
-									value="#{requestCustomerBean.listaRequestCustomerService}"
-									var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
+									value="#{typeOfSubActivityBean.listaSubActivityByActivity}"
+									var="x" itemValue="#{x}" itemLabel="#{x.description}" />
 							</p:selectOneMenu>
 
 

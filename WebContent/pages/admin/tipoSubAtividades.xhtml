@@ -42,14 +42,16 @@
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Assunto" filterBy="#{var.description}"
-						filterMatchMode="contains" sortBy="#{var.description}">
-						<h:outputText value="#{var.description}" />
+					<p:column headerText="Assunto"
+						filterBy="#{var.typeOfActivity.description}"
+						filterMatchMode="contains"
+						sortBy="#{var.typeOfActivity.description}">
+						<h:outputText value="#{var.typeOfActivity.description}" />
 					</p:column>
 
-					<p:column headerText="Descrição" filterBy="#{var.typeOfActivity}"
-						filterMatchMode="contains" sortBy="#{var.typeOfActivity}">
-						<h:outputText value="#{var.typeOfActivity.description}" />
+					<p:column headerText="Sub-Assunto" filterBy="#{var.description}"
+						filterMatchMode="contains" sortBy="#{var.description}">
+						<h:outputText value="#{var.description}" />
 					</p:column>
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
@@ -141,7 +143,18 @@
 						<f:selectItem itemLabel="Inativo" itemValue="Inativo" />
 					</p:selectOneRadio>
 
-					<h:outputText value="Descrição:" />
+					<h:outputLabel for="assunto" value="Assunto:" />
+					<p:selectOneMenu id="assunto"
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.typeOfActivity}"
+						converter="converterGrupoAtividade" required="true" filter="true"
+						filterMatchMode="startsWith" style="width: 220px;">
+						<f:selectItem itemLabel="Selecione Um Assunto" />
+						<f:selectItems
+							value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
+							var="x" itemValue="#{x}" itemLabel="#{x.description}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Sub-Assunto:" />
 					<p:inputText
 						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.description}"
 						style="font-weight:bold" />
