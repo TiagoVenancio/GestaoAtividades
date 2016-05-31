@@ -3,14 +3,22 @@ package com.springsecurity.beans;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+
 import com.springsecurity.entities.RequestTask;
+import com.springsecurity.entities.Role;
+import com.springsecurity.entities.User;
+import com.springsecurity.entities.UserOwnerTask;
 import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
 import com.springsecurity.service.RequestTaskService;
@@ -25,6 +33,9 @@ public class RequestTaskBean implements Serializable {
 	private RequestTaskService tarefaService;
 	private List<RequestTask> listaTarefas;
 	private RequestTask tarefaSelecionada;
+	private Role role;
+	private User user;
+	private UserOwnerTask userOwner;
 
 	public RequestTaskBean() {
 		tarefaSelecionada = new RequestTask();
@@ -32,7 +43,30 @@ public class RequestTaskBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
+
 		listaTarefas = tarefaService.getAllRequestTasks();
+		// verificaLogin();
+		// listaTarefas = tarefaService.listaPorLogin(userOwner);
+
+	}
+
+	public void verificaLogin() {
+
+		Object usuarioLogado = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (usuarioLogado instanceof UserDetails) {
+			((UserDetails) usuarioLogado).getAuthorities().toString()
+					.equals("ROLE_ADMIN");
+
+			listaTarefas = tarefaService.getAllRequestTasks();
+
+		}
+
+		else {
+
+			listaTarefas = tarefaService.listaPorLogin(userOwner);
+
+		}
+
 	}
 
 	public String incluirFila() {
@@ -40,9 +74,9 @@ public class RequestTaskBean implements Serializable {
 			tarefaSelecionada.setCreateDate(new Date(System.currentTimeMillis()));
 			tarefaSelecionada.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			tarefaSelecionada.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
-			
+
 			tarefaService.adicionar(tarefaSelecionada);
-			
+
 			listaTarefas = tarefaService.getAllRequestTasks();
 			FacesContext.getCurrentInstance().addMessage(
 					null,
@@ -56,6 +90,59 @@ public class RequestTaskBean implements Serializable {
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!",
 							"Item não adicionado!"));
+		}
+		return null;
+
+	}
+
+	public String salvar() {
+		try {
+			
+			RequestTask salvarTarefa = new RequestTask();
+			
+			salvarTarefa.setId(tarefaSelecionada.getId());
+			salvarTarefa.setAmountHours(tarefaSelecionada.getAmountHours());
+			salvarTarefa.setCloseDate(new Date(System.currentTimeMillis()));
+			salvarTarefa.setConclusionDate(tarefaSelecionada.getConclusionDate());
+			salvarTarefa.setCreateDate(tarefaSelecionada.getCreateDate());
+			salvarTarefa.setDescription(tarefaSelecionada.getDescription());
+			salvarTarefa.setRequestCustomer(tarefaSelecionada.getRequestCustomer());
+			salvarTarefa.setResume(tarefaSelecionada.getResume());
+			salvarTarefa.setStartDate(tarefaSelecionada.getStartDate());
+			
+			switch (tarefaSelecionada.getStatusTaskEnum()){
+			case A_FAZER:
+				salvarTarefa.setStatusObjectEnum(StatusObjectEnum.Ativo);
+				break;
+			case CANCELADA:
+				salvarTarefa.setStatusObjectEnum(StatusObjectEnum.Inativo);
+				break;
+			case CONCLUIDA:
+				salvarTarefa.setStatusObjectEnum(StatusObjectEnum.Inativo);
+				break;
+			case FAZENDO:
+				salvarTarefa.setStatusObjectEnum(StatusObjectEnum.Ativo);
+				break;
+			default:
+				salvarTarefa.setStatusObjectEnum(StatusObjectEnum.Ativo);
+				break;			
+			
+			}
+			salvarTarefa.setStatusTaskEnum(tarefaSelecionada.getStatusTaskEnum());
+			salvarTarefa.setTypeOfAction(tarefaSelecionada.getTypeOfAction());
+			salvarTarefa.setTypeOfActivity(tarefaSelecionada.getTypeOfActivity());
+			salvarTarefa.setTypeOfPriority(tarefaSelecionada.getTypeOfPriority());
+			salvarTarefa.setUserOwnerTask(tarefaSelecionada.getUserOwnerTask());
+
+			tarefaService.salvar(salvarTarefa);
+
+			listaTarefas = tarefaService.getAllRequestTasks();
+			
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!","Item Salvo Com Sucesso!"));
+			return "tarefasPendentes";
+
+		} catch (DataAccessException e) {e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha!","Item Não Salvo!"));
 		}
 		return null;
 
@@ -86,6 +173,7 @@ public class RequestTaskBean implements Serializable {
 			editarTarefa.setUserOwnerTask(tarefaSelecionada.getUserOwnerTask());
 
 			tarefaService.editar(editarTarefa);
+			
 			listaTarefas = tarefaService.getAllRequestTasks();
 
 			FacesContext.getCurrentInstance().addMessage(
@@ -127,6 +215,30 @@ public class RequestTaskBean implements Serializable {
 
 	public void setTarefaSelecionada(RequestTask tarefaSelecionada) {
 		this.tarefaSelecionada = tarefaSelecionada;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public UserOwnerTask getUserOwner() {
+		return userOwner;
+	}
+
+	public void setUserOwner(UserOwnerTask userOwner) {
+		this.userOwner = userOwner;
 	}
 
 }

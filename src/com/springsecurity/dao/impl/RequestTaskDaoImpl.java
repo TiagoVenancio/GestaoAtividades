@@ -1,15 +1,21 @@
 package com.springsecurity.dao.impl;
 
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.springsecurity.dao.RequestTaskDao;
 import com.springsecurity.entities.RequestTask;
+import com.springsecurity.entities.UserOwnerTask;
+import com.springsecurity.enums.StatusTaskEnum;
 
 @Repository
 @Transactional
@@ -45,7 +51,15 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 		return results;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
+	public List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask) {
+		Query query = entityManager.createQuery("select t from RequestTask t where userOwnerTask = :userOwnerTask");
+		query.setParameter("userOwnerTask", userOwnerTask);
+		return query.getResultList();
+	}
+
+	@Override	
 	public void save(RequestTask requestTask) {
 		entityManager.persist(requestTask);
 
@@ -60,6 +74,33 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 	@Override
 	public RequestTask getById(Long id) {
 		return entityManager.find(RequestTask.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> findAllTarefasAfazer() {
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where statusTaskEnum = :statusTaskEnum");
+		query.setParameter("statusTaskEnum", StatusTaskEnum.A_FAZER);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> findAllTarefasFazendo() {
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where statusTaskEnum = :statusTaskEnum");
+		query.setParameter("statusTaskEnum", StatusTaskEnum.FAZENDO);
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> findAllTarefasConcluido() {
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where statusTaskEnum = :statusTaskEnum");
+		query.setParameter("statusTaskEnum", StatusTaskEnum.CONCLUIDA);
+		return query.getResultList();
 	}
 
 }

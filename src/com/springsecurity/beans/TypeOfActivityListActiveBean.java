@@ -35,8 +35,7 @@ public class TypeOfActivityListActiveBean implements Serializable {
 		return listaAtividadesAtivas;
 	}
 
-	public void setListaAtividadesAtivas(
-			List<TypeOfActivity> listaAtividadesAtivas) {
+	public void setListaAtividadesAtivas(List<TypeOfActivity> listaAtividadesAtivas) {
 		this.listaAtividadesAtivas = listaAtividadesAtivas;
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.springsecurity.dao.RequestTaskDao;
 import com.springsecurity.entities.RequestTask;
+import com.springsecurity.entities.UserOwnerTask;
 import com.springsecurity.service.RequestTaskService;
 
 @Service
@@ -43,6 +44,34 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	@Override
 	public RequestTask getById(Long id) {
 		return dao.getById(id);
+	}
+	
+	@Override
+	public List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask) {
+		return dao.listaPorLogin(userOwnerTask);
+	}
+
+	@Override
+	public void salvar(RequestTask requestTask) throws IllegalArgumentException {
+		dao.save(requestTask);
+		
+	}
+
+	@Override
+	public List<RequestTask> listarTarefasAFazer() {
+		return dao.findAllTarefasAfazer();
+		
+	}
+
+	@Override
+	public List<RequestTask> listarTarefasFazendo() {
+		return dao.findAllTarefasFazendo();
+	}
+
+	@Override
+	public List<RequestTask> listarTarefasConcluido() {		
+		return dao.findAllTarefasConcluido();
+
 	}
 
 }

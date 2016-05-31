@@ -11,71 +11,85 @@
 
 			<h:panelGrid columns="3">
 
-				<p:dataTable id="dataTabAFazer" var="varTabFazer" value="#"
+				<p:dataTable id="dataTabAFazer" var="var"
+					value="#{taskAfazerBean.listaTarefasAfazer}"
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
         				A-FAZER
     				</f:facet>
 
-					<p:column headerText="Solicitante">
-						<h:outputText value="#" />
+					<p:column headerText="Solicitante"
+						sortBy="#{var.requestCustomer.userName}">
+						<h:outputText value="#{var.requestCustomer.userName}" />
 					</p:column>
 
-					<p:column headerText="Tarefa">
-						<h:outputText value="#" />
+					<p:column headerText="Tarefa" sortBy="#{var.resume}">
+						<h:outputText value="#{var.resume}" />
 					</p:column>
 
-					<p:column headerText="Previsão de início">
-						<h:outputText value="#" />
+					<p:column headerText="Previsão de início" sortBy="#{var.startDate}"  style="width:23%">
+						<h:outputText value="#{var.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+
 					</p:column>
+
 				</p:dataTable>
 
-
-				<p:dataTable id="dataTabFazendo" var="varTabFazendo" value="#"
+				<p:dataTable id="dataTabFazendo" var="var"
+					value="#{taskFazendoBean.listaTarefasFazendo}"
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
         				FAZENDO
     				</f:facet>
 
-					<p:column headerText="Tarefa">
-						<h:outputText value="#" />
+					<p:column headerText="Tarefa" sortBy="#{var.resume}">
+						<h:outputText value="#{var.resume}" />
 					</p:column>
 
-					<p:column headerText="Responsável">
-						<h:outputText value="#" />
+					<p:column headerText="Responsável"
+						sortBy="#{var.userOwnerTask.name}">
+						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
-					<p:column headerText="Previsão de conclusão">
-						<h:outputText value="#" />
+					<p:column headerText="Previsão de conclusão"
+						sortBy="#{var.conclusionDate}" style="width:23%">
+						<h:outputText value="#{var.conclusionDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 					</p:column>
 				</p:dataTable>
 
 
-				<p:dataTable id="dataTabConcluido" var="varTabConcluido" value="#"
+				<p:dataTable id="dataTabConcluido" var="var"
+					value="#{taskConcluidoBean.listaTarefasConcluido}"
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
         				CONCLUÍDO
     				</f:facet>
 
-					<p:column headerText="Solicitante">
-						<h:outputText value="#" />
+					<p:column headerText="Solicitante"
+						sortBy="#{var.requestCustomer.userName}">
+						<h:outputText value="#{var.requestCustomer.userName}" />
 					</p:column>
 
-					<p:column headerText="Tarefa">
-						<h:outputText value="#" />
+					<p:column headerText="Tarefa" sortBy="#{var.resume}">
+						<h:outputText value="#{var.resume}" />
 					</p:column>
 
-					<p:column headerText="Data de conclusão">
-						<h:outputText value="#" />
+					<p:column headerText="Data de conclusão"
+						sortBy="#{var.conclusionDate}" style="width:23%">
+						<h:outputText value="#{var.conclusionDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
 					</p:column>
+
 				</p:dataTable>
-
 			</h:panelGrid>
 		</h:form>
-
 	</ui:define>
 </ui:decorate>
 </html>

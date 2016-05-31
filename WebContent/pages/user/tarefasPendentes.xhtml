@@ -63,7 +63,7 @@
 					</p:column>
 
 
-					<p:column headerText="Ação" style="width:90px">
+					<p:column headerText="Ação" style="width:60px">
 
 						<p:commandButton update=":formEditar:displayEditar"
 							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
@@ -71,25 +71,19 @@
 								target="#{requestTaskBean.tarefaSelecionada}" />
 						</p:commandButton>
 
-						<p:commandButton update=":formConcluir:displayConcluir"
-							oncomplete="PF('dlgConcluir').show()" icon="ui-icon-check">
-							<f:setPropertyActionListener value="#{var}"
-								target="#{requestTaskBean.tarefaSelecionada}" />
-						</p:commandButton>
-
-						<p:commandButton update=":formCancelar:displayCancelar"
-							oncomplete="PF('dlgCancelar').show()" icon="ui-icon-circle-close">
+						<p:commandButton update=":formStatus:displayStatus"
+							oncomplete="PF('dlgStatus').show()" icon="ui-icon-notice">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{requestTaskBean.tarefaSelecionada}" />
 						</p:commandButton>
 
 					</p:column>
 
-
 					<f:facet name="footer">
 						<p:commandButton value="Adicionar" onclick="PF('dlgNovo').show();"
 							type="button" icon="ui-icon-circle-plus" />
 					</f:facet>
+
 				</p:dataTable>
 			</h:panelGrid>
 
@@ -230,6 +224,7 @@
 								action="#{requestTaskBean.incluirFila}" icon="ui-icon-wrench" />
 
 						</h:panelGrid>
+
 					</p:tab>
 				</p:tabView>
 			</p:dialog>
@@ -388,72 +383,101 @@
 
 		</p:dialog>
 
-		<p:dialog header="Concluir Tarefa" widgetVar="dlgConcluir"
+		<p:dialog header="Status Da Tarefa" widgetVar="dlgStatus"
 			resizable="false"
 			closeListener="#{resetValuesDialogBean.handleClose}">
 
-			<h:form id="formConcluir">
+			<h:form id="formStatus">
 
-				<h:panelGrid id="displayConcluir">
+				<h:panelGrid id="displayStatus">
 
-					<p:tabView id="tabViewTarefaConcluir">
+					<p:tabView id="tabViewTarefaStatus">
 
-						<!-- DIALOG NOVO - TAB DESCRICAO -->
+						<!-- DIALOG NOVO - TAB STATUS -->
 
-						<p:tab title="Deseja Concluir Essa Tarefa?">
+						<p:tab title="Alterar Status Da Tarefa">
 							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
 
 								<p:outputLabel for="concluirObjSelecionado" value="Status:" />
 								<p:selectOneRadio id="concluirObjSelecionado"
 									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+									<f:selectItem itemLabel="Fazendo" itemValue="FAZENDO" />
 									<f:selectItem itemLabel="Concluir" itemValue="CONCLUIDA" />
-								</p:selectOneRadio>
-
-								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.editar}" icon="ui-icon-circle-plus"
-									update=":formPrincipal" />
-
-
-							</h:panelGrid>
-
-
-						</p:tab>
-
-					</p:tabView>
-
-				</h:panelGrid>
-			</h:form>
-
-		</p:dialog>
-
-		<p:dialog header="Cancelar Tarefa" widgetVar="dlgCancelar"
-			resizable="false"
-			closeListener="#{resetValuesDialogBean.handleClose}">
-
-			<h:form id="formCancelar">
-
-				<h:panelGrid id="displayCancelar">
-
-					<p:tabView id="tabViewTarefaCancelar">
-
-						<!-- DIALOG NOVO - TAB DESCRICAO -->
-
-						<p:tab title="Deseja Cancelar Essa Tarefa?">
-							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
-
-								<p:outputLabel for="statusObjSelecionado" value="Status:" />
-								<p:selectOneRadio id="statusObjSelecionado"
-									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
 									<f:selectItem itemLabel="Cancelar" itemValue="CANCELADA" />
 								</p:selectOneRadio>
 
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.id}" />
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.createDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.closeDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.startDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.conclusionDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.amountHours}">								
+								</p:inputText>
+								
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.statusObjectEnum}">					
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.description}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.resume}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfSubActivity}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}">
+								</p:inputText>
+
+								<p:inputText type="hidden"
+									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}">
+								</p:inputText>
+
 								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.editar}" icon="ui-icon-circle-plus"
+									action="#{requestTaskBean.salvar}" icon="ui-icon-circle-plus"
 									update=":formPrincipal" />
 
-
 							</h:panelGrid>
-
 
 						</p:tab>
 
@@ -461,9 +485,7 @@
 
 				</h:panelGrid>
 			</h:form>
-
 		</p:dialog>
-
 	</ui:define>
 </ui:decorate>
 </html>
