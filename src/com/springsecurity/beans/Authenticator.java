@@ -12,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
+import com.sun.security.auth.module.NTSystem;
 import com.springsecurity.entities.User;
 import com.springsecurity.service.LoginService;
 
@@ -27,7 +28,11 @@ public class Authenticator implements AuthenticationProvider {
 	@SuppressWarnings("unused")
 	private String userLogadoWindows;
 
-	private static String userName = System.getProperty("user.name");
+	private static String infoSystem = new NTSystem().getName();
+
+	// private static String userName = System.getProperty("user.name");
+
+	private static String userName = infoSystem;
 
 	public String login() {
 		try {

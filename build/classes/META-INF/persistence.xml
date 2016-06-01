@@ -10,25 +10,22 @@
 		<class>com.springsecurity.entities.User</class>
 		<class>com.springsecurity.entities.RequestCustomer</class>
 		<class>com.springsecurity.entities.RequestTask</class>
-		<class>com.springsecurity.entities.StatusOfTask</class>
 		<class>com.springsecurity.entities.TypeOfAction</class>
 		<class>com.springsecurity.entities.TypeOfActivity</class>
-		<class>com.springsecurity.entities.TypeOfGroup</class>
 		<class>com.springsecurity.entities.TypeOfPriority</class>
-		<class>com.springsecurity.entities.TypeOfTask</class>
 		<class>com.springsecurity.entities.UserOwnerTask</class>
 		<class>com.springsecurity.entities.TypeOfSubActivity</class>
-		
+
 		<properties>
-	
-			<property name="hibernate.show_sql" value="true" />
+
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.use_sql_comments" value="false" />
 			<property name="hibernate.jdbc.wrap_result_sets" value="false" />
-			<property name="hibernate.hibernate.cache.use_query_cache"
-				value="true" />
+			<property name="hibernate.hibernate.cache.use_query_cache" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			
 		</properties>
 
 
