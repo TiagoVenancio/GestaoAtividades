@@ -22,47 +22,53 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				MANUTENÇÃO DE TEMAS
+        				MANUTENÇÃO DE SUB-ASSUNTO
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="Id" sortBy="#{var.id}"
+						style="width:5%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
-						<h:outputText value="#{var.createDate}" style="font-size:12px;">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}"
+						style="width:13%; font-size:12px; font-weight:bold; text-align: center;">
+						<h:outputText value="#{var.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
-						sortBy="#{var.lastUpdate}">
+						sortBy="#{var.lastUpdate}"
+						style="width:13%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Assunto"
 						filterBy="#{var.typeOfActivity.description}"
 						filterMatchMode="contains"
-						style="font-size:12px;"
-						sortBy="#{var.typeOfActivity.description}">
+						sortBy="#{var.typeOfActivity.description}"
+						style="width:25%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.typeOfActivity.description}" />
 					</p:column>
 
 					<p:column headerText="Sub-Assunto" filterBy="#{var.description}"
-						filterMatchMode="contains" sortBy="#{var.description}">
+						filterMatchMode="contains" sortBy="#{var.description}"
+						style="width:25%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.description}" />
 					</p:column>
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
-						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}"
+						style="width:15%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
-					<p:column style="width:32px">
+					<p:column headerText="Editar"
+						style="width:5%; font-size:12px; font-weight:bold; text-align: center;">
 						<p:commandButton update=":formEditar:panelEditar"
-							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{typeOfSubActivityBean.typeOfSubActivitySelecionada}" />
 						</p:commandButton>
@@ -81,26 +87,29 @@
 		<!-- FORM NOVO -->
 
 		<h:form id="formNovo">
-			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
-				hideEffect="bounce" height="350" resizable="false">
+			<p:dialog header="Novo Item" widgetVar="dlgNovo" height="350"
+				resizable="false">
 
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="assunto" value="Assunto:" />
+					<h:outputLabel for="assunto" value="Assunto:"
+						style="font-weight:bold;" />
 					<p:selectOneMenu id="assunto"
 						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.typeOfActivity}"
 						converter="converterGrupoAtividade" required="true" filter="true"
-						filterMatchMode="startsWith" style="width: 200px;">
+						filterMatchMode="startsWith" style="width: 220px;">
 						<f:selectItem itemLabel="Selecione Um Assunto" />
 						<f:selectItems
 							value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
 							var="x" itemValue="#{x}" itemLabel="#{x.description}" />
 					</p:selectOneMenu>
 
-					<h:outputLabel for="descricao" value="Descrição:" />
+					<h:outputLabel for="descricao" value="Descrição:"
+						style="font-weight:bold;" />
 					<p:inputText id="descricao" label="descricao"
-						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.description}" />
+						value="#{typeOfSubActivityBean.typeOfSubActivitySelecionada.description}"
+						style="font-weight:bold;" />
 
 				</h:panelGrid>
 

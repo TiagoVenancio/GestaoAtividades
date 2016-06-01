@@ -28,13 +28,13 @@
 					<p:column headerText="Responsável"
 						sortBy="#{var.userOwnerTask.name}"
 						filterBy="#{var.userOwnerTask.name}" filterMatchMode="contains"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
 					<p:column headerText="Tarefa" sortBy="#{var.resume}"
 						filterBy="#{var.resume}" filterMatchMode="contains"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
 
@@ -42,50 +42,50 @@
 						sortBy="#{var.typeOfAction.description}"
 						filterBy="#{var.typeOfAction.description}"
 						filterMatchMode="contains"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.typeOfAction.description}" />
-					</p:column>
-
-					<p:column headerText="Sub-Assunto"
-						sortBy="#{var.typeOfSubActivity.description}"
-						filterBy="#{var.typeOfSubActivity.description}"
-						filterMatchMode="contains"
-						style="font-size:12px; font-weight:bold;">
-						<h:outputText value="#{var.typeOfSubActivity.description}" />
 					</p:column>
 
 					<p:column headerText="Assunto"
 						sortBy="#{var.typeOfActivity.description}"
 						filterBy="#{var.typeOfActivity.description}"
 						filterMatchMode="contains"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.typeOfActivity.description}" />
+					</p:column>
+
+					<p:column headerText="Sub-Assunto"
+						sortBy="#{var.typeOfSubActivity.description}"
+						filterBy="#{var.typeOfSubActivity.description}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center;">
+						<h:outputText value="#{var.typeOfSubActivity.description}" />
 					</p:column>
 
 					<p:column headerText="Prioridade"
 						sortBy="#{var.typeOfPriority.description}"
 						filterBy="#{var.typeOfPriority.description}"
 						filterMatchMode="contains"
-						style="width:100px; font-size:12px; font-weight:bold;">
+						style="width:100px; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.typeOfPriority.description}" />
 					</p:column>
 
 					<p:column headerText="Status" sortBy="#{var.statusTaskEnum}"
-						style="width:60px; font-size:12px; font-weight:bold;">
+						style="width:60px; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.statusTaskEnum}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.createDate}"
-						style="width:60px; font-size:12px; font-weight:bold;">
+					<p:column headerText="Data De Criação" sortBy="#{var.createDate}"
+						style="width:60px; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
 
 
-					<p:column headerText="Previsão de conclusão"
+					<p:column headerText="Previsão De Conclusão"
 						sortBy="#{var.conclusionDate}"
-						style="width:60px; font-size:12px; font-weight:bold;">
+						style="width:60px; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
@@ -93,13 +93,13 @@
 
 					<p:column headerText="Esforço (hrs:min)"
 						sortBy="#{var.amountHours}"
-						style="width:48px; font-size:12px; font-weight:bold;">
+						style="width:48px; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.amountHours}" />
 					</p:column>
 
 
 					<p:column headerText="Ação"
-						style="width:60px; font-size:12px; font-weight:bold;">
+						style="width:60px; font-size:12px; font-weight:bold; text-align: center;">
 
 						<p:commandButton update=":formEditar:displayEditar"
 							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
@@ -448,7 +448,7 @@
 
 		</p:dialog>
 
-		<p:dialog header="Status Da Tarefa" widgetVar="dlgStatus"
+		<p:dialog header="Alterar Status Da Tarefa" widgetVar="dlgStatus"
 			resizable="false"
 			closeListener="#{resetValuesDialogBean.handleClose}">
 
@@ -456,97 +456,90 @@
 
 				<h:panelGrid id="displayStatus">
 
-					<p:tabView id="tabViewTarefaStatus">
+					<!-- DIALOG CONCLUIR -->
 
-						<!-- DIALOG CONCLUIR -->
+					<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
 
-						<p:tab title="Alterar Status Da Tarefa">
-							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
-
-								<p:outputLabel for="concluirObjSelecionado" value="Status:"
-									style="font-weight:bold;" />
-								<p:selectOneRadio id="concluirObjSelecionado"
-									value="#{requestTaskBean.enumSelecionado}">
-									<f:selectItem itemLabel="Fazendo" itemValue="FAZENDO" />
-									<f:selectItem itemLabel="Concluir" itemValue="CONCLUIDA" />
-									<f:selectItem itemLabel="Cancelar" itemValue="CANCELADA" />
-								</p:selectOneRadio>
+						<p:outputLabel for="concluirObjSelecionado" value="Status:"
+							style="font-weight:bold;" />
+						<p:selectOneRadio id="concluirObjSelecionado"
+							value="#{requestTaskBean.enumSelecionado}">
+							<f:selectItem itemLabel="Fazendo" itemValue="FAZENDO" />
+							<f:selectItem itemLabel="Concluir" itemValue="CONCLUIDA" />
+							<f:selectItem itemLabel="Cancelar" itemValue="CANCELADA" />
+						</p:selectOneRadio>
 
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.id}" />
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.id}" />
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.createDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.createDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.closeDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.closeDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.startDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.conclusionDate}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.conclusionDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.amountHours}">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.amountHours}">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.description}">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.description}">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.resume}">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.resume}">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
-									converter="converterGrupoAtividade">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+							converter="converterGrupoAtividade">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfSubActivity}"
-									converter="converterSubGrupoAtividade">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.typeOfSubActivity}"
+							converter="converterSubGrupoAtividade">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
-									converter="converterGrupoAcoes">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+							converter="converterGrupoAcoes">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
-									converter="converterGrupoClientes">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+							converter="converterGrupoClientes">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
-									converter="converterGrupoUsuarios">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+							converter="converterGrupoUsuarios">
+						</p:inputText>
 
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
-									converter="converterGrupoPrioridades">
-								</p:inputText>
+						<p:inputText type="hidden"
+							value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+							converter="converterGrupoPrioridades">
+						</p:inputText>
 
-								<p:commandButton value="Salvar" onclick="PF('dlg').show();"
-									action="#{requestTaskBean.salvar}" icon="ui-icon-circle-plus"
-									update=":formPrincipal" />
+						<p:commandButton value="Salvar" onclick="PF('dlg').show();"
+							action="#{requestTaskBean.salvar}" icon="ui-icon-circle-plus"
+							update=":formPrincipal" />
 
-							</h:panelGrid>
-
-						</p:tab>
-
-					</p:tabView>
+					</h:panelGrid>
 
 				</h:panelGrid>
 			</h:form>

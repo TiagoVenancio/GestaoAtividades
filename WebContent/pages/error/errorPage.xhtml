@@ -1,12 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <ui:decorate template="/template/default.xhtml">
 	<ui:define name="centro">
 		<h:form>
-			<h:messages />
-			<h:outputText
-				value="!!!! Desculpe, você não tem permissão para acessar a página requisitada. =/" />
+
+		<h:graphicImage library="images" name="acessoNegado.png" height="98%" width="100%"/>
+
 		</h:form>
 	</ui:define>
 </ui:decorate>

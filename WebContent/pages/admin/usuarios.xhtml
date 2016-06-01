@@ -24,52 +24,62 @@
         				MANUTENÇÃO DE USUÁRIOS
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="Id" sortBy="#{var.id}"
+						style="width:5%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.dateCreate}">
+					<p:column headerText="Data de Criação" sortBy="#{var.dateCreate}"
+						style="width:13%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.dateCreate}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
-						sortBy="#{var.lastUpdate}">
+						sortBy="#{var.lastUpdate}"
+						style="width:13%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Nome" filterBy="#{var.name}"
-						filterMatchMode="contains" sortBy="#{var.name}">
+						filterMatchMode="contains" sortBy="#{var.name}"
+						style="width:25%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.name}" />
 					</p:column>
 
 					<p:column headerText="Matrícula" filterBy="#{var.username}"
-						filterMatchMode="contains" sortBy="#{var.username}">
+						filterMatchMode="contains" sortBy="#{var.username}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.username}" />
 					</p:column>
 
 					<p:column headerText="E-mail" filterBy="#{var.email}"
-						filterMatchMode="contains" sortBy="#{var.email}">
+						filterMatchMode="contains" sortBy="#{var.email}"
+						style="width:25%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.email}" />
 					</p:column>
 
 					<p:column headerText="Grupo" filterBy="#{var.businessGroup}"
-						filterMatchMode="contains" sortBy="#{var.businessGroup}">
+						filterMatchMode="contains" sortBy="#{var.businessGroup}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.businessGroup}" />
 					</p:column>
 
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
-						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
-					<p:column style="width:32px">
+					<p:column headerText="Editar"
+						style="width:
+						5%; font-size:12px; font-weight:bold; text-align: center;">
 						<p:commandButton update=":formEditar:panelEditar"
-							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{userOwnerBean.userOwnerTaskSelecionado}" />
 						</p:commandButton>
@@ -88,27 +98,30 @@
 		<!-- FORM NOVO -->
 
 		<h:form id="formNovo">
-			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
-				hideEffect="bounce" height="350" resizable="false">
-
+			<p:dialog header="Novo Item" widgetVar="dlgNovo"
+				height="350" resizable="false">
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="registro" value="Matrícula:" />
+					<h:outputLabel for="registro" value="Matrícula:"
+						style="font-weight:bold;" />
 					<p:inputText id="registro" label="descricao"
-						value="#{userOwnerBean.registroUser}" />
+						value="#{userOwnerBean.registroUser}" style="font-weight:bold;" />
 
-					<h:outputLabel for="userName" value="Nome:" />
+					<h:outputLabel for="userName" value="Nome:"
+						style="font-weight:bold;" />
 					<p:inputText id="userName" label="Nome"
-						value="#{userOwnerBean.nameUser}" />
+						value="#{userOwnerBean.nameUser}" style="font-weight:bold;" />
 
-					<h:outputLabel for="emailUser" value="Email:" />
+					<h:outputLabel for="emailUser" value="Email:"
+						style="font-weight:bold;" />
 					<p:inputText id="emailUser" label="Email"
-						value="#{userOwnerBean.emailUser}" />
+						value="#{userOwnerBean.emailUser}" style="font-weight:bold;" />
 
-					<h:outputLabel for="groupUser" value="Grupo:" />
+					<h:outputLabel for="groupUser" value="Grupo:"
+						style="font-weight:bold;" />
 					<p:inputText id="groupUser" label="Grupo"
-						value="#{userOwnerBean.groupUser}" />
+						value="#{userOwnerBean.groupUser}" style="font-weight:bold;" />
 
 				</h:panelGrid>
 

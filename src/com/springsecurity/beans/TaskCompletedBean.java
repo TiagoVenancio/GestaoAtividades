@@ -32,19 +32,11 @@ public class TaskCompletedBean implements Serializable{
 	
 	@PostConstruct
 	public void init() {
-		tarefaSelecionada = new RequestTask();
-		
-	}
-	
-	public void buscaAll() {
 		listaTarefas = service.getAllRequestTasks();
+		
 	}
 	
-	public void pesquisarFiltros(){
-		
-		listaTarefas = service.findForFiltros("USER_OWNER_ID", String.valueOf(tarefaSelecionada.getUserOwnerTask().getId()));
-	}
-
+	
 		public String pesquisar(){
 			try {
 				
@@ -65,6 +57,7 @@ public class TaskCompletedBean implements Serializable{
 		
 		}
 
+
 		public List<RequestTask> getListaTarefas() {
 			return listaTarefas;
 		}
@@ -80,6 +73,6 @@ public class TaskCompletedBean implements Serializable{
 		public void setTarefaSelecionada(RequestTask tarefaSelecionada) {
 			this.tarefaSelecionada = tarefaSelecionada;
 		}
-		
+	
 		
 }

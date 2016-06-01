@@ -108,12 +108,10 @@ public class RequestTaskBean implements Serializable {
 			salvarTarefa.setId(tarefaSelecionada.getId());
 			salvarTarefa.setAmountHours(tarefaSelecionada.getAmountHours());
 			salvarTarefa.setCloseDate(new Date(System.currentTimeMillis()));
-			salvarTarefa.setConclusionDate(tarefaSelecionada
-					.getConclusionDate());
+			salvarTarefa.setConclusionDate(tarefaSelecionada.getConclusionDate());
 			salvarTarefa.setCreateDate(tarefaSelecionada.getCreateDate());
 			salvarTarefa.setDescription(tarefaSelecionada.getDescription());
-			salvarTarefa.setRequestCustomer(tarefaSelecionada
-					.getRequestCustomer());
+			salvarTarefa.setRequestCustomer(tarefaSelecionada.getRequestCustomer());
 			salvarTarefa.setResume(tarefaSelecionada.getResume());
 			salvarTarefa.setStartDate(tarefaSelecionada.getStartDate());
 
@@ -135,10 +133,9 @@ public class RequestTaskBean implements Serializable {
 			salvarTarefa.setStatusTaskEnum(enumSelecionado);
 
 			salvarTarefa.setTypeOfAction(tarefaSelecionada.getTypeOfAction());
-			salvarTarefa.setTypeOfActivity(tarefaSelecionada
-					.getTypeOfActivity());
-			salvarTarefa.setTypeOfPriority(tarefaSelecionada
-					.getTypeOfPriority());
+			salvarTarefa.setTypeOfActivity(tarefaSelecionada.getTypeOfActivity());
+			salvarTarefa.setTypeOfPriority(tarefaSelecionada.getTypeOfPriority());
+			salvarTarefa.setTypeOfSubActivity(tarefaSelecionada.getTypeOfSubActivity());			
 			salvarTarefa.setUserOwnerTask(tarefaSelecionada.getUserOwnerTask());
 
 			tarefaService.editar(salvarTarefa);

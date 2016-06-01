@@ -29,8 +29,7 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RequestTask> findAll() {
-		return entityManager.createQuery("FROM " + RequestTask.class.getName())
-				.getResultList();
+		return entityManager.createQuery("FROM " + RequestTask.class.getName()).getResultList();
 	}
 
 	@SuppressWarnings("unchecked")

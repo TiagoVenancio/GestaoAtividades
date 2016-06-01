@@ -25,36 +25,42 @@
         				MANUTENÇÃO DE PRIORIDADES
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="Id" sortBy="#{var.id}"
+						style="width:2%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.createDate}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
-						sortBy="#{var.lastUpdate}">
+						sortBy="#{var.lastUpdate}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.lastUpdate}">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Descrição" filterBy="#{var.description}"
-						filterMatchMode="contains" sortBy="#{var.description}">
+						filterMatchMode="contains" sortBy="#{var.description}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.description}" />
 					</p:column>
 
 					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
-						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}"
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
-					<p:column style="width:32px">
+					<p:column headerText="Editar"
+						style="width:2%; font-size:12px; font-weight:bold; text-align: center;">
 						<p:commandButton update=":formEditar:panelEditar"
-							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{typeOfPriorityBean.typeOfPrioritySelecionada}" />
 						</p:commandButton>
@@ -79,9 +85,11 @@
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
-					<h:outputLabel for="descricao" value="Descrição:" />
+					<h:outputLabel for="descricao" value="Descrição:"
+						style="font-weight:bold;" />
 					<p:inputText id="descricao" label="descricao"
-						value="#{typeOfPriorityBean.description}" />
+						value="#{typeOfPriorityBean.description}"
+						style="font-weight:bold;" />
 
 				</h:panelGrid>
 

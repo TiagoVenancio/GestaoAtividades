@@ -58,6 +58,13 @@ body {
 							<p:menuitem value="TaskBoard"
 								action="#{redirectorBean.successfulPage}" icon="ui-icon-flag" />
 
+							<p:submenu label="Tarefas" icon="ui-icon-pin-s">
+
+								<p:menuitem value="Minhas tarefas"
+									url="/pages/user/tarefasPendentes.jsf" icon="ui-icon-pin-w"
+									update="messages" />
+
+							</p:submenu>
 
 							<p:submenu label="Cadastro" icon="ui-icon-gear">
 
@@ -67,7 +74,6 @@ body {
 									update="messages" />
 
 							</p:submenu>
-
 
 							<p:submenu label="Configuração" icon="ui-icon-locked">
 
@@ -94,14 +100,6 @@ body {
 								</p:submenu>
 
 
-
-							</p:submenu>
-
-							<p:submenu label="Tarefas" icon="ui-icon-pin-s">
-
-								<p:menuitem value="Minhas tarefas"
-									url="/pages/user/tarefasPendentes.jsf" icon="ui-icon-pin-w"
-									update="messages" />
 
 							</p:submenu>
 

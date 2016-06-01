@@ -26,19 +26,20 @@
     				</f:facet>
 
 					<p:column headerText="Id" sortBy="#{var.id}"
-						style="width:3%; font-size:12px; font-weight:bold;">
+						style="width:3%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
 					<p:column headerText="Data de Criação" sortBy="#{var.createDate}"
-						style="width:12%; font-size:12px; font-weight:bold;">
+						style="width:12%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
-						sortBy="#{var.lastUpdate}" style="width:12%; font-size:12px; font-weight:bold;">
+						sortBy="#{var.lastUpdate}"
+						style="width:12%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.lastUpdate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
@@ -46,36 +47,37 @@
 
 					<p:column headerText="Criador" filterBy="#{var.lastUserChange}"
 						filterMatchMode="contains" sortBy="#{var.lastUserChange}"
-						style="width:10%; font-size:12px; font-weight:bold;">
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.lastUserChange}" />
 					</p:column>
 
 					<p:column headerText="Nome" filterBy="#{var.userName}"
 						filterMatchMode="contains" sortBy="#{var.userName}"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.userName}" />
 					</p:column>
 
 					<p:column headerText="Matrícula" filterBy="#{var.userId}"
 						filterMatchMode="contains" sortBy="#{var.userId}"
-						style="width:10%; font-size:12px; font-weight:bold;">
+						style="width:10%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.userId}" />
 					</p:column>
 
 					<p:column headerText="E-mail" filterBy="#{var.email}"
 						filterMatchMode="contains" sortBy="#{var.email}"
-						style="font-size:12px; font-weight:bold;">
+						style="font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.email}" />
 					</p:column>
 
 					<p:column headerText="Status" sortBy="#{var.statusObjectEnum}"
-						style="width:4%; font-size:12px; font-weight:bold;">
+						style="width:4%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
-					<p:column style="width:32px">
+					<p:column headerText="Editar"
+						style="width:5%; font-size:12px; font-weight:bold; text-align: center;">
 						<p:commandButton update=":formEditar:panelEditar"
-							oncomplete="PF('dlgEditar').show()" icon="ui-icon-search">
+							oncomplete="PF('dlgEditar').show()" icon="ui-icon-pencil">
 							<f:setPropertyActionListener value="#{var}"
 								target="#{requestCustomerBean.requestCustomerSelecionada}" />
 						</p:commandButton>
@@ -101,15 +103,18 @@
 
 					<h:outputLabel for="matriculaSolicitante" value="Matrícula:" />
 					<p:inputText id="matriculaSolicitante" label="Matricula"
-						value="#{requestCustomerBean.matriculaSolicitante}" style="font-weight:bold;"/>
+						value="#{requestCustomerBean.matriculaSolicitante}"
+						style="font-weight:bold;" />
 
 					<h:outputLabel for="nameSolicitante" value="Nome:" />
 					<p:inputText id="nameSolicitante" label="Nome"
-						value="#{requestCustomerBean.nameSolicitante}" style="font-weight:bold;"/>
+						value="#{requestCustomerBean.nameSolicitante}"
+						style="font-weight:bold;" />
 
 					<h:outputLabel for="emailSolicitante" value="E-mail:" />
 					<p:inputText id="emailSolicitante" label="E-mail"
-						value="#{requestCustomerBean.emailSolicitante}" style="font-weight:bold;"/>
+						value="#{requestCustomerBean.emailSolicitante}"
+						style="font-weight:bold;" />
 
 
 				</h:panelGrid>

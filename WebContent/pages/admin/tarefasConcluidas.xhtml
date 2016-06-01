@@ -53,7 +53,8 @@
 					converter="converterGrupoUsuarios" required="false"
 					filterMatchMode="startsWith" style="width: 250px;">
 					<f:selectItem itemLabel="Selecione um Sub Assunto" />
-					<f:selectItems value="#{typeOfSubActivityBean.listaTiposAtividades}" var="u"
+					<f:selectItems
+						value="#{typeOfSubActivityBean.listaTiposAtividades}" var="u"
 						itemValue="#{u}" itemLabel="#{u.description}" />
 				</p:selectOneMenu>
 
@@ -72,6 +73,7 @@
 		</h:form>
 
 		<h:form id="formPrincipal">
+
 			<!-- MENSAGENS- INICIO -->
 
 			<p:growl id="msgs" showDetail="true" />
@@ -79,8 +81,10 @@
 			<!-- FORM PRINCIPAL -->
 
 			<h:panelGrid id="gridPrincipal">
+
 				<p:dataTable id="dataTable" var="var"
-					value="#{taskCompletedBean.listaTarefas}" rows="25" paginator="true"
+					value="#{taskCompletedBean.listaTarefas}" rows="25"
+					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					emptyMessage="Nenhum registro encontrado.">
 
@@ -88,52 +92,109 @@
         				Manutenção Solicitante
     				</f:facet>
 
-					<p:column headerText="ID" style="width: 20px;">
+					<p:column headerText="ID Da Tarefa" sortBy="#{var.id}"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 80px;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Nome Da Tarefa" style="width: 200px;">
+					<p:column headerText="Nome Da Tarefa" sortBy="#{var.resume}"
+						filterBy="#{var.resume}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
 
-					<p:column headerText="Assunto" style="width: 200px;">
-						<h:outputText value="#{var.typeOfActivity.description}" />
-					</p:column>
-
-					<p:column headerText="Sub Assunto" style="width: 200px;">
-						<h:outputText value="#{var.description}" />
-					</p:column>
-
-					<p:column headerText="Ação Realizada" style="width: 200px;">
-						<h:outputText value="#{var.typeOfAction.description}" />
-					</p:column>
-
-					<p:column headerText="Status" style="width: 100px;">
-						<h:outputText value="#{var.statusTaskEnum}" />
-					</p:column>
-
-					<p:column headerText="Prioridade" style="width: 100px;">
-						<h:outputText value="#{var.typeOfPriority.description}" />
-					</p:column>
-
-					<p:column headerText="Responsável" style="width: 100px;">
+					<p:column headerText="Responsável"
+						sortBy="#{var.userOwnerTask.name}"
+						filterBy="#{var.userOwnerTask.name}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
 						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
-					<p:column headerText="Data Início" style="width: 180px;">
+					<p:column headerText="Solicitante"
+						sortBy="#{var.requestCustomer.userName}"
+						filterBy="#{var.requestCustomer.userName}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
+						<h:outputText value="#{var.requestCustomer.userName}" />
+					</p:column>
+
+					<p:column headerText="Ação Realizada"
+						sortBy="#{var.typeOfAction.description}"
+						filterBy="#{var.typeOfAction.description}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
+						<h:outputText value="#{var.typeOfAction.description}" />
+					</p:column>
+
+					<p:column headerText="Assunto"
+						sortBy="#{var.typeOfActivity.description}"
+						filterBy="#{var.typeOfActivity.description}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
+						<h:outputText value="#{var.typeOfActivity.description}" />
+					</p:column>
+
+					<p:column headerText="Sub-Assunto"
+						sortBy="#{var.typeOfSubActivity.description}"
+						filterBy="#{var.typeOfSubActivity.description}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 300px;">
+						<h:outputText value="#{var.typeOfSubActivity.description}" />
+					</p:column>
+
+					<p:column headerText="Prioridade"
+						sortBy="#{var.typeOfPriority.description}"
+						filterBy="#{var.typeOfPriority.description}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 100px;">
+						<h:outputText value="#{var.typeOfPriority.description}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{var.statusTaskEnum}"
+						filterBy="#{var.statusTaskEnum}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 100px;">
+						<h:outputText value="#{var.statusTaskEnum}" />
+					</p:column>
+
+					<p:column headerText="Esforço (hrs:min)"
+						sortBy="#{var.amountHours}" filterBy="#{var.amountHours}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 100px;">
+						<h:outputText value="#{var.amountHours}" />
+					</p:column>
+
+					<p:column headerText="Data De Criação" sortBy="#{var.createDate}"
+						filterBy="#{var.createDate}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 150px;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Data Fim" style="width: 180px;">
+					<p:column headerText="Data De Inicio" sortBy="#{var.startDate}"
+						filterBy="#{var.startDate}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 150px;">
+						<h:outputText value="#{var.startDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
+					</p:column>
+
+
+					<p:column headerText="Previsão De Conclusão"
+						sortBy="#{var.conclusionDate}" filterBy="#{var.conclusionDate}"
+						filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 150px;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
-					<p:column headerText="Tempo Desenvolvimento" style="width: 120px;">
-						<h:outputText value="#{var.amountHours}" />
+					<p:column headerText="Conclusão" sortBy="#{var.closeDate}"
+						filterBy="#{var.closeDate}" filterMatchMode="contains"
+						style="font-size:12px; font-weight:bold; text-align: center; width: 150px;">
+						<h:outputText value="#{var.closeDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+						</h:outputText>
 					</p:column>
 
 				</p:dataTable>

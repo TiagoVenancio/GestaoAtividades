@@ -7,36 +7,36 @@
 	<ui:define name="centro">
 
 		<h:form id="form">
+
 			<p:growl id="msgs" showDetail="true" />
 
-			<h:panelGrid columns="3">
-
+			<h:panelGrid columns="3" id="panelGrid">
 				<p:dataTable id="dataTabAFazer" var="var"
 					value="#{taskAfazerBean.listaTarefasAfazer}"
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				A-FAZER
-    				</f:facet>
+        			    	A-FAZER
+    			        	</f:facet>
 
 					<p:column headerText="Responsável"
-						sortBy="#{var.userOwnerTask.name}" style="font-size:12px; font-weight:bold;"
+						sortBy="#{var.userOwnerTask.name}"
+						style="font-size:12px; font-weight:bold; text-align: center;"
 						filterBy="#{var.userOwnerTask.name}" filterMatchMode="contains">
 						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
 					<p:column headerText="Tarefa" sortBy="#{var.resume}"
-						style="font-size:12px; font-weight:bold;" filterBy="#{var.resume}"
-						filterMatchMode="contains">
+						style="font-size:12px; font-weight:bold; text-align: center;"
+						filterBy="#{var.resume}" filterMatchMode="contains">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
 
 					<p:column headerText="Previsão de início" sortBy="#{var.startDate}"
-						style="width:20%; font-size:12px; font-weight:bold;">
+						style="width:20%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.startDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
-
 					</p:column>
 
 				</p:dataTable>
@@ -46,29 +46,31 @@
 					emptyMessage="Nenhum registro encontrado.">
 
 					<f:facet name="header">
-        				FAZENDO
-    				</f:facet>
+        			     	FAZENDO
+    				        </f:facet>
 
 					<p:column headerText="Responsável"
-						sortBy="#{var.userOwnerTask.name}" style="font-size:12px; font-weight:bold;"
+						sortBy="#{var.userOwnerTask.name}"
+						style="font-size:12px; font-weight:bold; text-align: center;"
 						filterBy="#{var.userOwnerTask.name}" filterMatchMode="contains">
 						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
 					<p:column headerText="Tarefa" sortBy="#{var.resume}"
-						style="font-size:12px; font-weight:bold;" filterBy="#{var.resume}"
-						filterMatchMode="contains">
+						style="font-size:12px; font-weight:bold; text-align: center;"
+						filterBy="#{var.resume}" filterMatchMode="contains">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
 
 					<p:column headerText="Previsão de conclusão"
-						sortBy="#{var.conclusionDate}" style="width:20%; font-size:12px; font-weight:bold;">
+						sortBy="#{var.conclusionDate}"
+						style="width:20%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-				</p:dataTable>
 
+				</p:dataTable>
 
 				<p:dataTable id="dataTabConcluido" var="var"
 					value="#{taskConcluidoBean.listaTarefasConcluido}"
@@ -79,19 +81,21 @@
     				</f:facet>
 
 					<p:column headerText="Responsável"
-						sortBy="#{var.userOwnerTask.name}" style="font-size:12px; font-weight:bold;"
+						sortBy="#{var.userOwnerTask.name}"
+						style="font-size:12px; font-weight:bold; text-align: center;"
 						filterBy="#{var.userOwnerTask.name}" filterMatchMode="contains">
 						<h:outputText value="#{var.userOwnerTask.name}" />
 					</p:column>
 
 					<p:column headerText="Tarefa" sortBy="#{var.resume}"
-						style="font-size:12px; font-weight:bold;" filterBy="#{var.resume}"
-						filterMatchMode="contains">
+						style="font-size:12px; font-weight:bold; text-align: center;"
+						filterBy="#{var.resume}" filterMatchMode="contains">
 						<h:outputText value="#{var.resume}" />
 					</p:column>
 
 					<p:column headerText="Data de conclusão"
-						sortBy="#{var.conclusionDate}" style="width:20%; font-size:12px; font-weight:bold;">
+						sortBy="#{var.conclusionDate}"
+						style="width:20%; font-size:12px; font-weight:bold; text-align: center;">
 						<h:outputText value="#{var.conclusionDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
