@@ -393,18 +393,19 @@
 
 					<p:tabView id="tabViewTarefaStatus">
 
-						<!-- DIALOG NOVO - TAB STATUS -->
+						<!-- DIALOG CONCLUIR -->
 
 						<p:tab title="Alterar Status Da Tarefa">
 							<h:panelGrid columns="2" cellpadding="1" id="panelStatusTarefa">
 
 								<p:outputLabel for="concluirObjSelecionado" value="Status:" />
 								<p:selectOneRadio id="concluirObjSelecionado"
-									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+									value="#{requestTaskBean.enumSelecionado}">
 									<f:selectItem itemLabel="Fazendo" itemValue="FAZENDO" />
 									<f:selectItem itemLabel="Concluir" itemValue="CONCLUIDA" />
 									<f:selectItem itemLabel="Cancelar" itemValue="CANCELADA" />
 								</p:selectOneRadio>
+
 
 								<p:inputText type="hidden"
 									value="#{requestTaskBean.tarefaSelecionada.id}" />
@@ -430,11 +431,7 @@
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.amountHours}">								
-								</p:inputText>
-								
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.statusObjectEnum}">					
+									value="#{requestTaskBean.tarefaSelecionada.amountHours}">
 								</p:inputText>
 
 								<p:inputText type="hidden"
@@ -446,7 +443,8 @@
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfActivity}"
+									converter="converterGrupoAtividade">
 								</p:inputText>
 
 								<p:inputText type="hidden"
@@ -454,23 +452,23 @@
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
+									converter="converterGrupoAcoes">
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.statusTaskEnum}">
+									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}"
+									converter="converterGrupoClientes">
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.requestCustomer}">
+									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+									converter="converterGrupoUsuarios">
 								</p:inputText>
 
 								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}">
-								</p:inputText>
-
-								<p:inputText type="hidden"
-									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}">
+									value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
+									converter="converterGrupoPrioridades">
 								</p:inputText>
 
 								<p:commandButton value="Salvar" onclick="PF('dlg').show();"

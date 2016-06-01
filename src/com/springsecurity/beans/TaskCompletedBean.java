@@ -35,11 +35,16 @@ public class TaskCompletedBean implements Serializable{
 		tarefaSelecionada = new RequestTask();
 		
 	}
+	
+	public void pesquisarFiltros(){
+		
+		listaTarefas = service.findForFiltros("USER_OWNER_ID", String.valueOf(tarefaSelecionada.getUserOwnerTask().getId()));
+	}
 
 		public String pesquisar(){
 			try {
 				
-				service.buscarTaskPor(tarefaSelecionada);
+				service.buscarTaskPor(tarefaSelecionada.getUserOwnerTask().getId());
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso!",
 								"Item adicionado com sucesso!");
 				return "Sucesso";

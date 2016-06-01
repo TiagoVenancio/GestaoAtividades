@@ -7,12 +7,14 @@ import com.springsecurity.entities.UserOwnerTask;
 
 public interface RequestTaskService {
 
-	List<RequestTask> buscarTaskPor(RequestTask requestTask);
-	
+	List<RequestTask> buscarTaskPor(Long userOwnerTask);
+
+	List<RequestTask> findForFiltros(String campo, String filtros);
+
 	List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask);
 
 	void adicionar(RequestTask requestTask) throws IllegalArgumentException;
-	
+
 	void salvar(RequestTask requestTask) throws IllegalArgumentException;
 
 	void editar(RequestTask requestTask) throws IllegalArgumentException;
@@ -20,10 +22,12 @@ public interface RequestTaskService {
 	public RequestTask getById(Long id);
 
 	public List<RequestTask> getAllRequestTasks();
-	
+
 	public List<RequestTask> listarTarefasAFazer();
-	
+
 	public List<RequestTask> listarTarefasFazendo();
-	
+
 	public List<RequestTask> listarTarefasConcluido();
+
+	public List<RequestTask> listarTarefasPendentes();
 }

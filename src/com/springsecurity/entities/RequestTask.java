@@ -3,6 +3,7 @@ package com.springsecurity.entities;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -58,15 +59,15 @@ public class RequestTask implements Serializable {
 	@Column(name = "RESUME", length = 45, nullable = false)
 	private String resume;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "TYPE_ACTIVITY_ID")
 	private TypeOfActivity typeOfActivity;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "TYPE_SUB_ACTIVITY_ID")
 	private TypeOfSubActivity typeOfSubActivity;
-	
-	@ManyToOne
+
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "TYPE_ACTION_ID")
 	private TypeOfAction typeOfAction;
 
@@ -74,15 +75,15 @@ public class RequestTask implements Serializable {
 	@Column(name = "STATUS_TASK_ID", length = 1, nullable = false)
 	private StatusTaskEnum statusTaskEnum;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "CLIENT_ID")
 	private RequestCustomer requestCustomer;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "USER_OWNER_ID")
 	private UserOwnerTask userOwnerTask;
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.DETACH })
 	@JoinColumn(name = "PRIORITY_ID")
 	private TypeOfPriority typeOfPriority;
 
@@ -205,7 +206,7 @@ public class RequestTask implements Serializable {
 	public void setUserOwnerTask(UserOwnerTask userOwnerTask) {
 		this.userOwnerTask = userOwnerTask;
 	}
-	
+
 	public TypeOfSubActivity getTypeOfSubActivity() {
 		return typeOfSubActivity;
 	}

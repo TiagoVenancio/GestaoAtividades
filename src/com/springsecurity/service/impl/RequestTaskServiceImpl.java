@@ -31,11 +31,6 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	}
 
 	@Override
-	public List<RequestTask> buscarTaskPor(RequestTask requestTask) {
-		return dao.buscarTaskPor(requestTask);
-	}
-
-	@Override
 	public void editar(RequestTask requestTask) throws IllegalArgumentException {
 		dao.update(requestTask);
 
@@ -45,7 +40,7 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	public RequestTask getById(Long id) {
 		return dao.getById(id);
 	}
-	
+
 	@Override
 	public List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask) {
 		return dao.listaPorLogin(userOwnerTask);
@@ -54,13 +49,13 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	@Override
 	public void salvar(RequestTask requestTask) throws IllegalArgumentException {
 		dao.save(requestTask);
-		
+
 	}
 
 	@Override
 	public List<RequestTask> listarTarefasAFazer() {
 		return dao.findAllTarefasAfazer();
-		
+
 	}
 
 	@Override
@@ -69,9 +64,24 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 	}
 
 	@Override
-	public List<RequestTask> listarTarefasConcluido() {		
+	public List<RequestTask> listarTarefasConcluido() {
 		return dao.findAllTarefasConcluido();
 
+	}
+
+	@Override
+	public List<RequestTask> findForFiltros(String campo, String filtros) {
+		return dao.findForFiltros(campo, filtros);
+	}
+
+	@Override
+	public List<RequestTask> buscarTaskPor(Long userOwnerTask) {
+		return dao.buscarTaskPor(userOwnerTask);
+	}
+
+	@Override
+	public List<RequestTask> listarTarefasPendentes() {
+		return dao.listarTarefasPendentes();
 	}
 
 }

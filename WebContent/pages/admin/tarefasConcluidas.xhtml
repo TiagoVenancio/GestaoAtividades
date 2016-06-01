@@ -41,7 +41,7 @@
 						var="u" itemValue="#{u}" itemLabel="#{u.description}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel for="dataInicio" value="Data de Início:" />
+				<p:outputLabel for="dataInicio" value="Data De Início:" />
 				<p:calendar id="dataInicio"
 					value="#{taskCompletedBean.tarefaSelecionada.createDate}"
 					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
@@ -49,23 +49,23 @@
 
 				<p:outputLabel for="subAssunto" value="Sub Assunto:" />
 				<p:selectOneMenu id="subAssunto"
-					value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
+					value="#{taskCompletedBean.tarefaSelecionada.userOwnerTask}"
 					converter="converterGrupoUsuarios" required="false"
 					filterMatchMode="startsWith" style="width: 250px;">
 					<f:selectItem itemLabel="Selecione um Sub Assunto" />
-					<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-						itemValue="#{u}" itemLabel="#{u.name}" />
+					<f:selectItems value="#{typeOfSubActivityBean.listaTiposAtividades}" var="u"
+						itemValue="#{u}" itemLabel="#{u.description}" />
 				</p:selectOneMenu>
 
-				<p:outputLabel for="dataFim" value="Data de Fim:" />
+				<p:outputLabel for="dataFim" value="Data De Fim:" />
 				<p:calendar id="dataFim"
 					value="#{taskCompletedBean.tarefaSelecionada.closeDate}"
 					pattern="dd-MM-yyyy" mask="true" required="false" size="25"
 					locale="pt" navigator="true" />
 
-				<p:commandButton value="Salvar"
+				<p:commandButton value="Buscar"
 					actionListener="#{taskCompletedBean.pesquisar}"
-					update=":formPrincipal:gridPrincipal" icon="ui-icon-wrench" />
+					update=":formPrincipal:gridPrincipal" icon="ui-icon-search" />
 
 			</h:panelGrid>
 

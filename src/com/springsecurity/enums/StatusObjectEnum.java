@@ -1,6 +1,8 @@
 package com.springsecurity.enums;
 
-public enum StatusObjectEnum {
+import java.io.Serializable;
+
+public enum StatusObjectEnum implements Serializable {
 
 	Ativo(0), Inativo(1);
 

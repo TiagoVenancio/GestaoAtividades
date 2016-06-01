@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.springsecurity.dao.RequestTaskDao;
 import com.springsecurity.entities.RequestTask;
 import com.springsecurity.entities.UserOwnerTask;
+import com.springsecurity.enums.StatusObjectEnum;
 import com.springsecurity.enums.StatusTaskEnum;
 
 @Repository
@@ -34,17 +35,20 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<RequestTask> buscarTaskPor(RequestTask requestTask) {
+	public List<RequestTask> buscarTaskPor(Long userOwnerTask) {
 		Criteria cr = session.createCriteria(RequestTask.class);
-		cr.add(Restrictions.like("resume", "%resume%"));
-		cr.add(Restrictions.eq("typeOfActivity",
-				requestTask.getTypeOfActivity()));
-		cr.add(Restrictions.eq("typeOfSubActivity",
-				requestTask.getTypeOfActivity())); // ALTERAR AQUI PARA
-													// SUB-ATIVIDADE
-		cr.add(Restrictions.between("conclusionDate",
-				requestTask.getConclusionDate(),
-				requestTask.getConclusionDate()));
+		cr.add(Restrictions.eq("userOwnerTask", userOwnerTask));
+		/*
+		 * cr.add(Restrictions.eq("typeOfActivity",requestTask.getTypeOfActivity(
+		 * ))); cr.add(Restrictions.eq("typeOfSubActivity",
+		 * requestTask.getTypeOfSubActivity()));
+		 * cr.add(Restrictions.like("resume", "%resume%"));
+		 * cr.add(Restrictions.between
+		 * ("conclusionDate",requestTask.getConclusionDate
+		 * (),requestTask.getConclusionDate()));
+		 * cr.add(Restrictions.between("startDate",
+		 * requestTask.getStartDate(),requestTask.getConclusionDate()));
+		 */
 
 		List<RequestTask> results = cr.list();
 
@@ -54,12 +58,13 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask) {
-		Query query = entityManager.createQuery("select t from RequestTask t where userOwnerTask = :userOwnerTask");
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where userOwnerTask = :userOwnerTask");
 		query.setParameter("userOwnerTask", userOwnerTask);
 		return query.getResultList();
 	}
 
-	@Override	
+	@Override
 	public void save(RequestTask requestTask) {
 		entityManager.persist(requestTask);
 
@@ -93,13 +98,31 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 		query.setParameter("statusTaskEnum", StatusTaskEnum.FAZENDO);
 		return query.getResultList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RequestTask> findAllTarefasConcluido() {
 		Query query = entityManager
 				.createQuery("select t from RequestTask t where statusTaskEnum = :statusTaskEnum");
 		query.setParameter("statusTaskEnum", StatusTaskEnum.CONCLUIDA);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> findForFiltros(String campo, String filtros) {
+		return entityManager.createQuery(
+				"FROM " + RequestTask.class.getName() + " where " + campo
+						+ "like '%" + filtros + "%'").getResultList();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> listarTarefasPendentes() {
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where statusObjectEnum = :statusObjectEnum");
+		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
 		return query.getResultList();
 	}
 
