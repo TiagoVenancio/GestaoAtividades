@@ -168,31 +168,25 @@ public class RequestTaskBean implements Serializable {
 			RequestTask editarTarefa = new RequestTask();
 
 			editarTarefa.setId(tarefaSelecionada.getId());
-
 			editarTarefa.setAmountHours(tarefaSelecionada.getAmountHours());
 			editarTarefa.setCloseDate(tarefaSelecionada.getCloseDate());
-			editarTarefa.setConclusionDate(tarefaSelecionada
-					.getConclusionDate());
+			editarTarefa.setConclusionDate(tarefaSelecionada.getConclusionDate());
 			editarTarefa.setCreateDate(tarefaSelecionada.getCreateDate());
 			editarTarefa.setDescription(tarefaSelecionada.getDescription());
-			editarTarefa.setRequestCustomer(tarefaSelecionada
-					.getRequestCustomer());
+			editarTarefa.setRequestCustomer(tarefaSelecionada.getRequestCustomer());
 			editarTarefa.setResume(tarefaSelecionada.getResume());
 			editarTarefa.setStartDate(tarefaSelecionada.getStartDate());
-
 			editarTarefa.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			editarTarefa.setStatusTaskEnum(StatusTaskEnum.A_FAZER);
-
 			editarTarefa.setTypeOfAction(tarefaSelecionada.getTypeOfAction());
-			editarTarefa.setTypeOfActivity(tarefaSelecionada
-					.getTypeOfActivity());
-			editarTarefa.setTypeOfPriority(tarefaSelecionada
-					.getTypeOfPriority());
+			editarTarefa.setTypeOfActivity(tarefaSelecionada.getTypeOfActivity());
+			editarTarefa.setTypeOfSubActivity(tarefaSelecionada.getTypeOfSubActivity());
+			editarTarefa.setTypeOfPriority(tarefaSelecionada.getTypeOfPriority());
 			editarTarefa.setUserOwnerTask(tarefaSelecionada.getUserOwnerTask());
 
 			tarefaService.editar(editarTarefa);
 
-			listaTarefas = tarefaService.getAllRequestTasks();
+			listaTarefas = tarefaService.listarTarefasPendentes();
 
 			FacesContext.getCurrentInstance().addMessage(
 					null,

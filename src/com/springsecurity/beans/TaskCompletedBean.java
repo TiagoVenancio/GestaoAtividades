@@ -36,6 +36,10 @@ public class TaskCompletedBean implements Serializable{
 		
 	}
 	
+	public void buscaAll() {
+		listaTarefas = service.getAllRequestTasks();
+	}
+	
 	public void pesquisarFiltros(){
 		
 		listaTarefas = service.findForFiltros("USER_OWNER_ID", String.valueOf(tarefaSelecionada.getUserOwnerTask().getId()));
@@ -59,14 +63,6 @@ public class TaskCompletedBean implements Serializable{
 			return null;
 
 		
-		}
-
-		public RequestTaskService getService() {
-			return service;
-		}
-
-		public void setService(RequestTaskService service) {
-			this.service = service;
 		}
 
 		public List<RequestTask> getListaTarefas() {

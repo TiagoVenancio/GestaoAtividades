@@ -25,46 +25,51 @@
         				MANUTENÇÃO DE SOLICITANTES
     				</f:facet>
 
-					<p:column headerText="Id" sortBy="#{var.id}" style="width:5%">
+					<p:column headerText="Id" sortBy="#{var.id}"
+						style="width:3%; font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.id}" />
 					</p:column>
 
-					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
+					<p:column headerText="Data de Criação" sortBy="#{var.createDate}"
+						style="width:12%; font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.createDate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Última Atualização"
-						sortBy="#{var.lastUpdate}">
+						sortBy="#{var.lastUpdate}" style="width:12%; font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.lastUpdate}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 						</h:outputText>
 					</p:column>
 
 					<p:column headerText="Criador" filterBy="#{var.lastUserChange}"
-						filterMatchMode="contains" sortBy="#{var.lastUserChange}">
+						filterMatchMode="contains" sortBy="#{var.lastUserChange}"
+						style="width:10%; font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.lastUserChange}" />
 					</p:column>
 
-					<p:column headerText="Matrícula" filterBy="#{var.userId}"
-						filterMatchMode="contains" sortBy="#{var.userId}">
-						<h:outputText value="#{var.userId}" />
-					</p:column>
-
-
 					<p:column headerText="Nome" filterBy="#{var.userName}"
-						filterMatchMode="contains" sortBy="#{var.userName}">
+						filterMatchMode="contains" sortBy="#{var.userName}"
+						style="font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.userName}" />
 					</p:column>
 
+					<p:column headerText="Matrícula" filterBy="#{var.userId}"
+						filterMatchMode="contains" sortBy="#{var.userId}"
+						style="width:10%; font-size:12px; font-weight:bold;">
+						<h:outputText value="#{var.userId}" />
+					</p:column>
+
 					<p:column headerText="E-mail" filterBy="#{var.email}"
-						filterMatchMode="contains" sortBy="#{var.email}">
+						filterMatchMode="contains" sortBy="#{var.email}"
+						style="font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.email}" />
 					</p:column>
 
-					<p:column headerText="Status" filterBy="#{var.statusObjectEnum}"
-						filterMatchMode="contains" sortBy="#{var.statusObjectEnum}">
+					<p:column headerText="Status" sortBy="#{var.statusObjectEnum}"
+						style="width:4%; font-size:12px; font-weight:bold;">
 						<h:outputText value="#{var.statusObjectEnum}" />
 					</p:column>
 
@@ -89,23 +94,22 @@
 		<!-- FORM NOVO -->
 
 		<h:form id="formNovo">
-			<p:dialog header="Novo Item" widgetVar="dlgNovo" showEffect="explode"
-				hideEffect="bounce" height="350" resizable="false">
+			<p:dialog header="Novo Item" widgetVar="dlgNovo" height="350">
 
 
 				<h:panelGrid columns="2" cellpadding="5" id="panelGridNovo">
 
 					<h:outputLabel for="matriculaSolicitante" value="Matrícula:" />
 					<p:inputText id="matriculaSolicitante" label="Matricula"
-						value="#{requestCustomerBean.matriculaSolicitante}" />
+						value="#{requestCustomerBean.matriculaSolicitante}" style="font-weight:bold;"/>
 
 					<h:outputLabel for="nameSolicitante" value="Nome:" />
 					<p:inputText id="nameSolicitante" label="Nome"
-						value="#{requestCustomerBean.nameSolicitante}" />
+						value="#{requestCustomerBean.nameSolicitante}" style="font-weight:bold;"/>
 
 					<h:outputLabel for="emailSolicitante" value="E-mail:" />
 					<p:inputText id="emailSolicitante" label="E-mail"
-						value="#{requestCustomerBean.emailSolicitante}" />
+						value="#{requestCustomerBean.emailSolicitante}" style="font-weight:bold;"/>
 
 
 				</h:panelGrid>

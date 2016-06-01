@@ -30,7 +30,7 @@
 					</p:column>
 
 					<p:column headerText="Data de Criação" sortBy="#{var.createDate}">
-						<h:outputText value="#{var.createDate}">
+						<h:outputText value="#{var.createDate}" style="font-size:12px;">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
@@ -45,6 +45,7 @@
 					<p:column headerText="Assunto"
 						filterBy="#{var.typeOfActivity.description}"
 						filterMatchMode="contains"
+						style="font-size:12px;"
 						sortBy="#{var.typeOfActivity.description}">
 						<h:outputText value="#{var.typeOfActivity.description}" />
 					</p:column>
