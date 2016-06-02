@@ -48,7 +48,7 @@ public class RequestTaskBean implements Serializable {
 	public void init() {
 
 		listaTarefas = tarefaService.listarTarefasPendentes();
-		// verificaLogin();
+		//verificaLogin();
 		// listaTarefas = tarefaService.listaPorLogin(userOwner);
 
 	}
@@ -61,13 +61,15 @@ public class RequestTaskBean implements Serializable {
 			((UserDetails) usuarioLogado).getAuthorities().toString()
 					.equals("ROLE_ADMIN");
 
-			listaTarefas = tarefaService.getAllRequestTasks();
+			listaTarefas = tarefaService.listarTarefasPendentes();
 
 		}
 
 		else {
+			//listaTarefas = tarefaService.listarTarefasPendentes();
+			listaTarefas = tarefaService.listaLoginLogado(SecurityContextHolder.getContext().getAuthentication().getName());
 
-			listaTarefas = tarefaService.listaPorLogin(userOwner);
+			
 
 		}
 

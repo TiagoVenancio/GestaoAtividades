@@ -73,12 +73,25 @@ body {
 									url="/pages/user/solicitante.jsf" icon="ui-icon-person"
 									update="messages" />
 
+
+								<p:menuitem value="Ações" url="/pages/user/tipoAcoes.jsf"
+									icon="ui-icon-wrench" update="messages" />
+
+								<p:submenu label="Temas" icon="ui-icon-tag">
+
+									<p:menuitem value="Assuntos"
+										url="/pages/user/tipoAtividades.jsf" icon="ui-icon-tag"
+										update="messages" />
+
+									<p:menuitem value="Sub-Assuntos"
+										url="/pages/user/tipoSubAtividades.jsf" icon="ui-icon-tag"
+										update="messages" />
+
+								</p:submenu>
+
 							</p:submenu>
 
 							<p:submenu label="Configuração" icon="ui-icon-locked">
-
-								<p:menuitem value="Ações" url="/pages/admin/tipoAcoes.jsf"
-									icon="ui-icon-wrench" update="messages" />
 
 								<p:menuitem value="Prioridades"
 									url="/pages/admin/prioridades.jsf" icon="ui-icon-alert"
@@ -86,20 +99,6 @@ body {
 
 								<p:menuitem value="Usuários" url="/pages/admin/usuarios.jsf"
 									icon="ui-icon-person" update="messages" />
-
-								<p:submenu label="Temas" icon="ui-icon-tag">
-
-									<p:menuitem value="Assuntos"
-										url="/pages/admin/tipoAtividades.jsf" icon="ui-icon-tag"
-										update="messages" />
-
-									<p:menuitem value="Sub-Assuntos"
-										url="/pages/admin/tipoSubAtividades.jsf" icon="ui-icon-tag"
-										update="messages" />
-
-								</p:submenu>
-
-
 
 							</p:submenu>
 

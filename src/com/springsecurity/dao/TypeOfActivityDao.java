@@ -6,9 +6,9 @@ import com.springsecurity.entities.TypeOfActivity;
 
 public interface TypeOfActivityDao {
 
-	List<TypeOfActivity> findAll();
+	public List<TypeOfActivity> findAll();
 
-	List<TypeOfActivity> findAllActivityAtivas();
+	public List<TypeOfActivity> findAtivos();
 
 	void save(TypeOfActivity typeOfActivity);
 

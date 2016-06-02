@@ -13,6 +13,8 @@ public interface RequestCustomerService {
 			throws IllegalArgumentException;
 
 	public List<RequestCustomer> getAllRequestCustomers();
+	
+	public List<RequestCustomer> findAtivos();
 
 	public RequestCustomer getByIdRequestCustomer(Long id);
 

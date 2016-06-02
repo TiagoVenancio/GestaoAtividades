@@ -46,7 +46,7 @@ public class TypeOfPriorityDaoImpl implements TypeOfPriorityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TypeOfPriority> findAllPrioridadesAtivas() {
+	public List<TypeOfPriority> findAtivos() {
 		Query query = entityManager
 				.createQuery("select t from TypeOfPriority t where statusObjectEnum = :statusObjectEnum");
 		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);

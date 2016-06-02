@@ -35,7 +35,7 @@ public class TypeOfSubActivityDaoImpl implements TypeOfSubActivityDao {
 
 	@Override
 	public void save(TypeOfSubActivity typeOfSubActivity) {
-		entityManager.persist(typeOfSubActivity);
+		entityManager.merge(typeOfSubActivity);
 
 	}
 
@@ -47,20 +47,20 @@ public class TypeOfSubActivityDaoImpl implements TypeOfSubActivityDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TypeOfSubActivity> findAllActivityAtivas() {
-		Query query = entityManager
-				.createQuery("select t from TypeOfSubActivity t where statusObjectEnum = :statusObjectEnum");
-		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
-		return query.getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public List<TypeOfSubActivity> listaSubActivityByActivity(
 			TypeOfActivity typeOfActivity) {
 		Query query = entityManager
 				.createQuery("select t from TypeOfSubActivity t where typeOfActivity = :typeOfActivity");
 		query.setParameter("typeOfActivity", typeOfActivity);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TypeOfSubActivity> findAtivos() {
+		Query query = entityManager
+				.createQuery("select t from TypeOfSubActivity t where statusObjectEnum = :statusObjectEnum");
+		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
 		return query.getResultList();
 	}
 

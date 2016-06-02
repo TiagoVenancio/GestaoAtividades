@@ -28,6 +28,7 @@ public class RequestCustomerServiceImpl implements RequestCustomerService {
 	public List<RequestCustomer> getAllRequestCustomers() {
 		return dao.findAll();
 	}
+	
 
 	@Override
 	public void alterar(RequestCustomer requestCustomer)
@@ -39,6 +40,11 @@ public class RequestCustomerServiceImpl implements RequestCustomerService {
 	@Override
 	public RequestCustomer getByIdRequestCustomer(Long id) {
 		return dao.getById(id);
+	}
+
+	@Override
+	public List<RequestCustomer> findAtivos() {
+		return dao.findAtivos();
 	}
 
 }

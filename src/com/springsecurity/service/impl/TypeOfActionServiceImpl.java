@@ -41,4 +41,9 @@ public class TypeOfActionServiceImpl implements TypeOfActionService {
 		return dao.getById(id);
 	}
 
+	@Override
+	public List<TypeOfAction> findAtivos() {
+		return dao.findAtivos();
+	}
+
 }

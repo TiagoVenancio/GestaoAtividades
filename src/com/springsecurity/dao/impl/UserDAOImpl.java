@@ -48,11 +48,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public User login(String username) {
-		String query = "FROM User u where u.username = ?";
+	public User login(String username, String password) {
+		String query = "FROM User u where u.username = ? and u.password=?";
 		Query q = entityManager.createQuery(query);
 		q.setParameter(1, username);
-
+		q.setParameter(2, password);
 
 		List l = q.getResultList();
 

@@ -7,17 +7,19 @@ import com.springsecurity.entities.UserOwnerTask;
 
 public interface RequestTaskDao {
 
-	List<RequestTask> findAll();
+	public	List<RequestTask> findAll();
 
-	List<RequestTask> buscarTaskPor(Long userOwnerTask);
+	public	List<RequestTask> buscarTaskPor(Long userOwnerTask);
 
-	List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask);
+	public	List<RequestTask> listaPorLogin(UserOwnerTask userOwnerTask);
 
-	List<RequestTask> findAllTarefasAfazer();
+	public	List<RequestTask> findAllTarefasAfazer();
 
-	List<RequestTask> findAllTarefasFazendo();
+	public	List<RequestTask> findAllTarefasFazendo();
 
-	List<RequestTask> findAllTarefasConcluido();
+	public	List<RequestTask> findAllTarefasConcluido();
+	
+	public	List<RequestTask> listaLoginLogado(String id);
 
 	void save(RequestTask requestTask);
 
@@ -25,8 +27,10 @@ public interface RequestTaskDao {
 
 	RequestTask getById(Long id);
 
-	List<RequestTask> findForFiltros(String campo, String filtros);
+	public List<RequestTask> findForFiltros(String campo, String filtros);
 
-	List<RequestTask> listarTarefasPendentes();
+	public List<RequestTask> listarTarefasPendentes();
 
+	public List<RequestTask> teste (Long login);
+	
 }

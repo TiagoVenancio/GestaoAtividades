@@ -157,8 +157,7 @@
 								converter="converterGrupoClientes" required="true" filter="true"
 								filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione um solicitante" />
-								<f:selectItems
-									value="#{requestCustomerBean.listaRequestCustomerService}"
+								<f:selectItems value="#{listsActivesBean.requestCustomerLista}"
 									var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
 							</p:selectOneMenu>
 
@@ -166,11 +165,11 @@
 								style="font-weight:bold;" />
 							<p:selectOneMenu id="responsavel"
 								value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
-								converter="converterGrupoUsuarios" required="true"
+								converter="converterGrupoUsuarios" required="true" filter="true"
 								filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione um responsável" />
-								<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-									itemValue="#{u}" itemLabel="#{u.name}" />
+								<f:selectItems value="#{listsActivesBean.userOwnerTaskLista}"
+									var="u" itemValue="#{u}" itemLabel="#{u.name}" />
 							</p:selectOneMenu>
 
 							<p:outputLabel for="atividade" value="Assunto: "
@@ -180,8 +179,7 @@
 								converter="converterGrupoAtividade" required="true"
 								filter="true" filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione Um Assunto" />
-								<f:selectItems
-									value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
+								<f:selectItems value="#{listsActivesBean.typeOfActivityLista}"
 									var="a" itemValue="#{a}" itemLabel="#{a.description}" />
 							</p:selectOneMenu>
 
@@ -193,18 +191,18 @@
 								filter="true" filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione Um Sub-Assunto" />
 								<f:selectItems
-									value="#{typeOfSubActivityListActiveBean.listaPrioridadeAtivas}"
-									var="x" itemValue="#{x}" itemLabel="#{x.description}" />
+									value="#{listsActivesBean.typeOfSubActivityLista}" var="x"
+									itemValue="#{x}" itemLabel="#{x.description}" />
 							</p:selectOneMenu>
 
 							<p:outputLabel for="acaoRealizacao" value="Ação realizada: "
 								style="font-weight:bold;" />
 							<p:selectOneMenu id="acaoRealizacao"
 								value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
-								converter="converterGrupoAcoes" required="true"
+								converter="converterGrupoAcoes" required="true" filter="true"
 								filterMatchMode="startsWith" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione uma ação" />
-								<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
+								<f:selectItems value="#{listsActivesBean.typeOfActionLista}"
 									var="ac" itemValue="#{ac}" itemLabel="#{ac.description}" />
 							</p:selectOneMenu>
 
@@ -231,10 +229,9 @@
 							<p:selectOneMenu id="prioridade"
 								value="#{requestTaskBean.tarefaSelecionada.typeOfPriority}"
 								converter="converterGrupoPrioridades" required="true"
-								style="width: 340px;">
+								filter="true" style="width: 340px;">
 								<f:selectItem itemLabel="Selecione uma prioridade" />
-								<f:selectItems
-									value="#{typeOfPriorityListActiveBean.listaPrioridadeAtivas}"
+								<f:selectItems value="#{listsActivesBean.typeOfPriorityLista}"
 									var="p" itemValue="#{p}" itemLabel="#{p.description}" />
 							</p:selectOneMenu>
 
@@ -315,8 +312,7 @@
 									filter="true" filterMatchMode="startsWith"
 									style="width: 340px;">
 									<f:selectItem itemLabel="Selecione um solicitante" />
-									<f:selectItems
-										value="#{requestCustomerBean.listaRequestCustomerService}"
+									<f:selectItems value="#{listsActivesBean.requestCustomerLista}"
 										var="x" itemValue="#{x}" itemLabel="#{x.userName}" />
 								</p:selectOneMenu>
 
@@ -324,11 +320,11 @@
 									style="font-weight:bold;" />
 								<p:selectOneMenu id="responsavelEditar"
 									value="#{requestTaskBean.tarefaSelecionada.userOwnerTask}"
-									converter="converterGrupoUsuarios" required="true"
+									converter="converterGrupoUsuarios" required="true" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Selecione um responsável" />
-									<f:selectItems value="#{userOwnerBean.listaUsuarios}" var="u"
-										itemValue="#{u}" itemLabel="#{u.name}" />
+									<f:selectItems value="#{listsActivesBean.userOwnerTaskLista}"
+										var="u" itemValue="#{u}" itemLabel="#{u.name}" />
 								</p:selectOneMenu>
 
 								<p:outputLabel for="atividadeEditar" value="Assunto: "
@@ -339,8 +335,7 @@
 									filter="true" filterMatchMode="startsWith"
 									style="width: 340px;">
 									<f:selectItem itemLabel="Selecione um tema" />
-									<f:selectItems
-										value="#{typeOfActivityListActiveBean.listaAtividadesAtivas}"
+									<f:selectItems value="#{listsActivesBean.typeOfActivityLista}"
 										var="a" itemValue="#{a}" itemLabel="#{a.description}" />
 								</p:selectOneMenu>
 
@@ -353,18 +348,18 @@
 									style="width: 340px;">
 									<f:selectItem itemLabel="Selecione Um Sub-Assunto" />
 									<f:selectItems
-										value="#{typeOfSubActivityListActiveBean.listaPrioridadeAtivas}"
-										var="x" itemValue="#{x}" itemLabel="#{x.description}" />
+										value="#{listsActivesBean.typeOfSubActivityLista}" var="x"
+										itemValue="#{x}" itemLabel="#{x.description}" />
 								</p:selectOneMenu>
 
 								<p:outputLabel for="acaoRealizacaoEditar"
 									value="Ação realizada: " style="font-weight:bold;" />
 								<p:selectOneMenu id="acaoRealizacaoEditar"
 									value="#{requestTaskBean.tarefaSelecionada.typeOfAction}"
-									converter="converterGrupoAcoes" required="true"
+									converter="converterGrupoAcoes" required="true" filter="true"
 									filterMatchMode="startsWith" style="width: 340px;">
 									<f:selectItem itemLabel="Selecione uma ação" />
-									<f:selectItems value="#{typeOfActionBean.listaTiposAcoes}"
+									<f:selectItems value="#{listsActivesBean.typeOfActionLista}"
 										var="ac" itemValue="#{ac}" itemLabel="#{ac.description}" />
 								</p:selectOneMenu>
 
@@ -395,8 +390,7 @@
 									converter="converterGrupoPrioridades" required="true"
 									style="width: 340px;">
 									<f:selectItem itemLabel="Selecione uma prioridade" />
-									<f:selectItems
-										value="#{typeOfPriorityListActiveBean.listaPrioridadeAtivas}"
+									<f:selectItems value="#{listsActivesBean.typeOfPriorityLista}"
 										var="p" itemValue="#{p}" itemLabel="#{p.description}" />
 								</p:selectOneMenu>
 

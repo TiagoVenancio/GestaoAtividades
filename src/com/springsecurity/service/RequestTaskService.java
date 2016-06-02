@@ -30,4 +30,8 @@ public interface RequestTaskService {
 	public List<RequestTask> listarTarefasConcluido();
 
 	public List<RequestTask> listarTarefasPendentes();
+	
+	public	List<RequestTask> listaLoginLogado(String id);
+	
+	public List<RequestTask> teste (Long login);
 }

@@ -8,6 +8,8 @@ public interface RequestCustomerDao {
 	public RequestCustomer getById(Long id);
 	
 	List<RequestCustomer> findAll();
+	
+	List<RequestCustomer> findAtivos();
 
 	void save(RequestCustomer requestCustomer);
 

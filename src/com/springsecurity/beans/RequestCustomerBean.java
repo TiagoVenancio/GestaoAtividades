@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import com.springsecurity.entities.RequestCustomer;
@@ -32,7 +33,6 @@ public class RequestCustomerBean implements Serializable {
 	private String nameSolicitante;
 	private String emailSolicitante;
 	
-	private static String USERNAMEL_LOGADO = System.getProperty("user.name");
 	private StatusObjectEnum statusObjectEnum;
 	
 	public RequestCustomerBean(){
@@ -53,7 +53,7 @@ public class RequestCustomerBean implements Serializable {
 			RequestCustomer.setUserId(matriculaSolicitante);
 			RequestCustomer.setUserName(nameSolicitante);
 			RequestCustomer.setEmail(emailSolicitante);
-			RequestCustomer.setLastUserChange(USERNAMEL_LOGADO);
+			RequestCustomer.setLastUserChange(SecurityContextHolder.getContext().getAuthentication().getName());
 			RequestCustomer.setStatusObjectEnum(StatusObjectEnum.Ativo);
 			requestCustomerService.adicionar(RequestCustomer);
 			listaRequestCustomerService = requestCustomerService.getAllRequestCustomers();
@@ -150,14 +150,6 @@ public class RequestCustomerBean implements Serializable {
 		this.emailSolicitante = emailSolicitante;
 	}
 
-	public static String getUSERNAMEL_LOGADO() {
-		return USERNAMEL_LOGADO;
-	}
-
-	public static void setUSERNAMEL_LOGADO(String uSERNAMEL_LOGADO) {
-		USERNAMEL_LOGADO = uSERNAMEL_LOGADO;
-	}
-
 	public StatusObjectEnum getStatusObjectEnum() {
 		return statusObjectEnum;
 	}
@@ -169,6 +161,5 @@ public class RequestCustomerBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 	
 }

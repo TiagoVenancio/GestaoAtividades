@@ -42,15 +42,16 @@ public class TypeOfSubActivityServiceImpl implements TypeOfSubActivityService {
 		return dao.getById(id);
 	}
 
-	@Override
-	public List<TypeOfSubActivity> listarAtividadesAtivas() {
-		return dao.findAllActivityAtivas();
-	}
 
 	@Override
 	public List<TypeOfSubActivity> listaSubActivityByActivity(
 			TypeOfActivity typeOfActivity) {
 		return dao.listaSubActivityByActivity(typeOfActivity);
+	}
+
+	@Override
+	public List<TypeOfSubActivity> findAtivos() {
+		return dao.findAtivos();
 	}
 
 }

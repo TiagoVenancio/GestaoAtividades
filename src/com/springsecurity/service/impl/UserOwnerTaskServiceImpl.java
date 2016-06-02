@@ -41,4 +41,9 @@ public class UserOwnerTaskServiceImpl implements UserOwnerTaskService {
 		return dao.getById(id);
 	}
 
+	@Override
+	public List<UserOwnerTask> findAtivos() {
+		return dao.findAtivos();
+	}
+
 }

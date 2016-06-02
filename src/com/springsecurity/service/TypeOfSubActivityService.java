@@ -15,8 +15,8 @@ public interface TypeOfSubActivityService {
 	public List<TypeOfSubActivity> listaSubActivityByActivity (TypeOfActivity typeOfActivity);
 
 	public List<TypeOfSubActivity> getAllTipoDeAtividades();
-
-	public List<TypeOfSubActivity> listarAtividadesAtivas();
+	
+	public List<TypeOfSubActivity> findAtivos();
 
 	public TypeOfSubActivity getByIdTypeOfSubActivity(Long id);
 

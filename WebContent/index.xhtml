@@ -76,7 +76,7 @@ body {
 
 
 	<div class="container-fluid">
-		<div id="loginbox" style="margin-top: 15%;"
+		<div id="loginbox" style="margin-top: 10%;"
 			class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 			<div class="panel panel-primary">
 
@@ -84,7 +84,7 @@ body {
 					<div class="panel-title">Autenticação | Login</div>
 				</div>
 
-				<div style="padding-top: 30px" class="panel-body">
+				<div style="padding-top: 0px" class="panel-body">
 
 					<div style="display: none" id="login-alert"
 						class="alert alert-danger col-sm-12"></div>
@@ -95,13 +95,22 @@ body {
 
 						<div style="margin-bottom: 25px" class="input-group">
 							<h3>
-								<h:outputLabel id="msg1"
-									value="Olá, #{authenticator.userLogadoWindows}" />
-								<br /> <br />
-								
-								<h:outputLabel
-									value="Bem vindo ao Sistema de Gestão de Atividades! " />
 
+								<h:panelGrid id="gridPrincipal">
+								
+									<p:outputLabel id="msg2" value="Login" />
+									<p:inputText id="login" value="#{authenticator.username}"
+										required="true" style="width: 80%; font-weight:bold;" />
+									<br />
+									
+									<p:outputLabel id="msg3" value="Senha" />
+									<p:password  id="senha" value="#{authenticator.password}"
+										required="true" style="width: 80%; font-weight:bold;" />
+									<br />
+									
+									<p:outputLabel
+										value="Bem vindo ao Sistema de Gestão de Atividades! " />
+								</h:panelGrid>
 							</h3>
 						</div>
 

@@ -9,7 +9,7 @@ public interface TypeOfSubActivityDao {
 
 	List<TypeOfSubActivity> findAll();
 
-	List<TypeOfSubActivity> findAllActivityAtivas();
+	List<TypeOfSubActivity> findAtivos();
 	
 	List<TypeOfSubActivity> listaSubActivityByActivity (TypeOfActivity typeOfActivity);
 

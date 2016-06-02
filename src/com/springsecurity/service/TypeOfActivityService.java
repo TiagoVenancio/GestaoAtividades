@@ -13,7 +13,7 @@ public interface TypeOfActivityService {
 
 	public List<TypeOfActivity> getAllTipoDeAtividades();
 
-	public List<TypeOfActivity> listarAtividadesAtivas();
+	public List<TypeOfActivity> findAtivos();
 
 	public TypeOfActivity getByIdTypeOfActivity(Long id);
 

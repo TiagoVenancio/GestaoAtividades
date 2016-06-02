@@ -84,4 +84,14 @@ public class RequestTaskServiceImpl implements RequestTaskService {
 		return dao.listarTarefasPendentes();
 	}
 
+	@Override
+	public List<RequestTask> listaLoginLogado(String id) {
+		return dao.listaLoginLogado(id);
+	}
+
+	@Override
+	public List<RequestTask> teste(Long login) {
+		return dao.teste(login);
+	}
+
 }

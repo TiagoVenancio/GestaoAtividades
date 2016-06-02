@@ -6,7 +6,9 @@ import com.springsecurity.entities.UserOwnerTask;
 
 public interface UserOwnerTaskDAO {
 
-	List<UserOwnerTask> findAll();
+	public	List<UserOwnerTask> findAll();
+	
+	public List<UserOwnerTask> findAtivos();
 
 	void save(UserOwnerTask userOwnerTask);
 

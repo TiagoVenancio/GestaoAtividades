@@ -11,6 +11,8 @@ public interface TypeOfActionService {
 	void alterar(TypeOfAction typeOfAction) throws IllegalArgumentException;
 
 	public List<TypeOfAction> getAllTipoDeAcoes();
+	
+	public List<TypeOfAction> findAtivos();
 
 	public TypeOfAction getByIdTypeOfAction(Long id);
 

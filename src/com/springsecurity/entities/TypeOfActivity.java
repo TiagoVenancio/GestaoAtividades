@@ -39,7 +39,7 @@ public class TypeOfActivity implements Serializable {
 
 	@Column(name = "DESCRIPTION", length = 45, nullable = false)
 	private String description;
-
+	
 	public Long getId() {
 		return id;
 	}

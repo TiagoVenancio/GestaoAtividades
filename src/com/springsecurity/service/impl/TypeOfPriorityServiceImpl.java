@@ -47,8 +47,9 @@ public class TypeOfPriorityServiceImpl implements TypeOfPriorityService {
 	}
 
 	@Override
-	public List<TypeOfPriority> listarPrioridadesAtivas() {
-		return dao.findAllPrioridadesAtivas();
+	public List<TypeOfPriority> findAtivos() {
+		return dao.findAtivos();
 	}
+
 
 }

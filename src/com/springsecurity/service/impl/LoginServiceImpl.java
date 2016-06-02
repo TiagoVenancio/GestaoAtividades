@@ -8,19 +8,21 @@ import com.springsecurity.service.LoginService;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-	
 	@Autowired
 	private UserDAO dao;
 
-	public User login(String username) throws IllegalArgumentException {
-		if (isEmptyOrNull(username)) {
-			throw new IllegalArgumentException("Atenção, Usuário vazios!");
+	@Override
+	public User login(String username, String password)
+			throws IllegalArgumentException {
+		if (isEmptyOrNull(username) || isEmptyOrNull(password)) {
+			throw new IllegalArgumentException(
+					"Atenção, username ou password vazios!");
 		}
-		User u = dao.login(username);
-
+		User u = dao.login(username, password);
+		
 		if (u == null) {
 			throw new IllegalArgumentException(
-					"Erro: Usuário não cadastrado ou inativo!");
+					"Erro: username ou password incorretos!");
 		}
 		return u;
 	}
@@ -28,5 +30,4 @@ public class LoginServiceImpl implements LoginService {
 	private boolean isEmptyOrNull(String s) {
 		return s == null || s.equals("");
 	}
-
 }

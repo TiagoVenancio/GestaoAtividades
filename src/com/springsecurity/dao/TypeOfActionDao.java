@@ -8,7 +8,9 @@ public interface TypeOfActionDao {
 	
 	public	TypeOfAction getById(Long id);
 	
-	List<TypeOfAction> findAll();
+	public List<TypeOfAction> findAll();
+	
+	public List<TypeOfAction> findAtivos();
 
 	void save(TypeOfAction typeOfAction);
 

@@ -6,9 +6,9 @@ import com.springsecurity.entities.TypeOfPriority;
 
 public interface TypeOfPriorityDao {
 
-	List<TypeOfPriority> findAll();
-
-	List<TypeOfPriority> findAllPrioridadesAtivas();
+	public List<TypeOfPriority> findAll();
+	
+	public List<TypeOfPriority> findAtivos();
 
 	void save(TypeOfPriority typeOfPriority);
 

@@ -14,8 +14,8 @@ public interface TypeOfPriorityService {
 	public List<TypeOfPriority> getAllTipoDePrioridades();
 
 	public List<TypeOfPriority> findAll();
-
-	public List<TypeOfPriority> listarPrioridadesAtivas();
+	
+	public List<TypeOfPriority> findAtivos();
 
 	public TypeOfPriority getByIdTypeOfPriority(Long id);
 

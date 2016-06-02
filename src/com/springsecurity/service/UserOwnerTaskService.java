@@ -11,6 +11,8 @@ public interface UserOwnerTaskService {
 	void alterar(UserOwnerTask userOwnerTask) throws IllegalArgumentException;
 
 	public List<UserOwnerTask> getAll();
+	
+	public List<UserOwnerTask> findAtivos();
 
 	public UserOwnerTask getByIdUserOwnerTask(Long id);
 

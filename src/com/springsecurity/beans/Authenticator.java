@@ -12,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
-import com.sun.security.auth.module.NTSystem;
 import com.springsecurity.entities.User;
 import com.springsecurity.service.LoginService;
 
@@ -25,18 +24,14 @@ public class Authenticator implements AuthenticationProvider {
 	@Autowired
 	private UserSession session;
 
-	@SuppressWarnings("unused")
-	private String userLogadoWindows;
-
-	private static String infoSystem = new NTSystem().getName();
-
-	// private static String userName = System.getProperty("user.name");
-
-	private static String userName = infoSystem;
+	private String username;
+	private String password;
 
 	public String login() {
 		try {
-			User user = service.login(userName.toLowerCase());
+			User user = service.login(username, password);
+			
+			
 			loginSpringSecurity(user);
 			session.setUser(user);
 			return "successfulPage";
@@ -46,16 +41,7 @@ public class Authenticator implements AuthenticationProvider {
 		return "";
 	}
 
-	public String getUserLogadoWindows() {
-		return System.getProperty("user.name");
-	}
-
-	public void setUserLogadoWindows(String userLogadoWindows) {
-		this.userLogadoWindows = System.getProperty("user.name");
-	}
-
 	private void loginSpringSecurity(User user) {
-
 		UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 				user.getUsername(), null, user.getRoles());
 		token.setDetails(user);
@@ -75,14 +61,32 @@ public class Authenticator implements AuthenticationProvider {
 				new FacesMessage(message));
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public Authentication authenticate(Authentication arg0)
 			throws AuthenticationException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean supports(Class<?> arg0) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

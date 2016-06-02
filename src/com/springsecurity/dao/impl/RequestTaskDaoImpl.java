@@ -29,7 +29,8 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<RequestTask> findAll() {
-		return entityManager.createQuery("FROM " + RequestTask.class.getName()).getResultList();
+		return entityManager.createQuery("FROM " + RequestTask.class.getName())
+				.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -125,4 +126,27 @@ public class RequestTaskDaoImpl implements RequestTaskDao {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<RequestTask> teste(Long login) {
+
+		Query query = entityManager
+				.createQuery("select t from RequestTask t where userOwnerTask = :login and statusObjectEnum = :statusObjectEnum");
+		query.setParameter("statusObjectEnum", StatusObjectEnum.Ativo);
+		query.setParameter("login", login);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<RequestTask> listaLoginLogado(String id) {
+		Query query = entityManager
+				.createQuery("select t " + 
+		                         "from RequestTask t " + 
+						         "left join t.UserOwnerTask as u " +
+		                         "on t.userOwnerTask = u.id " +
+		                         "where u.username = :username");
+		query.setParameter("username", id);
+
+		return query.getResultList();
+	}
 }
